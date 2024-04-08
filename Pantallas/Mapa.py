@@ -1,6 +1,13 @@
-from Módulos import Escape_Island as EI
 import pygame
 import sys
+import os
+
+directorio_actual = os.path.dirname(os.path.abspath(__file__)) #Se obtiene la ruta del directorio actual donde se encuentra el script
+directorio_modulos = os.path.join(directorio_actual, '..', 'Módulos') #Se concatena la ruta del directorio actual con la carpeta que contiene el módulo
+sys.path.append(directorio_modulos) #Se añade la ruta de la carpeta de módulos al sistema de rutas
+
+import Escape_Island as EI
+
 
 pygame.init()
 
