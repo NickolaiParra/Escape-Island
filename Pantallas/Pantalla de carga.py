@@ -2,8 +2,6 @@
 #Importamos las librerías necesarias
 import pygame
 import sys
-import numpy
-import math
 import threading
 import os
 
