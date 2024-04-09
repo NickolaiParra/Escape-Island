@@ -1,0 +1,4 @@
+#Ignorando: Archivos de caché de python y carpetas __pycache__
+__pycache__
+__pycache__/
+.pyc
