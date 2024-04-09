@@ -9,7 +9,7 @@ directorio_actual = os.path.dirname(os.path.abspath(__file__)) #Se obtiene la ru
 directorio_modulos = os.path.join(directorio_actual, '..', 'Módulos') #Se concatena la ruta del directorio actual con la carpeta que contiene el módulo
 sys.path.append(directorio_modulos) #Se añade la ruta de la carpeta de módulos al sistema de rutas
 
-import Escape_Island as EI
+from Módulos import Escape_Island as EI
 
 #Inicializamos pygame
 pygame.init()
