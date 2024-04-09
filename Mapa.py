@@ -58,6 +58,7 @@ saltando = None
 anterior = None
 ataque1 = None
 ataque3 = None
+fullscreen = True
 
 while True:
 
@@ -69,10 +70,23 @@ while True:
             sys.exit()
         if evento.type == pygame.KEYDOWN:
             #Si se presiona la tecla "Esc", entonces se sale de la pantalla completa
-            if evento.key == pygame.K_ESCAPE:
-                EI.PANTALLA = pygame.display.set_mode((500, 400))
-                portada_ajustada = pygame.transform.scale(EI.portada, (500, 400))
+            if evento.key == pygame.K_ESCAPE and fullscreen:
+                fullscreen = False
+                pygame.quit()
+                pygame.init()
+                EI.PANTALLA = pygame.display.set_mode((EI.ancho - (EI.ancho * 0.1), EI.alto - (EI.alto * 0.2)))
+                portada_ajustada = pygame.transform.scale(EI.portada,(EI.ancho - (EI.ancho * 0.1), EI.alto - (EI.alto * 0.2)))
                 EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
+                mapa_avion_ajustado =  pygame.transform.scale(EI.mapa_avion, (EI.ancho - (EI.ancho * 0.1), EI.alto - (EI.alto * 0.2)))
+            #Si se presiona la tecla "f", entoces vuelve a pantalla completa
+            if evento.key == pygame.K_f and not fullscreen:
+                fullscreen = True
+                pygame.quit()
+                pygame.init()
+                EI.PANTALLA = pygame.display.set_mode((EI.ancho, EI.alto))
+                portada_ajustada = pygame.transform.scale(EI.portada, (EI.ancho, EI.alto))
+                EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
+                mapa_avion_ajustado =  pygame.transform.scale(EI.mapa_avion, (EI.ancho, EI.alto))
             #Si se presiona la tecla "espacio", entonces el personaje salta
             if evento.key == pygame.K_SPACE:
                 saltando = True
