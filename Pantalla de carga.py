@@ -3,16 +3,22 @@
 import pygame
 import sys
 import threading
-import os
 
-directorio_actual = os.path.dirname(os.path.abspath(__file__)) #Se obtiene la ruta del directorio actual donde se encuentra el script
-directorio_modulos = os.path.join(directorio_actual, '..', 'Módulos') #Se concatena la ruta del directorio actual con la carpeta que contiene el módulo
-sys.path.append(directorio_modulos) #Se añade la ruta de la carpeta de módulos al sistema de rutas
 
 from Módulos import Escape_Island as EI
 
 #Inicializamos pygame
 pygame.init()
+
+#Inicializamos el módulo de sonido de pygame
+pygame.mixer.init()
+
+#Cargamos la música
+
+pygame.mixer.music.load('Música\ST.mp3')
+
+#Reproducimos la música en bucle 
+pygame.mixer.music.play(-1)
 
 
 #Pantalla de carga
