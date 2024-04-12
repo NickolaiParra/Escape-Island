@@ -20,6 +20,8 @@ pygame.mixer.music.load('Música\ST.mp3')
 #Reproducimos la música en bucle 
 pygame.mixer.music.play(-1)
 
+pantalla_de_carga_ajustada =  pygame.transform.scale(EI.pantalla_de_carga, (EI.ancho, EI.alto)) #Ajustamos portada al tamaño de la pantalla
+
 
 #Pantalla de carga
 posicionx_barra = EI.ancho * 0.1
@@ -73,6 +75,7 @@ while True:
                     EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
                 #Si se presiona enter, se abre la pantalla de inicio
                 if (evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER) and progreso_carga >= 1:
+                    EI.transicion_desvanecimiento(portada2_ajustada, pantalla_de_carga_ajustada, 2000)  #Transición de desvanecimiento de 2 segundos entre la pantalla de carga y de inicio
                     romper_carga = False
                     break
         if romper_carga == False:

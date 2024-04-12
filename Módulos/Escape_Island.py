@@ -15,6 +15,7 @@ logo = pygame.image.load("Imagenes\Portada-Logo\Logo.png")
 portada = pygame.image.load("Imagenes\Portada-Logo\Portada.jpeg") 
 portada_2 = pygame.image.load("Imagenes\Portada-Logo\Portada_2.jpeg") 
 mapa_avion = pygame.image.load("Imagenes\Mapa\Avion.png")
+pantalla_de_carga = pygame.image.load("Imagenes\Portada-Logo\Pantalla_de_carga.png")
 
 #Pantalla
 informacion_pantalla = pygame.display.Info() #Información sobre la pantalla
@@ -23,6 +24,26 @@ alto = informacion_pantalla.current_h  #Información sobre el alto de la pantall
 PANTALLA = pygame.display.set_mode((ancho, alto)) #Tamaño
 pygame.display.set_caption("Escape Island") #Título
 pygame.display.set_icon(logo) #Logo
+
+#Funciones
+def transicion_desvanecimiento(pantalla_carga, pantalla_inicio, tiempo_transicion):
+    """Esta función realiza una transición de desvanecimiento. Recibe como argumentos la pantalla que se quiere cargar, la pantalla de inicio y el tiempo de transición (en milisegundos)"""
+    #Se establecen dos superficies temporales en las que se copian la pantalla de carga y la pantalla de inicio
+    pantalla_carga_surface = pygame.Surface((ancho, alto))
+    pantalla_carga_surface.blit(pantalla_carga, (0, 0))
+
+    pantalla_inicio_surface = pygame.Surface((ancho, alto))
+    pantalla_inicio_surface.blit(pantalla_inicio, (0, 0))
+
+    #Se itera desde 255 hasta 0 con decrementos de 5
+    for alpha in range(255, 0, -5):
+        pantalla_inicio_surface.set_alpha(alpha) #Se modifica la transparencia de pantalla_inicio hasta que sea transparente
+        #Se limpia el fondo y se imprimen ambas pantallas
+        PANTALLA.fill(FONDO) 
+        PANTALLA.blit(pantalla_carga_surface, (0, 0))
+        PANTALLA.blit(pantalla_inicio_surface, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(tiempo_transicion // 50) #Se agrega un retraso para controlar la velocidad de transición
 
 #Clases
 class Boton:
