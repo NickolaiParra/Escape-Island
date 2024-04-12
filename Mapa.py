@@ -5,17 +5,8 @@ pygame.init()
 
 from Módulos import Escape_Island as EI
 
-def cargar_sprites(hoja_sprites, ancho_sprite, alto_sprite, espacio_entre_sprites):
-    """Esta función toma como argumento la hoja de sprites, el ancho de cada sprite, el alto de cada sprite, el espacio entre sprites y retorna cada sprite saparado individualmente en una lista"""
-    sprites = []
-    for x in range(0, hoja_sprites.get_width(), espacio_entre_sprites): #Se itera entre 0 y el ancho total de la hoja de sprites con un paso de espacio_entre_sprites
-        #Se extrae un sprite individiual de la hoja de sprites y se almacena en sprites
-        cuadro = hoja_sprites.subsurface((x, 0, ancho_sprite, alto_sprite)) 
-        cuadro = pygame.transform.scale(cuadro, (EI.ancho * 0.09, EI.alto * 0.09)) #Se adecua el sprite a un tamaño específico
-        sprites.append(cuadro)
-    return sprites
 
-seleccion = 3
+seleccion = 2
 
 if seleccion == 1:
     #Cargamos las hojas de sprites del personaje 1
@@ -34,16 +25,16 @@ if seleccion == 1:
     saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\saltar_derecha.png")
     saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\saltar_izquierda.png")
     #Extraemos los sprites individuales del personaje 1
-    sprites_correr_derecha = cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 78, 128)
-    sprites_caminar_derecha = cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 84, 128)
-    sprites_saltar_derecha = cargar_sprites(saltar_derecha, saltar_derecha.get_width()//10, 87, 128)
-    sprites_saltar_izquierda = cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//10, 87, 128)
-    sprites_caminar_izquierda = cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 84, 128)
-    sprites_correr_izquierda = cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 78, 128)
-    sprites_ataque3_derecha = cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 81, 128)
-    sprites_ataque3_izquierda = cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 81, 128)
-    sprites_ataque1_derecha = cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//4, 84, 128)
-    sprites_ataque1_izquierda = cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//4, 84, 128)
+    sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 78, 128)
+    sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 84, 128)
+    sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//10, 87, 128)
+    sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//10, 87, 128)
+    sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 84, 128)
+    sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 78, 128)
+    sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 81, 128)
+    sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 81, 128)
+    sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//4, 84, 128)
+    sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//4, 84, 128)
 elif seleccion == 2:
     #Cargamos las hojas de sprites del personaje 2
     quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\quieto_derecha.png")
@@ -61,16 +52,16 @@ elif seleccion == 2:
     saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\saltar_derecha.png")
     saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\saltar_izquierda.png")
     #Extraemos los sprites individuales del personaje 2
-    sprites_caminar_derecha = cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 81, 128)
-    sprites_caminar_izquierda = cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 81, 128)
-    sprites_saltar_derecha = cargar_sprites(saltar_derecha, saltar_derecha.get_width()//12, 85, 128)
-    sprites_saltar_izquierda = cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//12, 85, 128)
-    sprites_correr_izquierda = cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 75, 128)
-    sprites_correr_derecha = cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 75, 128)
-    sprites_ataque3_derecha = cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 78, 128)
-    sprites_ataque3_izquierda = cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 78, 128)
-    sprites_ataque1_derecha = cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//5, 80, 128)
-    sprites_ataque1_izquierda = cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//5, 80, 128)
+    sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 81, 128)
+    sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 81, 128)
+    sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//12, 85, 128)
+    sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//12, 85, 128)
+    sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 75, 128)
+    sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 75, 128)
+    sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 78, 128)
+    sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 78, 128)
+    sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//5, 80, 128)
+    sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//5, 80, 128)
 elif seleccion == 3:
     #Cargamos las hojas de sprites del personaje 3
     quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\quieto_derecha.png")
@@ -88,16 +79,16 @@ elif seleccion == 3:
     saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\saltar_derecha.png")
     saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\saltar_izquierda.png")
     #Extraemos los sprites individuales del personaje 3
-    sprites_caminar_derecha = cargar_sprites(caminar_derecha, caminar_derecha.get_width()//11, 80, 128)
-    sprites_caminar_izquierda = cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//11, 80, 128)
-    sprites_saltar_derecha = cargar_sprites(saltar_derecha, saltar_derecha.get_width()//11, 92, 128)
-    sprites_saltar_izquierda = cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//11, 92, 128)
-    sprites_correr_izquierda = cargar_sprites(correr_izquierda, correr_izquierda.get_width()//9, 81, 128)
-    sprites_correr_derecha = cargar_sprites(correr_derecha, correr_derecha.get_width()//9, 81, 128)
-    sprites_ataque3_derecha = cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//5, 95, 128)
-    sprites_ataque3_izquierda = cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//5, 95, 128)
-    sprites_ataque1_derecha = cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//6, 90, 128)
-    sprites_ataque1_izquierda = cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//6, 90, 128)
+    sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//11, 80, 128)
+    sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//11, 80, 128)
+    sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//11, 92, 128)
+    sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//11, 92, 128)
+    sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//9, 81, 128)
+    sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//9, 81, 128)
+    sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//5, 95, 128)
+    sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//5, 95, 128)
+    sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//6, 90, 128)
+    sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//6, 90, 128)
 
 
 
@@ -130,6 +121,8 @@ while True:
                 fullscreen = False
                 pygame.quit()
                 pygame.init()
+                pygame.display.set_caption("Escape Island") #Título
+                pygame.display.set_icon(EI.logo) #Logo
                 EI.PANTALLA = pygame.display.set_mode((EI.ancho - (EI.ancho * 0.1), EI.alto - (EI.alto * 0.2)))
                 portada_ajustada = pygame.transform.scale(EI.portada,(EI.ancho - (EI.ancho * 0.1), EI.alto - (EI.alto * 0.2)))
                 EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
@@ -141,6 +134,8 @@ while True:
                 fullscreen = True
                 pygame.quit()
                 pygame.init()
+                pygame.display.set_caption("Escape Island") #Título
+                pygame.display.set_icon(EI.logo) #Logo
                 EI.PANTALLA = pygame.display.set_mode((EI.ancho, EI.alto))
                 portada_ajustada = pygame.transform.scale(EI.portada, (EI.ancho, EI.alto))
                 EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
