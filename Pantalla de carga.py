@@ -97,10 +97,10 @@ EI.PANTALLA.blit(portada2_ajustada, (0, 0)) #Mostramos portada 2
 pygame.draw.rect(EI.PANTALLA, EI.FONDO, (0, 0, EI.ancho * 0.2, EI. alto))
 
 #Botones
-boton_nueva_partida = EI.Boton(EI.ancho * 0.025, EI.alto * 0.15, EI.ancho * 0.15, EI.alto * 0.1, "Nueva partida", 45)
-boton_cargar_partida = EI.Boton(EI.ancho * 0.025, EI.alto * 0.35, EI.ancho * 0.15, EI.alto * 0.1, "Cargar partida", 45)
-boton_creditos = EI.Boton(EI.ancho * 0.025, EI.alto * 0.55, EI.ancho * 0.15, EI.alto * 0.1, "Créditos", 45)
-boton_configuracion = EI.Boton(EI.ancho * 0.025, EI.alto * 0.75, EI.ancho * 0.15, EI.alto * 0.1, "Configuración", 45)
+boton_nueva_partida = EI.Boton(EI.ancho * 0.025, EI.alto * 0.15, EI.ancho * 0.15, EI.alto * 0.1, "Nueva partida", 45, 20)
+boton_cargar_partida = EI.Boton(EI.ancho * 0.025, EI.alto * 0.35, EI.ancho * 0.15, EI.alto * 0.1, "Cargar partida", 45, 20)
+boton_creditos = EI.Boton(EI.ancho * 0.025, EI.alto * 0.55, EI.ancho * 0.15, EI.alto * 0.1, "Créditos", 45, 20)
+boton_configuracion = EI.Boton(EI.ancho * 0.025, EI.alto * 0.75, EI.ancho * 0.15, EI.alto * 0.1, "Configuración", 45, 20)
 
 #Mostramos inicialmente los botones
 boton_nueva_partida.dibujar(EI.PANTALLA)

@@ -91,12 +91,11 @@ elif seleccion == 3:
     sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//6, 90, 128)
 
 
-
-mapa_avion_ajustado =  pygame.transform.scale(EI.mapa_avion, (EI.ancho, EI.alto)) #Ajustamos el mapa al tamaño de la pantalla
+mapa_avion_ajustado = pygame.transform.scale(EI.mapa_avion, (EI.ancho, EI.alto)) #Ajustamos el mapa al tamaño de la pantalla
 EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Mostramos el mapa
 
 altura = EI.alto * 0.3
-velocidad_personaje1 = EI.ancho * 0.6
+velocidad_personaje = EI.ancho * 0.6
 estado_caminar_derecha = None
 estado_caminar_izquierda = None
 estado_correr_derecha = None
@@ -128,7 +127,7 @@ while True:
                 EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
                 mapa_avion_ajustado =  pygame.transform.scale(EI.mapa_avion, (EI.ancho - (EI.ancho * 0.1), EI.alto - (EI.alto * 0.2)))
                 altura -= EI.alto * 0.076
-                velocidad_personaje1 -= EI.ancho * 0.06
+                velocidad_personaje -= EI.ancho * 0.06
             #Si se presiona la tecla "f", entoces vuelve a pantalla completa
             if evento.key == pygame.K_f and not fullscreen:
                 fullscreen = True
@@ -141,7 +140,7 @@ while True:
                 EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
                 mapa_avion_ajustado =  pygame.transform.scale(EI.mapa_avion, (EI.ancho, EI.alto))
                 altura += EI.alto * 0.076
-                velocidad_personaje1 += EI.ancho * 0.06
+                velocidad_personaje += EI.ancho * 0.06
             #Si se presiona la tecla "espacio", entonces el personaje salta
             if evento.key == pygame.K_SPACE:
                 saltando = True
@@ -157,8 +156,8 @@ while True:
         restar = 0 if seleccion == 3 else EI.ancho * 0.02
         for sprite in sprites_ataque1_derecha:
             EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-            velocidad_personaje1 += EI.ancho * 0.003
-            EI.PANTALLA.blit(sprite, (velocidad_personaje1 - restar, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
+            velocidad_personaje += EI.ancho * 0.003
+            EI.PANTALLA.blit(sprite, (velocidad_personaje - restar, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
             pygame.display.flip()  #Se actualiza la pantalla
             pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
         ataque1 = False
@@ -167,8 +166,8 @@ while True:
     if ataque1 and (anterior == "izquierda"):
         for sprite in sprites_ataque1_izquierda[::-1]:
             EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-            velocidad_personaje1 -= EI.ancho * 0.003
-            EI.PANTALLA.blit(sprite, (velocidad_personaje1 + EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
+            velocidad_personaje -= EI.ancho * 0.003
+            EI.PANTALLA.blit(sprite, (velocidad_personaje + EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
             pygame.display.flip()  #Se actualiza la pantalla
             pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
         ataque1 = False
@@ -178,8 +177,8 @@ while True:
         restar = 0 if seleccion == 3 else EI.ancho * 0.02
         for sprite in sprites_ataque3_derecha:
             EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-            velocidad_personaje1 += EI.ancho * 0.003
-            EI.PANTALLA.blit(sprite, (velocidad_personaje1 - restar, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
+            velocidad_personaje += EI.ancho * 0.003
+            EI.PANTALLA.blit(sprite, (velocidad_personaje - restar, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
             pygame.display.flip()  #Se actualiza la pantalla
             pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
         ataque3 = False
@@ -188,8 +187,8 @@ while True:
     if ataque3 and (anterior == "izquierda"):
         for sprite in sprites_ataque3_izquierda[::-1]:
             EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-            velocidad_personaje1 -= EI.ancho * 0.003
-            EI.PANTALLA.blit(sprite, (velocidad_personaje1 + EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
+            velocidad_personaje -= EI.ancho * 0.003
+            EI.PANTALLA.blit(sprite, (velocidad_personaje + EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
             pygame.display.flip()  #Se actualiza la pantalla
             pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
         ataque3 = False
@@ -198,8 +197,8 @@ while True:
     if saltando and (anterior == "derecha" or anterior == None):
         for sprite in sprites_saltar_derecha:
             EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-            velocidad_personaje1 += EI.ancho * 0.003
-            EI.PANTALLA.blit(sprite, (velocidad_personaje1 - EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
+            velocidad_personaje += EI.ancho * 0.003
+            EI.PANTALLA.blit(sprite, (velocidad_personaje - EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
             pygame.display.flip()  #Se actualiza la pantalla
             pygame.time.delay(50)  #Se pausa la ejecución durante un breve período de tiempo
         saltando = False
@@ -208,8 +207,8 @@ while True:
     if saltando and (anterior == "izquierda"):
         for sprite in sprites_saltar_izquierda[::-1]:
             EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-            velocidad_personaje1 -= EI.ancho * 0.003
-            EI.PANTALLA.blit(sprite, (velocidad_personaje1 + EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
+            velocidad_personaje -= EI.ancho * 0.003
+            EI.PANTALLA.blit(sprite, (velocidad_personaje + EI.ancho * 0.02, altura - EI.alto * 0.009))  #Se dibuja el sprite actual
             pygame.display.flip()  #Se actualiza la pantalla
             pygame.time.delay(50)  #Se pausa la ejecución durante un breve período de tiempo
         saltando = False
@@ -217,155 +216,155 @@ while True:
     teclas = pygame.key.get_pressed() 
     #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
     if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
-        EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje1 + EI.ancho * 0.027, altura))
+        EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje + EI.ancho * 0.027, altura))
     if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
-        EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje1 + EI.ancho * 0.04, altura))
+        EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje + EI.ancho * 0.04, altura))
 
     #Si se presiona la tecla hacia abajo o "s", entonces el personaje baja
     if (teclas[pygame.K_DOWN] or teclas[pygame.K_s]) and (anterior == "derecha" or anterior == None):
         altura += EI.alto * 0.01
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-        EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje1 + EI.ancho * 0.027, altura))
+        EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje + EI.ancho * 0.027, altura))
 
     #Si se presiona la tecla hacia abajo o "s", entonces el personaje baja
     if (teclas[pygame.K_DOWN] or teclas[pygame.K_s]) and (anterior == "izquierda"):
         altura += EI.alto * 0.01
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-        EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje1 + EI.ancho * 0.04, altura))
+        EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje + EI.ancho * 0.04, altura))
     
     #Si se presiona la tecla hacia arriba o "w", entonces el personaje sube
     if (teclas[pygame.K_UP] or teclas[pygame.K_w]) and (anterior == "derecha" or anterior == None):
         altura -= EI.alto * 0.01
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-        EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje1 + EI.ancho * 0.027, altura))
+        EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje + EI.ancho * 0.027, altura))
     
     #Si se presiona la tecla hacia arriba o "w", entonces el personaje sube
     if (teclas[pygame.K_UP] or teclas[pygame.K_w]) and (anterior == "izquierda"):
         altura -= EI.alto * 0.01
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-        EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje1 + EI.ancho * 0.04, altura))
+        EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje + EI.ancho * 0.04, altura))
     
     
     #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
     if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LSHIFT] or teclas[pygame.K_RSHIFT]) == False:
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-        velocidad_personaje1 += EI.ancho * 0.002 
+        velocidad_personaje += EI.ancho * 0.002 
         sumar = EI.ancho * 0.015 if seleccion == 3 else 0
         anterior = "derecha"
         if estado_caminar_derecha == None or estado_caminar_derecha == 7:
-            EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 0
         elif estado_caminar_derecha == 0:
-            EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 1
         elif estado_caminar_derecha == 1:
-            EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 2
         elif estado_caminar_derecha == 2:
-            EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 3
         elif estado_caminar_derecha == 3:
-            EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 4
         elif estado_caminar_derecha == 4:
-            EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 5
         elif estado_caminar_derecha == 5:
-            EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 6
         elif estado_caminar_derecha == 6:
-            EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje + sumar, altura))
             estado_caminar_derecha = 7
 
     #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
     if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) and (teclas[pygame.K_LSHIFT] or teclas[pygame.K_RSHIFT]) == False:
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
-        velocidad_personaje1 -= EI.ancho * 0.002 
+        velocidad_personaje -= EI.ancho * 0.002 
         sumar = EI.ancho * 0.02 if seleccion == 3 else 0
         anterior = "izquierda"
         if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 0
         elif estado_caminar_izquierda == 0:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 1
         elif estado_caminar_izquierda == 1:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 2
         elif estado_caminar_izquierda == 2:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 3
         elif estado_caminar_izquierda == 3:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 4
         elif estado_caminar_izquierda == 4:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 5
         elif estado_caminar_izquierda == 5:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 6
         elif estado_caminar_izquierda == 6:
-            EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje1 + sumar, altura))
+            EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje + sumar, altura))
             estado_caminar_izquierda = 7
 
     #Si la tecla derecha o "d" y shift están siendo presionadas, entonces el personaje corre hacia la derecha
     if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LSHIFT] or teclas[pygame.K_RSHIFT]):
-        velocidad_personaje1 += EI.ancho * 0.003
+        velocidad_personaje += EI.ancho * 0.003
         anterior = "derecha"
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
         if estado_correr_derecha == None or estado_correr_derecha == 7:
-            EI.PANTALLA.blit(sprites_correr_derecha[0], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[0], (velocidad_personaje, altura))
             estado_correr_derecha = 0
         elif estado_correr_derecha == 0:
-            EI.PANTALLA.blit(sprites_correr_derecha[1], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[1], (velocidad_personaje, altura))
             estado_correr_derecha = 1
         elif estado_correr_derecha == 1:
-            EI.PANTALLA.blit(sprites_correr_derecha[2], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[2], (velocidad_personaje, altura))
             estado_correr_derecha = 2
         elif estado_correr_derecha == 2:
-            EI.PANTALLA.blit(sprites_correr_derecha[3], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[3], (velocidad_personaje, altura))
             estado_correr_derecha = 3
         elif estado_correr_derecha == 3:
-            EI.PANTALLA.blit(sprites_correr_derecha[4], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[4], (velocidad_personaje, altura))
             estado_correr_derecha = 4
         elif estado_correr_derecha == 4:
-            EI.PANTALLA.blit(sprites_correr_derecha[5], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[5], (velocidad_personaje, altura))
             estado_correr_derecha = 5
         elif estado_correr_derecha == 5:
-            EI.PANTALLA.blit(sprites_correr_derecha[6], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[6], (velocidad_personaje, altura))
             estado_correr_derecha = 6
         elif estado_correr_derecha == 6:
-            EI.PANTALLA.blit(sprites_correr_derecha[7], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_derecha[7], (velocidad_personaje, altura))
             estado_correr_derecha = 7
 
     #Si la tecla izquierda o "a" y shift están siendo presionadas, entonces el personaje corre hacia la izquierda
     if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) and (teclas[pygame.K_LSHIFT] or teclas[pygame.K_RSHIFT]):
-        velocidad_personaje1 -= EI.ancho * 0.003
+        velocidad_personaje -= EI.ancho * 0.003
         anterior = "izquierda"
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
         if estado_correr_izquierda == None or estado_correr_izquierda == 7:
-            EI.PANTALLA.blit(sprites_correr_izquierda[7], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[7], (velocidad_personaje, altura))
             estado_correr_izquierda = 0
         elif estado_correr_izquierda == 0:
-            EI.PANTALLA.blit(sprites_correr_izquierda[6], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[6], (velocidad_personaje, altura))
             estado_correr_izquierda = 1
         elif estado_correr_izquierda == 1:
-            EI.PANTALLA.blit(sprites_correr_izquierda[5], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[5], (velocidad_personaje, altura))
             estado_correr_izquierda = 2
         elif estado_correr_izquierda == 2:
-            EI.PANTALLA.blit(sprites_correr_izquierda[4], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[4], (velocidad_personaje, altura))
             estado_correr_izquierda = 3
         elif estado_correr_izquierda == 3:
-            EI.PANTALLA.blit(sprites_correr_izquierda[3], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[3], (velocidad_personaje, altura))
             estado_correr_izquierda = 4
         elif estado_correr_izquierda == 4:
-            EI.PANTALLA.blit(sprites_correr_izquierda[2], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[2], (velocidad_personaje, altura))
             estado_correr_izquierda = 5
         elif estado_correr_izquierda == 5:
-            EI.PANTALLA.blit(sprites_correr_izquierda[1], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[1], (velocidad_personaje, altura))
             estado_correr_izquierda = 6
         elif estado_correr_izquierda == 6:
-            EI.PANTALLA.blit(sprites_correr_izquierda[0], (velocidad_personaje1, altura))
+            EI.PANTALLA.blit(sprites_correr_izquierda[0], (velocidad_personaje, altura))
             estado_correr_izquierda = 7
 
     pygame.time.Clock().tick(60) #Limitamos la cantidad de fotogramas
