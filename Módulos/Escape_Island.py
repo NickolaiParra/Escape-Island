@@ -9,6 +9,7 @@ VERDE = (0, 255, 0)
 AZUL = (0, 0, 255)
 FONDO = (244, 236, 223) 
 H14AD8F = (20, 143, 173) 
+GRIS = (155, 155, 155)
 
 #Imágenes
 logo = pygame.image.load("Imagenes\Portada-Logo\Logo.png") 
@@ -16,6 +17,8 @@ portada = pygame.image.load("Imagenes\Portada-Logo\Portada.jpeg")
 portada_2 = pygame.image.load("Imagenes\Portada-Logo\Portada_2.jpeg") 
 mapa_avion = pygame.image.load("Imagenes\Mapa\Avion.png")
 pantalla_de_carga = pygame.image.load("Imagenes\Portada-Logo\Pantalla_de_carga.png")
+icono_sonido = pygame.image.load("Imagenes\Iconos\Sonido.png")
+icono_sinsonido = pygame.image.load("Imagenes\Iconos\Sinsonido.png")
 
 #Pantalla
 informacion_pantalla = pygame.display.Info() #Información sobre la pantalla
@@ -54,6 +57,13 @@ def cargar_sprites(hoja_sprites, ancho_sprite, alto_sprite, espacio_entre_sprite
         cuadro = pygame.transform.scale(cuadro, (ancho * 0.09, alto * 0.09)) #Se adecua el sprite a un tamaño específico
         sprites.append(cuadro)
     return sprites
+
+def dibujar_barra(pos_x, color_barra, color_control, color_anterior):
+    """Esta función toma como argumento la posición x del mouse, el color de la barra, el color del control deslizante, el color de la parte anterior de la barra y dibuja una barra con control deslizante"""
+    pygame.draw.rect(PANTALLA, color_anterior, (ancho * 0.2, alto * 0.1, pos_x - (ancho * 0.2), alto * 0.03))  #Parte anterior de la barra
+    pygame.draw.rect(PANTALLA, color_barra, (pos_x, alto * 0.1, ancho * 0.3 - (pos_x - (ancho * 0.2)), alto * 0.03))  #Parte posterior de la barra
+    pygame.draw.rect(PANTALLA, color_control, (pos_x, alto * 0.09, ancho * 0.02, alto * 0.05))  #Control deslizante azul
+
 
 #Clases
 class Boton:
