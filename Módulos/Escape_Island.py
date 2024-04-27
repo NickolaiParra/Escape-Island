@@ -51,7 +51,7 @@ def transicion_desvanecimiento(pantalla_carga, pantalla_inicio, tiempo_transicio
         pygame.time.delay(tiempo_transicion // 50) #Se agrega un retraso para controlar la velocidad de transición
 
 def cargar_sprites(hoja_sprites, ancho_sprite, alto_sprite, espacio_entre_sprites):
-    """Esta función toma como argumento la hoja de sprites, el ancho de cada sprite, el alto de cada sprite, el espacio entre sprites y retorna cada sprite saparado individualmente en una lista"""
+    """Esta función toma como argumento la hoja de sprites, el ancho de cada sprite, el alto de cada sprite, el espacio entre sprites y retorna cada sprite separado individualmente en una lista"""
     sprites = []
     for x in range(0, hoja_sprites.get_width(), espacio_entre_sprites): #Se itera entre 0 y el ancho total de la hoja de sprites con un paso de espacio_entre_sprites
         #Se extrae un sprite individiual de la hoja de sprites y se almacena en sprites

@@ -38,9 +38,11 @@ Gris_brillo = True
 
 while True:
     for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+        if evento.type == pygame.KEYDOWN:
+            #Si se presiona la tecla "Esc", entonces se sale del juego
+            if evento.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
         if evento.type == pygame.MOUSEMOTION:
             #Si el cursor del mouse pasa por encima de algún  botón, entonces su color cambia
             boton_aceptar.color_normal = EI.AZUL if not boton_aceptar.esta_encima(evento.pos) else EI.ROJO
@@ -67,6 +69,7 @@ while True:
 
     mouse_x, mouse_y = pygame.mouse.get_pos() #Obtenemos la posición del mouse
 
+    #Dibujamos barra con control desplazable para el sonido
     if EI.alto * 0.09 <= mouse_y <= EI.alto * 0.09 + EI.alto * 0.05 and EI.ancho * 0.195 <= mouse_x <= EI.ancho * 0.489:  #Verificamos si el mouse está dentro de los límites de la barra 
         posicion_relativa = (mouse_x - (EI.ancho * 0.2)) / (EI.ancho * 0.3) #Calculamos la posición relativa del control deslizante azul en la barra 
         posicion_relativa = max(0, min(1, posicion_relativa)) #Asegurarse de que la posición relativa esté en el rango [0, 1]
@@ -82,6 +85,7 @@ while True:
             EI.dibujar_barra(mouseantiguo_x, EI.NEGRO, EI.AZUL, EI.AZUL, EI.ancho * 0.2, EI.alto * 0.1, EI.ancho * 0.3, EI.alto * 0.03, EI.ancho * 0.02, EI.alto * 0.05) #Dibujar barra desplazable
         else: EI.dibujar_barra(mouseantiguo_x, EI.GRIS, EI.AZUL, EI.GRIS, EI.ancho * 0.2, EI.alto * 0.1, EI.ancho * 0.3, EI.alto * 0.03, EI.ancho * 0.02, EI.alto * 0.05) #Dibujar barra desplazable
     
+    #Dibujamos barra con control desplazable para el brillo
     if EI.alto * 0.4 <= mouse_y <= EI.alto * 0.4 + EI.alto * 0.05 and EI.ancho * 0.195 <= mouse_x <= EI.ancho * 0.489:  #Verificamos si el mouse está dentro de los límites de la barra 
         brillo = (mouse_x - (EI.ancho * 0.2)) / (EI.ancho * 0.3) #Calculamos la posición relativa del control deslizante azul en la barra 
         brillo = max(0, min(1, brillo)) #Asegurarse de que la posición relativa esté en el rango [0, 1]

@@ -137,9 +137,12 @@ while running:
                 dialog_text3 = fuente_dialog.render("Hola",True,BLACK)
                 dialog_text_rect3 = dialog_text3.get_rect()
                 dialog_text_rect3.topright = (ancho * 0.1,alto* 0.90)
-            elif event.key == pygame.K_z and dialog_active:
+            elif event.key == pygame.K_RIGHT and dialog_active:
                 #Avanzar el diálogo
                 num_dialog += 1
+            elif event.key == pygame.K_LEFT and dialog_active:
+                #Retroceder en el diálogo
+                num_dialog -= 1
             elif event.key == pygame.K_m:
                 #Activar/Desactivar diálogos
                 #Pendiente de cambiar
