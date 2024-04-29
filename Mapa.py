@@ -825,22 +825,23 @@ while True:
             altura += EI.alto * 0.01
             posy_hitbox_derecha += EI.ancho * 0.0055
             EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje + EI.ancho * 0.027, altura))
-            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
+
             if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) or (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
                 EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Ataques", "Puedes presionar 'x' y 'z' para atacar:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(tecla_x, (EI.ancho * 0.6, EI.alto * 0.8))
+            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
 
         #Si se presiona la tecla hacia abajo o "s", entonces el personaje baja
         if (teclas[pygame.K_DOWN] or teclas[pygame.K_s]) and (anterior == "izquierda") and posy_hitbox_derecha < EI.alto * 0.48:
             altura += EI.alto * 0.01
             posy_hitbox_derecha += EI.ancho * 0.0055
             EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje + EI.ancho * 0.04, altura))
-            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
             if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) or (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
                 EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Ataques", "Puedes presionar 'x' y 'z' para atacar:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(tecla_x, (EI.ancho * 0.6, EI.alto * 0.8))
+            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
 
         #Si se presiona la tecla hacia arriba o "w", entonces el personaje sube
         if (teclas[pygame.K_UP] or teclas[pygame.K_w]) and (anterior == "derecha" or anterior == None):
@@ -848,11 +849,11 @@ while True:
                 altura -= EI.alto * 0.01
                 posy_hitbox_derecha -= EI.ancho * 0.0055
             EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje + EI.ancho * 0.027, altura))
-            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
             if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) or (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
                 EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Ataques", "Puedes presionar 'x' y 'z' para atacar:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(tecla_x, (EI.ancho * 0.6, EI.alto * 0.8))
+            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
         
         #Si se presiona la tecla hacia arriba o "w", entonces el personaje sube
         if (teclas[pygame.K_UP] or teclas[pygame.K_w]) and (anterior == "izquierda"):
@@ -860,11 +861,11 @@ while True:
                 altura -= EI.alto * 0.01
                 posy_hitbox_derecha -= EI.ancho * 0.0055
             EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje + EI.ancho * 0.04, altura))
-            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
             if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) or (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
                 EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Ataques", "Puedes presionar 'x' y 'z' para atacar:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(tecla_x, (EI.ancho * 0.6, EI.alto * 0.8))
+            EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
         
         #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
         if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
