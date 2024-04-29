@@ -63,6 +63,9 @@ while True:
             boton_personaje3.color_normal = EI.AZUL if not boton_personaje3.esta_encima(evento.pos) else EI.GRIS
             boton_aceptar.color_normal = EI.AZUL if not boton_aceptar.esta_encima(evento.pos) else EI.ROJO
             boton_cancelar.color_normal = EI.AZUL if not boton_cancelar.esta_encima(evento.pos) else EI.ROJO
+        
+        if evento.type == pygame.MOUSEBUTTONDOWN and boton_aceptar.esta_encima(evento.pos):
+            seleccion = 1 if p1 else 2
 
         
 
@@ -83,5 +86,5 @@ while True:
     EI.PANTALLA.blit(texto_seleccionar, (EI.ancho * 0.2, EI.alto * 0.1)) #Se imprime el texto "Selecciona tu personaje"
     
 
-    pygame.display.flip() #Actualizar la pantallz
+    pygame.display.flip() #Actualizar la pantalla
             

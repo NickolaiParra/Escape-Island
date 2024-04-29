@@ -10,6 +10,8 @@ AZUL = (0, 0, 255)
 FONDO = (244, 236, 223) 
 H14AD8F = (20, 143, 173) 
 GRIS = (155, 155, 155)
+NARANJA = (255, 100, 0)
+CIAN = (190,220,255)    
 
 #Imágenes
 logo = pygame.image.load("Imagenes\Portada-Logo\Logo.png") 
@@ -21,6 +23,26 @@ icono_sonido = pygame.image.load("Imagenes\Iconos\Sonido.png")
 icono_sinsonido = pygame.image.load("Imagenes\Iconos\Sinsonido.png")
 icono_brillo = pygame.image.load("Imagenes\Iconos\Brillo.png")
 icono_sinbrillo = pygame.image.load("Imagenes\Iconos\Sinbrillo.png")
+dialogo = pygame.image.load("Imagenes\Sprites\dialogo.png")
+flechas = pygame.image.load("Imagenes\Iconos\Flechas.png")
+flecha_izquierda = pygame.image.load("Imagenes\Iconos\Flecha_izquierda.png")
+flecha_derecha = pygame.image.load("Imagenes\Iconos\Flecha_derecha.png")
+flecha_abajo = pygame.image.load("Imagenes\Iconos\Flecha_abajo.png")
+flecha_arriba = pygame.image.load("Imagenes\Iconos\Flecha_arriba.png")
+fondo_1 = pygame.image.load("Imagenes\Mapa\Fondo_1.png")
+fondo_2 = pygame.image.load("Imagenes\Mapa\Fondo_2.png")
+fondo_3 = pygame.image.load("Imagenes\Mapa\Fondo_3.png")
+shift = pygame.image.load("Imagenes\Iconos\Shift.png")
+shift_flechaizquierda = pygame.image.load("Imagenes\Iconos\Shift_flecha_izquierda.png")
+shift_flechaderecha = pygame.image.load("Imagenes\Iconos\Shift_flecha_derecha.png")
+shift_izquierda = pygame.image.load("Imagenes\Iconos\Shift_izquierda.png")
+shift_derecha = pygame.image.load("Imagenes\Iconos\Shift_derecha.png")
+espacio_presionado = pygame.image.load("Imagenes/Iconos/Espacio_presionado.png")
+espacio_sinpresionar = pygame.image.load("Imagenes/Iconos/Espacio_sin_presionar.png")
+tecla_x = pygame.image.load("Imagenes/Iconos/X.png")
+tecla_xpresionada = pygame.image.load("Imagenes/Iconos/X_presionada.png")
+tecla_z = pygame.image.load("Imagenes/Iconos/Z.png")
+tecla_zpresionada = pygame.image.load("Imagenes/Iconos/Z_presionada.png")
 
 #Pantalla
 informacion_pantalla = pygame.display.Info() #Información sobre la pantalla
@@ -50,13 +72,13 @@ def transicion_desvanecimiento(pantalla_carga, pantalla_inicio, tiempo_transicio
         pygame.display.flip()
         pygame.time.delay(tiempo_transicion // 50) #Se agrega un retraso para controlar la velocidad de transición
 
-def cargar_sprites(hoja_sprites, ancho_sprite, alto_sprite, espacio_entre_sprites):
-    """Esta función toma como argumento la hoja de sprites, el ancho de cada sprite, el alto de cada sprite, el espacio entre sprites y retorna cada sprite separado individualmente en una lista"""
+def cargar_sprites(hoja_sprites, ancho_sprite, alto_sprite, espacio_entre_sprites, ancho_sprite_resultante = ancho * 0.09, alto_sprite_resultante = alto * 0.09):
+    """Esta función toma como argumento la hoja de sprites, el ancho de cada sprite, el alto de cada sprite, el espacio entre sprites, el ancho del sprite resultante, el alto del sprite resultante y retorna cada sprite separado individualmente en una lista"""
     sprites = []
     for x in range(0, hoja_sprites.get_width(), espacio_entre_sprites): #Se itera entre 0 y el ancho total de la hoja de sprites con un paso de espacio_entre_sprites
         #Se extrae un sprite individiual de la hoja de sprites y se almacena en sprites
         cuadro = hoja_sprites.subsurface((x, 0, ancho_sprite, alto_sprite)) 
-        cuadro = pygame.transform.scale(cuadro, (ancho * 0.09, alto * 0.09)) #Se adecua el sprite a un tamaño específico
+        cuadro = pygame.transform.scale(cuadro, (ancho_sprite_resultante, alto_sprite_resultante)) #Se adecua el sprite a un tamaño específico 
         sprites.append(cuadro)
     return sprites
 
@@ -65,6 +87,36 @@ def dibujar_barra(pos_x, color_barra, color_control, color_anterior, x, y, ancho
     pygame.draw.rect(PANTALLA, color_anterior, (x, y, pos_x - x, alto_barra))  #Parte anterior de la barra
     pygame.draw.rect(PANTALLA, color_barra, (pos_x, y, ancho_barra - (pos_x - x), alto_barra))  #Parte posterior de la barra
     pygame.draw.rect(PANTALLA, color_control, (pos_x, y - (alto_control - alto_barra) / 2, ancho_control, alto_control))  #Control deslizante
+
+def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(ancho * 0.023), tamaño_texto = int(ancho * 0.02), color = NARANJA):
+    """Esta función toma como argumentos el título, el texto de máximo 3 líneas, el tamaño del título, el tamaño del texto, el color del título y retorna un cuadro de texto en la parte inferior"""
+    fuente_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_texto)
+    personaje_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_titulo)
+    personaje_dialog.set_bold(True)
+    dialog_char = personaje_dialog.render("Hola",True,NEGRO)
+    dialog_char_rect = dialog_char.get_rect()
+    dialog_char_rect.topright = (ancho * 0.1, alto * 0.74)
+    dialog_text1 = fuente_dialog.render("Hola",True,NEGRO)
+    dialog_text_rect1 = dialog_text1.get_rect()
+    dialog_text_rect1.topright = (ancho * 0.1, alto * 0.80)
+    dialog_text2 = fuente_dialog.render("Hola", True,NEGRO)
+    dialog_text_rect2 = dialog_text1.get_rect()
+    dialog_text_rect2.topright = (ancho * 0.1, alto * 0.85)
+    dialog_text3 = fuente_dialog.render("Hola", True,NEGRO)
+    dialog_text_rect3 = dialog_text1.get_rect()
+    dialog_text_rect3.topright = (ancho * 0.1, alto * 0.90)
+    dialframe = pygame.transform.scale(dialogo,(ancho, 0.3 * alto))
+    dialframe_rect = dialframe.get_rect()
+    dialframe_rect.bottomleft = (0,alto)
+    PANTALLA.blit(dialframe,dialframe_rect)
+    dialog_char = personaje_dialog.render(titulo, True, color)
+    PANTALLA.blit(dialog_char,dialog_char_rect)
+    dialog_text1 = fuente_dialog.render(linea1, True, NEGRO)
+    PANTALLA.blit(dialog_text1,dialog_text_rect1)
+    dialog_text2 = fuente_dialog.render(linea2, True, NEGRO)
+    PANTALLA.blit(dialog_text2,dialog_text_rect2)
+    dialog_text3 = fuente_dialog.render(linea3, True, NEGRO)
+    PANTALLA.blit(dialog_text3,dialog_text_rect3)
 
 #Clases
 class Boton:
