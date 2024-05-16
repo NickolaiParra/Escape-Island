@@ -18,6 +18,7 @@ pygame.mixer.init()
 pygame.mixer.music.load('Música\ST.mp3')
 
 #Reproducimos la música en bucle 
+
 pygame.mixer.music.play(-1)
 
 pantalla_de_carga_ajustada =  pygame.transform.scale(EI.pantalla_de_carga, (EI.ancho, EI.alto)) #Ajustamos portada al tamaño de la pantalla
@@ -68,11 +69,11 @@ while True:
                 pygame.quit()
                 sys.exit()
             if evento.type == pygame.KEYDOWN:
-                #Si se presiona la tecla "Esc", entonces se sale de la pantalla completa
+                #Si se presiona la tecla "Esc", entonces se sale del juego
                 if evento.key == pygame.K_ESCAPE:
-                    EI.PANTALLA = pygame.display.set_mode((500, 400))
-                    portada_ajustada = pygame.transform.scale(EI.portada, (500, 400))
-                    EI.PANTALLA.blit(portada_ajustada, (0, 0)) #Mostramos portada
+                    if evento.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
                 #Si se presiona enter, se abre la pantalla de inicio
                 if (evento.key == pygame.K_RETURN or evento.key == pygame.K_KP_ENTER) and progreso_carga >= 1:
                     EI.transicion_desvanecimiento(portada2_ajustada, pantalla_de_carga_ajustada, 2000)  #Transición de desvanecimiento de 2 segundos entre la pantalla de carga y de inicio
@@ -118,16 +119,14 @@ while True:
             if evento.type == pygame.KEYDOWN:
                 #Si se presiona la tecla "Esc", entonces se sale de la pantalla completa
                 if evento.key == pygame.K_ESCAPE:
-                    EI.PANTALLA = pygame.display.set_mode((500, 400))
-                    portada_ajustada = pygame.transform.scale(EI.portada, (500, 400))
-                    EI.PANTALLA.blit(portada_ajustada, (0, 0))
-                    cerrar = False
+                    pygame.quit()
+                    sys.exit()
             if evento.type == pygame.MOUSEMOTION:
                 #Si el cursor del mouse pasa por encima de algún  botón, entonces su color cambia
                 boton_nueva_partida.color_normal = EI.AZUL if not boton_nueva_partida.esta_encima(evento.pos) else EI.ROJO
                 boton_cargar_partida.color_normal = EI.AZUL if not boton_cargar_partida.esta_encima(evento.pos) else EI.ROJO
                 boton_creditos.color_normal = EI.AZUL if not boton_creditos.esta_encima(evento.pos) else EI.ROJO
-                boton_configuracion.color_normal = EI.AZUL if not boton_configuracion.esta_encima(evento.pos) else EI.ROJO
+                boton_configuracion.color_normal = EI.AZUL if not boton_configuracion.esta_encima(evento.pos) else EI.ROJO 
             if cerrar:
                 #Mostramos los botones
                 boton_nueva_partida.dibujar(EI.PANTALLA)

@@ -4,12 +4,6 @@ import sys
 pygame.init()
 from Módulos import Escape_Island as EI
 
-BLACK = (0,0,0)
-ORANGE = (255,100,0)
-AMARILLO_FONDO = (255,168,100)
-DORADO_FONDO = (251,192,34)
-
-
 #Booleanos
 running = True
 dialog_continue = True
@@ -18,32 +12,27 @@ dialog_continue = True
 num_dialog = -1
 
 #personajes
-variably = pygame.image.load("Imagenes/Sprites/Variably.png").convert_alpha()
-variably = pygame.transform.scale(variably,(EI.ancho*0.2,EI.alto*0.3))
+variably = pygame.transform.scale(EI.variably,(EI.ancho*0.2,EI.alto*0.3))
 variably_rect = variably.get_rect()
 variably_rect.bottomleft = (EI.ancho*0.01,EI.alto*0.7)
 
 #Fondos
-fondo_aldea = pygame.image.load("Imagenes/Sprites/Fondo_aldea.jpg").convert()
-fondo_aldea = pygame.transform.scale(fondo_aldea,(EI.ancho*0.8,EI.alto*0.7))
+
+fondo_aldea = pygame.transform.scale(EI.fondo_aldea,(EI.ancho*0.8,EI.alto*0.7))
 fondo_aldea_rect = fondo_aldea.get_rect()
 fondo_aldea_rect.midtop = (EI.ancho//2, 0)
 
 #Cajas
-caja_a = pygame.image.load("Imagenes/Sprites/caja_a.png").convert()
-caja_a = pygame.transform.scale(caja_a,(EI.ancho * 0.1,EI.alto * 0.15))
+caja_a = pygame.transform.scale(EI.caja_a,(EI.ancho * 0.1,EI.alto * 0.15))
 caja_a_rect = caja_a.get_rect()
 caja_a_rect.bottomleft=(EI.ancho * 0.25, EI.alto * 0.69)
-caja_b = pygame.image.load("Imagenes/Sprites/caja_b.png").convert()
-caja_b = pygame.transform.scale(caja_b,(EI.ancho * 0.1,EI.alto * 0.15))
+caja_b = pygame.transform.scale(EI.caja_b,(EI.ancho * 0.1,EI.alto * 0.15))
 caja_b_rect = caja_b.get_rect()
 caja_b_rect.bottomleft=(EI.ancho * 0.4, EI.alto * 0.69)
-caja_c = pygame.image.load("Imagenes/Sprites/caja_c.png").convert()
-caja_c = pygame.transform.scale(caja_c,(EI.ancho * 0.1,EI.alto * 0.15))
+caja_c = pygame.transform.scale(EI.caja_c,(EI.ancho * 0.1,EI.alto * 0.15))
 caja_c_rect = caja_c.get_rect()
 caja_c_rect.bottomleft=(EI.ancho * 0.55, EI.alto * 0.69)
-caja_d = pygame.image.load("Imagenes/Sprites/caja_d.png").convert()
-caja_d = pygame.transform.scale(caja_d,(EI.ancho * 0.1,EI.alto * 0.15))
+caja_d = pygame.transform.scale(EI.caja_d,(EI.ancho * 0.1,EI.alto * 0.15))
 caja_d_rect = caja_d.get_rect()
 caja_d_rect.bottomleft=(EI.ancho * 0.7, EI.alto * 0.69)
 
@@ -57,35 +46,35 @@ def pregunta(titulo,pregunta,r1,r2,r3,r4, tamaño_texto =int(EI.ancho * 0.02),ta
     titulo_pregunta = fuente_titulo.render(" Respuestas: ",True,EI.ROJO)
     titulo_pregunta_rect = titulo_pregunta.get_rect()
     titulo_pregunta_rect.topleft =  (EI.ancho * 0.19,EI.alto*0.04)
-    pygame.draw.rect(EI.PANTALLA,DORADO_FONDO,titulo_pregunta_rect)
+    pygame.draw.rect(EI.PANTALLA,EI.DORADO_FONDO,titulo_pregunta_rect)
     pygame.draw.rect(EI.PANTALLA,EI.NEGRO,titulo_pregunta_rect,1)
     EI.PANTALLA.blit(titulo_pregunta,titulo_pregunta_rect)
     
     resp_a = fuente_dialog.render((" a. "+ r1 + " "),True,EI.NEGRO)
     resp_a_rect = resp_a.get_rect()
     resp_a_rect.topleft = (EI.ancho * 0.2,EI.alto*0.1)
-    pygame.draw.rect(EI.PANTALLA,AMARILLO_FONDO,resp_a_rect)
+    pygame.draw.rect(EI.PANTALLA,EI.AMARILLO_FONDO,resp_a_rect)
     pygame.draw.rect(EI.PANTALLA,EI.NEGRO,resp_a_rect,1)
     EI.PANTALLA.blit(resp_a,resp_a_rect)
     
     resp_b = fuente_dialog.render((" b. "+ r2 + " "),True,EI.NEGRO)
     resp_b_rect = resp_b.get_rect()
     resp_b_rect.topleft = (EI.ancho * 0.2,EI.alto*0.15)
-    pygame.draw.rect(EI.PANTALLA,AMARILLO_FONDO,resp_b_rect)
+    pygame.draw.rect(EI.PANTALLA,EI.AMARILLO_FONDO,resp_b_rect)
     pygame.draw.rect(EI.PANTALLA,EI.NEGRO,resp_b_rect,1)
     EI.PANTALLA.blit(resp_b,resp_b_rect)
     
     resp_c = fuente_dialog.render((" c. "+ r3 + " "),True,EI.NEGRO)
     resp_c_rect = resp_c.get_rect()
     resp_c_rect.topleft = (EI.ancho * 0.2,EI.alto*0.2)
-    pygame.draw.rect(EI.PANTALLA,AMARILLO_FONDO,resp_c_rect)
+    pygame.draw.rect(EI.PANTALLA,EI.AMARILLO_FONDO,resp_c_rect)
     pygame.draw.rect(EI.PANTALLA,EI.NEGRO,resp_c_rect,1)
     EI.PANTALLA.blit(resp_c,resp_c_rect)
     
     resp_d = fuente_dialog.render((" d. "+ r4 + " "),True,EI.NEGRO)
     resp_d_rect = resp_d.get_rect()
     resp_d_rect.topleft = (EI.ancho * 0.2,EI.alto*0.25)
-    pygame.draw.rect(EI.PANTALLA,AMARILLO_FONDO,resp_d_rect)
+    pygame.draw.rect(EI.PANTALLA,EI.AMARILLO_FONDO,resp_d_rect)
     pygame.draw.rect(EI.PANTALLA,EI.NEGRO,resp_d_rect,1)
     EI.PANTALLA.blit(resp_d,resp_d_rect)
     
@@ -104,10 +93,10 @@ while running:
     
     #Diálogos
     if num_dialog == -1:
-        EI.mostrar_texto("Escape Island","Llegando a Aldea de las variables.","(Presiona 'Enter' para continuar)",color=EI.AZUL)
+        EI.mostrar_texto("Escape Island","Llegando a la aldea de las variables.","(Usa las flechas para continuar).",color=EI.AZUL)
     elif num_dialog == 0:
-        t1 = "Haz llegado a una aldea maravillosa"
-        t2 = "Un aura de variabilidad llena el ambiente"
+        t1 = "Haz llegado a una aldea maravillosa."
+        t2 = "Un aura de variabilidad llena el ambiente."
         t3 = "Sientes como tu gran aventura empieza de verdad."
         EI.mostrar_texto("Aldea de las variables",t1,t2,t3,color=EI.AZUL)
     elif num_dialog == 1:
@@ -161,10 +150,10 @@ while running:
         #Quiz de variables 1
         EI.PANTALLA.blit(variably,variably_rect)
         t1 = "¿Qué es una variable en programación?"
-        a = "Una caja"
-        b = "Un espacio para guardar información"
-        c = "Un valor numérico"
-        d = "Una cadena de texto"
+        a = "Una caja."
+        b = "Un espacio para guardar información."
+        c = "Un valor numérico."
+        d = "Una cadena de texto."
         correcta = 2
         pregunta("Quiz de variables 1",[t1,"",""],a,b,c,d)
         dialog_continue = False
@@ -189,9 +178,15 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-            elif event.key == pygame.K_RETURN and dialog_continue:
+            #Si se presiona la flecha izquierda o derecha, se avanza en los diálogos
+            elif event.key == pygame.K_RIGHT and dialog_continue:
                 #Avanzar el diálogo
                 num_dialog += 1
+                print(num_dialog)
+            elif num_dialog >= 0 and event.key == pygame.K_LEFT and dialog_continue:
+                #Retroceder el diálogo
+                num_dialog -= 1
+                print(num_dialog)
     
     pygame.time.Clock().tick(60)
     pygame.display.update()

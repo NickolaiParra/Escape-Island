@@ -12,26 +12,36 @@ H14AD8F = (20, 143, 173)
 GRIS = (155, 155, 155)
 NARANJA = (255, 100, 0)
 CIAN = (190,220,255)    
+AMARILLO_FONDO = (255,168,100)
+DORADO_FONDO = (251,192,34)
+
+#Pantalla
+informacion_pantalla = pygame.display.Info() #Información sobre la pantalla
+ancho = informacion_pantalla.current_w  #Información sobre el ancho de la pantalla
+alto = informacion_pantalla.current_h  #Información sobre el alto de la pantalla
+PANTALLA = pygame.display.set_mode((ancho, alto)) #Tamaño
+pygame.display.set_caption("Escape Island") #Título
+logo = pygame.image.load("Imagenes\Portada-Logo\Logo.png").convert()
+pygame.display.set_icon(logo) #Logo
 
 #Imágenes
-logo = pygame.image.load("Imagenes\Portada-Logo\Logo.png") 
-portada = pygame.image.load("Imagenes\Portada-Logo\Portada.jpeg") 
-portada_2 = pygame.image.load("Imagenes\Portada-Logo\Portada_2.jpeg") 
-mapa_avion = pygame.image.load("Imagenes\Mapa\Avion.png")
-pantalla_de_carga = pygame.image.load("Imagenes\Portada-Logo\Pantalla_de_carga.png")
-icono_sonido = pygame.image.load("Imagenes\Iconos\Sonido.png")
-icono_sinsonido = pygame.image.load("Imagenes\Iconos\Sinsonido.png")
-icono_brillo = pygame.image.load("Imagenes\Iconos\Brillo.png")
-icono_sinbrillo = pygame.image.load("Imagenes\Iconos\Sinbrillo.png")
-dialogo = pygame.image.load("Imagenes\Sprites\dialogo.png")
+portada = pygame.image.load("Imagenes\Portada-Logo\Portada.jpeg").convert()
+portada_2 = pygame.image.load("Imagenes\Portada-Logo\Portada_2.jpeg").convert() 
+mapa_avion = pygame.image.load("Imagenes\Mapa\Avion.png").convert()
+pantalla_de_carga = pygame.image.load("Imagenes\Portada-Logo\Pantalla_de_carga.png").convert()
+icono_sonido = pygame.image.load("Imagenes\Iconos\Sonido.png").convert()
+icono_sinsonido = pygame.image.load("Imagenes\Iconos\Sinsonido.png").convert()
+icono_brillo = pygame.image.load("Imagenes\Iconos\Brillo.png").convert()
+icono_sinbrillo = pygame.image.load("Imagenes\Iconos\Sinbrillo.png").convert()
+dialogo = pygame.image.load("Imagenes\Mapa\dialogo.png").convert()
 flechas = pygame.image.load("Imagenes\Iconos\Flechas.png")
 flecha_izquierda = pygame.image.load("Imagenes\Iconos\Flecha_izquierda.png")
 flecha_derecha = pygame.image.load("Imagenes\Iconos\Flecha_derecha.png")
 flecha_abajo = pygame.image.load("Imagenes\Iconos\Flecha_abajo.png")
 flecha_arriba = pygame.image.load("Imagenes\Iconos\Flecha_arriba.png")
-fondo_1 = pygame.image.load("Imagenes\Mapa\Fondo_1.png")
-fondo_2 = pygame.image.load("Imagenes\Mapa\Fondo_2.png")
-fondo_3 = pygame.image.load("Imagenes\Mapa\Fondo_3.png")
+fondo_1 = pygame.image.load("Imagenes\Mapa\Fondo_1.png").convert()
+fondo_2 = pygame.image.load("Imagenes\Mapa\Fondo_2.png").convert()
+fondo_3 = pygame.image.load("Imagenes\Mapa\Fondo_3.png").convert()
 shift = pygame.image.load("Imagenes\Iconos\Shift.png")
 shift_flechaizquierda = pygame.image.load("Imagenes\Iconos\Shift_flecha_izquierda.png")
 shift_flechaderecha = pygame.image.load("Imagenes\Iconos\Shift_flecha_derecha.png")
@@ -43,14 +53,16 @@ tecla_x = pygame.image.load("Imagenes/Iconos/X.png")
 tecla_xpresionada = pygame.image.load("Imagenes/Iconos/X_presionada.png")
 tecla_z = pygame.image.load("Imagenes/Iconos/Z.png")
 tecla_zpresionada = pygame.image.load("Imagenes/Iconos/Z_presionada.png")
-
-#Pantalla
-informacion_pantalla = pygame.display.Info() #Información sobre la pantalla
-ancho = informacion_pantalla.current_w  #Información sobre el ancho de la pantalla
-alto = informacion_pantalla.current_h  #Información sobre el alto de la pantalla
-PANTALLA = pygame.display.set_mode((ancho, alto)) #Tamaño
-pygame.display.set_caption("Escape Island") #Título
-pygame.display.set_icon(logo) #Logo
+variably = pygame.image.load("Imagenes/Sprites/Variably.png").convert_alpha()
+fondo_aldea = pygame.image.load("Imagenes/Mapa/Fondo_aldea.jpg").convert()
+caja_a = pygame.image.load("Imagenes/Iconos/caja_a.png").convert()
+caja_b = pygame.image.load("Imagenes/Iconos/caja_b.png").convert()
+caja_c = pygame.image.load("Imagenes/Iconos/caja_c.png").convert()
+caja_d = pygame.image.load("Imagenes/Iconos/caja_d.png").convert()
+caja_a_rota = pygame.image.load("Imagenes/Iconos/caja_a_rota.png").convert()
+caja_b_rota = pygame.image.load("Imagenes/Iconos/caja_b_rota.png").convert()
+caja_c_rota = pygame.image.load("Imagenes/Iconos/caja_c_rota.png").convert()
+caja_d_rota = pygame.image.load("Imagenes/Iconos/caja_d_rota.png").convert()
 
 #Funciones
 def transicion_desvanecimiento(pantalla_carga, pantalla_inicio, tiempo_transicion):
@@ -91,7 +103,7 @@ def dibujar_barra(pos_x, color_barra, color_control, color_anterior, x, y, ancho
 def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(ancho * 0.023), tamaño_texto = int(ancho * 0.02), color = NARANJA):
     """Esta función toma como argumentos el título, el texto de máximo 3 líneas, el tamaño del título, el tamaño del texto, el color del título y retorna un cuadro de texto en la parte inferior"""
     fuente_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_texto)
-    personaje_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_titulo)
+    personaje_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_titulo) 
     personaje_dialog.set_bold(True)
     dialog_char = personaje_dialog.render("Hola",True,NEGRO)
     dialog_char_rect = dialog_char.get_rect()
@@ -117,6 +129,70 @@ def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(
     PANTALLA.blit(dialog_text2,dialog_text_rect2)
     dialog_text3 = fuente_dialog.render(linea3, True, NEGRO)
     PANTALLA.blit(dialog_text3,dialog_text_rect3)
+
+def pregunta(titulo,pregunta,r1,r2,r3,r4, tamaño_texto =int(ancho * 0.02),tamaño_titulo =int(ancho * 0.023)):
+    """Esta función toma como argumento el título del cuestionario, el texto de la pregunta, el texto de 4 respuestas, el tamaño del texto, el tamaño del título y retorna una plantilla de cuestionario usando cuatro cajas."""
+    caja_a = pygame.image.load("Imagenes/Iconos/caja_a.png").convert()
+    caja_b = pygame.image.load("Imagenes/Iconos/caja_b.png").convert()
+    caja_c = pygame.image.load("Imagenes/Iconos/caja_c.png").convert()
+    caja_d = pygame.image.load("Imagenes/Iconos/caja_d.png").convert()
+    l1,l2,l3 = pregunta
+    #Cajas
+    caja_a = pygame.transform.scale(caja_a,(ancho * 0.1,alto * 0.15))
+    caja_a_rect = caja_a.get_rect()
+    caja_a_rect.bottomleft=(ancho * 0.25, alto * 0.69)
+    caja_b = pygame.transform.scale(caja_b,(ancho * 0.1,alto * 0.15))
+    caja_b_rect = caja_b.get_rect()
+    caja_b_rect.bottomleft=(ancho * 0.4, alto * 0.69)
+    caja_c = pygame.transform.scale(caja_c,(ancho * 0.1,alto * 0.15))
+    caja_c_rect = caja_c.get_rect()
+    caja_c_rect.bottomleft=(ancho * 0.55, alto * 0.69)
+    caja_d = pygame.transform.scale(caja_d,(ancho * 0.1,alto * 0.15))
+    caja_d_rect = caja_d.get_rect()
+    caja_d_rect.bottomleft=(ancho * 0.7, alto * 0.69)
+    mostrar_texto(titulo,l1,l2,l3,color=ROJO)
+    fuente_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_texto)
+    fuente_titulo = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_titulo)
+    
+    titulo_pregunta = fuente_titulo.render(" Respuestas: ",True,ROJO)
+    titulo_pregunta_rect = titulo_pregunta.get_rect()
+    titulo_pregunta_rect.topleft =  (ancho * 0.19,alto*0.04)
+    pygame.draw.rect(PANTALLA,DORADO_FONDO,titulo_pregunta_rect)
+    pygame.draw.rect(PANTALLA,NEGRO,titulo_pregunta_rect,1)
+    PANTALLA.blit(titulo_pregunta,titulo_pregunta_rect)
+    
+    resp_a = fuente_dialog.render((" a. "+ r1 + " "),True,NEGRO)
+    resp_a_rect = resp_a.get_rect()
+    resp_a_rect.topleft = (ancho * 0.2,alto*0.1)
+    pygame.draw.rect(PANTALLA,AMARILLO_FONDO,resp_a_rect)
+    pygame.draw.rect(PANTALLA,NEGRO,resp_a_rect,1)
+    PANTALLA.blit(resp_a,resp_a_rect)
+    
+    resp_b = fuente_dialog.render((" b. "+ r2 + " "),True,NEGRO)
+    resp_b_rect = resp_b.get_rect()
+    resp_b_rect.topleft = (ancho * 0.2,alto*0.15)
+    pygame.draw.rect(PANTALLA,AMARILLO_FONDO,resp_b_rect)
+    pygame.draw.rect(PANTALLA,NEGRO,resp_b_rect,1)
+    PANTALLA.blit(resp_b,resp_b_rect)
+    
+    resp_c = fuente_dialog.render((" c. "+ r3 + " "),True,NEGRO)
+    resp_c_rect = resp_c.get_rect()
+    resp_c_rect.topleft = (ancho * 0.2,alto*0.2)
+    pygame.draw.rect(PANTALLA,AMARILLO_FONDO,resp_c_rect)
+    pygame.draw.rect(PANTALLA,NEGRO,resp_c_rect,1)
+    PANTALLA.blit(resp_c,resp_c_rect)
+    
+    resp_d = fuente_dialog.render((" d. "+ r4 + " "),True,NEGRO)
+    resp_d_rect = resp_d.get_rect()
+    resp_d_rect.topleft = (ancho * 0.2,alto*0.25)
+    pygame.draw.rect(PANTALLA,AMARILLO_FONDO,resp_d_rect)
+    pygame.draw.rect(PANTALLA,NEGRO,resp_d_rect,1)
+    PANTALLA.blit(resp_d,resp_d_rect)
+    
+    PANTALLA.blit(caja_a,caja_a_rect)
+    PANTALLA.blit(caja_b,caja_b_rect)
+    PANTALLA.blit(caja_c,caja_c_rect)
+    PANTALLA.blit(caja_d,caja_d_rect)
 
 #Clases
 class Boton:
