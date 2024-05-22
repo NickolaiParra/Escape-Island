@@ -1370,12 +1370,12 @@ while True:
 
             #Diálogos
             if num_dialog == -1:
-                EI.mostrar_texto("Escape Island","Llegando a la aldea de las variables.","(Usa las flechas para continuar).",color=EI.AZUL)
+                EI.mostrar_texto("Escape Island","Llegando a la aldea de las variables.","(Usa las flechas para continuar).",color=EI.ROJO)
             elif num_dialog == 0:
                 t1 = "Haz llegado a una aldea maravillosa."
                 t2 = "Un aura de variabilidad llena el ambiente."
                 t3 = "Sientes como tu gran aventura empieza de verdad."
-                EI.mostrar_texto("Aldea de las variables",t1,t2,t3,color=EI.AZUL)
+                EI.mostrar_texto("Aldea de las variables",t1,t2,t3,color=EI.VERDE_OSCURO)
             elif num_dialog == 1:
                 EI.PANTALLA.blit(variably,variably_rect)
                 personaje = "???"
