@@ -174,7 +174,7 @@ while running:
     elif num_dialog == 12:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
-        t1 = "Para esto vamos a usar un lenguaje de programación que se llama python."
+        t1 = "Para esto vamos a usar un lenguaje de programación que se llama Python."
         t2 = "Ya verás que es bastante intuitivo y fácil de usar."
         EI.mostrar_texto(personaje,t1,t2)
     elif num_dialog == 13:
@@ -187,21 +187,21 @@ while running:
     elif num_dialog == 14:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
-        t1 = "Por ejemplo si vas a escribir nombre (Una cadena de texto) puedes poner:"
+        t1 = "Por ejemplo, si vas a asignar un nombre a una variable, puedes poner:"
         t2 = "nombre = 'Juan'"
         t3 = "Y así se guarda 'Juan' en la variable 'nombre'"
         EI.mostrar_texto(personaje,t1,t2,t3)
     elif num_dialog == 15:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
-        t1 = "También puedes guardar números de la siguente manera:"
+        t1 = "También, puedes guardar números de la siguente manera:"
         t2 = "numero_entero = 42"
-        t3 = "numero_decimal = 3.1416"
+        t3 = "numero_decimal = -3.1416"
         EI.mostrar_texto(personaje,t1,t2,t3)
     elif num_dialog == 16:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
-        t1 = "El último tipo de dato simple que puedes guardar es un booleano. "
+        t1 = "El último tipo de dato simple que puedes guardar es un booleano."
         t2 = "Este dato es un valor que puede ser verdadero o falso."
         t3 = "El valor de verdadero se escribe como 'True' y falso como 'False'"
         EI.mostrar_texto(personaje,t1,t2,t3)
@@ -210,27 +210,27 @@ while running:
         personaje = "Variably"
         t1 = "Un ejemplo de esto es el siguiente:"
         t2 = "valor = True"
-        t3 = "No se te olvide que los booleanos van en mayúscula en python."
+        t3 = "No se te olvide que los booleanos van en mayúscula en Python."
         EI.mostrar_texto(personaje,t1,t2,t3)
     elif num_dialog == 17:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
         t1 = "Esos son los tipos más sencillos de datos que vas a encontrar."
         t2 = "Y ya sabes como guardarlos en una variable para poder trabajar con ellos después."
-        t3 = "Durante tu viaje seguirás usándolos y prendiendo sobre estos."
+        t3 = "Durante tu viaje seguirás usándolos y aprendiendo sobre estos."
         EI.mostrar_texto(personaje,t1,t2,t3)
     elif num_dialog == 18:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
         t1 = "Eso es todo por tu segunda y última lección aquí en la aldea."
         t2 = "Te voy a hacer una pregunta para ver si entendiste bien la lección."
-        t3 = "Aquí vamos!"
+        t3 = "¡Aquí vamos!"
         EI.mostrar_texto(personaje,t1,t2,t3)
     elif num_dialog == 19:
         #Quiz de variables 2
         EI.PANTALLA.blit(variably,variably_rect)
         t1 = "Si yo quiero crear una variable que se llame 'fruta' y que guarde mi fruta favorita,"
-        t2 = "¿Cuál de las siguentes es la más correcta de nombrar la variable?"
+        t2 = "¿Cuál de las siguentes es la forma correcta de nombrar la variable?"
         t3 = "Ten en cuenta la manera en la que están escritas."
         a = "'fresa' = fruta"
         b = "'fruta' = manzana"
@@ -264,7 +264,7 @@ while running:
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
         t1 = "Si pasas podrás irte."
-        t2 = "Si no tu tiempo aquí se alargará."
+        t2 = "Si no, entonces tu tiempo aquí se alargará."
         t3 = "¿Estás listo?"
         EI.mostrar_texto(personaje,t1,t2,t3)
     elif num_dialog == 23:
@@ -279,7 +279,7 @@ while running:
         pregunta("Examen de variables",[t1,"",""],a,b,c,d)
     elif num_dialog == 24:
         #Pregunta 2
-        t1 = "¿Cuál es la sintaxis corecta para definir una variable en python?"
+        t1 = "¿Cuál es la sintaxis corecta para definir una variable en Python?"
         a = "variable = valor"
         b = "valor = variable"
         c = "variable == valor"
@@ -310,17 +310,17 @@ while running:
         pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
     elif num_dialog == 27:
         #Pregunta 5
-        t1 = "¿Cuál es el nombre del lenguaje de programación que se ha estado usando?"
-        a = "c++"
-        b = "java"
-        c = "python"
-        d = "c"
+        t1 = "¿Cuál es el nombre del lenguaje de programación que se hemos estado usando?"
+        a = "C++"
+        b = "Java"
+        c = "Python"
+        d = "C"
         correcta = 3
         pregunta("Examen de variables",[t1,"",""],a,b,c,d)
     elif num_dialog == -300: # Si no pasa
         EI.PANTALLA.blit(variably,variably_rect)
         personaje = "Variably"
-        t1 = "Lo intentase."
+        t1 = "Lo intentaste."
         t2 = "No pierdas la esperanza."
         t3 = "Lo intentaremos otra vez."
         EI.mostrar_texto(personaje,t1,t2,t3)
