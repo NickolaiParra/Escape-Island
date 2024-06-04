@@ -1220,6 +1220,8 @@ dialogo = pygame.transform.scale(EI.dialogo, (EI.ancho * 0.5, EI.alto * 0.4))
 fuente_niveles = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.03))
 texto_variables = fuente_niveles.render("Aldea de las variables", True, (EI.ROJO)) 
 boton_niveles = EI.Boton(EI.ancho * 0.30, EI.alto * 0.5, EI.ancho * 0.15, EI.alto * 0.08, "Comenzar", int(EI.ancho * 0.04), int(EI.ancho * 0.01))
+estrella_rellena_transformada = pygame.transform.scale(EI.estrella_rellena, (EI.ancho * 0.15, EI.alto * 0.2))
+estrella_vacia_transformada = pygame.transform.scale(EI.estrella_vacia, (EI.ancho * 0.15, EI.alto * 0.2))
 #Variables para implementar los niveles
 variables = False
 condicionales = False
@@ -1592,6 +1594,7 @@ while True:
                 c = "Un valor numérico."
                 d = "Una cadena de texto."
                 correcta = 2
+                prueba = True
                 EI.pregunta("Quiz de variables 1",[t1,"",""],a,b,c,d)
                 dialog_continue = False
                 #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
@@ -1830,7 +1833,7 @@ while True:
                 personaje = "Variably"
                 t1 = "Por ejemplo, si vas a asignar un nombre a una variable, puedes poner:"
                 t2 = "nombre = 'Juan'"
-                t3 = "Y así se guarda 'Juan' en la variable 'nombre'"
+                t3 = "Y así se guarda 'Juan' en la variable 'nombre'."
                 EI.mostrar_texto(personaje,t1,t2,t3)
 
             elif num_dialog == 15:
@@ -2547,10 +2550,10 @@ while True:
                 t1 = "Si se define la siguiente variable:"
                 t2 = "ejecutando = True"
                 t3 = "¿De qué tipo es la información qué guarda?"
-                a = "Texto"
-                b = "Booleano"
-                c = "Número entero"
-                d = "Número decimal"
+                a = "Texto."
+                b = "Booleano."
+                c = "Número entero."
+                d = "Número decimal."
                 correcta = 2
                 EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
                 dialog_continue = False
@@ -3586,6 +3589,10 @@ while True:
             EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
             EI.PANTALLA.blit(texto_variables, (EI.ancho * 0.3, EI.alto * 0.35))
             boton_niveles.dibujar(EI.PANTALLA)
+            if completar_variables:
+                EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+            else: 
+                EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
 
 
     pygame.time.Clock().tick(30)

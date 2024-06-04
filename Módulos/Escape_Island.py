@@ -67,6 +67,8 @@ caja_a_rota = pygame.image.load("Imagenes/Iconos/caja_a_rota.png").convert()
 caja_b_rota = pygame.image.load("Imagenes/Iconos/caja_b_rota.png").convert()
 caja_c_rota = pygame.image.load("Imagenes/Iconos/caja_c_rota.png").convert()
 caja_d_rota = pygame.image.load("Imagenes/Iconos/caja_d_rota.png").convert()
+estrella_vacia = pygame.image.load("Imagenes/Iconos/Estrella_vacia.png")
+estrella_rellena = pygame.image.load("Imagenes/Iconos/Estrella_rellena.png")
 
 #Funciones
 def transicion_desvanecimiento(pantalla_carga, pantalla_inicio, tiempo_transicion):
