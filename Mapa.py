@@ -40,7 +40,6 @@ p2 = False
 controlar_bucle = False
 
 #Booleanos
-running = True
 dialog_continue = True
 
 
@@ -1213,15 +1212,20 @@ posx_hitbox_derecha = EI.ancho * 0.63
 posy_hitbox_derecha = EI.alto * 0.31
 posx_hitbox_izquierda = EI.ancho * 0.64
 hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto * 0.08)
+
 #Variables para calcular las hitboxes de los niveles
 hitbox_nivel_variables = pygame.Rect(EI.ancho * 0.74, EI.alto * 0.3, EI.ancho * 0.08, EI.alto * 0.1)
+hitbox_nivel_condicionales = pygame.Rect(EI.ancho * 0.77, EI.alto * 0.12, EI.ancho * 0.07, EI.alto * 0.13)
 dialogo = pygame.transform.scale(EI.dialogo, (EI.ancho * 0.5, EI.alto * 0.4))
+
 #Variables para mostrar el texto
 fuente_niveles = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.03))
 texto_variables = fuente_niveles.render("Aldea de las variables", True, (EI.ROJO)) 
+texto_condicionales = fuente_niveles.render("Cueva de condicionales", True, (EI.ROJO)) 
 boton_niveles = EI.Boton(EI.ancho * 0.30, EI.alto * 0.5, EI.ancho * 0.15, EI.alto * 0.08, "Comenzar", int(EI.ancho * 0.04), int(EI.ancho * 0.01))
 estrella_rellena_transformada = pygame.transform.scale(EI.estrella_rellena, (EI.ancho * 0.15, EI.alto * 0.2))
 estrella_vacia_transformada = pygame.transform.scale(EI.estrella_vacia, (EI.ancho * 0.15, EI.alto * 0.2))
+
 #Variables para implementar los niveles
 variables = False
 condicionales = False
@@ -1234,26 +1238,13 @@ Derivadas = False
 mapa = True
 terminado = False
 var = True
+con = True
 
 while True: 
-
-    if variables:
-        
+    #Nivel de condicionales
+    if condicionales:
         if seleccion == 1:
-            #Cargamos las hojas de sprites del personaje 1
-            quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\quieto_derecha.png")
-            quieto_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\quieto_izquierda.png")
-            correr_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\correr_derecha.png")
-            caminar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\caminar_derecha.png")
-            caminar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\caminar_izquierda.png")
-            correr_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\correr_izquierda.png")
-            ataque1_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque1_derecha.png")
-            ataque1_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque1_izquierda.png")
-            ataque3_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque3_derecha.png")
-            ataque3_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque3_izquierda.png")
-            saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\saltar_derecha.png")
-            saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\saltar_izquierda.png")
-            #Extraemos los sprites individuales del personaje 1
+            #Extraemos los sprites individuales del personaje 1 con las dimensiones ajustadas
             sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
             sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
             sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//10, 87, 128, EI.ancho * 0.2, EI.alto * 0.22)
@@ -1265,20 +1256,7 @@ while True:
             sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
             sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
         elif seleccion == 2:
-            #Cargamos las hojas de sprites del personaje 2
-            quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\quieto_derecha.png")
-            quieto_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\quieto_izquierda.png")
-            correr_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\correr_derecha.png")
-            caminar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\caminar_derecha.png")
-            caminar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\caminar_izquierda.png")
-            correr_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\correr_izquierda.png")
-            ataque1_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque1_derecha.png")
-            ataque1_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque1_izquierda.png")
-            ataque3_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque3_derecha.png")
-            ataque3_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque3_izquierda.png")
-            saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\saltar_derecha.png")
-            saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\saltar_izquierda.png")
-            #Extraemos los sprites individuales del personaje 2
+            #Extraemos los sprites individuales del personaje 2 con las dimensiones ajustadas
             sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
             sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
             sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//12, 85, 128, EI.ancho * 0.2, EI.alto * 0.22)
@@ -1290,20 +1268,7 @@ while True:
             sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
             sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
         elif seleccion == 3:
-            #Cargamos las hojas de sprites del personaje 3
-            quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\quieto_derecha.png")
-            quieto_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\quieto_izquierda.png")
-            correr_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\correr_derecha.png")
-            caminar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\caminar_derecha.png")
-            caminar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\caminar_izquierda.png")
-            correr_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\correr_izquierda.png")
-            ataque1_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque1_derecha.png")
-            ataque1_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque1_izquierda.png")
-            ataque3_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque3_derecha.png")
-            ataque3_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque3_izquierda.png")
-            saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\saltar_derecha.png")
-            saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\saltar_izquierda.png")
-            #Extraemos los sprites individuales del personaje 3
+            #Extraemos los sprites individuales del personaje 3 con las dimensiones ajustadas
             sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//11, 80, 128)
             sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//11, 80, 128)
             sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//11, 92, 128)
@@ -1321,12 +1286,23 @@ while True:
         caja_b_rota_transformada = pygame.transform.scale(EI.caja_b_rota, (EI.ancho * 0.1, EI.alto * 0.15))
         caja_c_rota_transformada = pygame.transform.scale(EI.caja_c_rota, (EI.ancho * 0.1, EI.alto * 0.15))
         caja_d_rota_transformada = pygame.transform.scale(EI.caja_d_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+
+        #Variables apra las preguntas
+        num_dialog = -1
+
+        #Variables para las respuestas
         caja_a_presionada = False
         caja_b_presionada = False
         caja_c_presionada = False
         caja_d_presionada = False
         prueba = True
         error = False
+
+        #personajes
+        condi = pygame.transform.scale(EI.condi,(EI.ancho*0.2,EI.alto*0.3))
+        condi_rect = condi.get_rect()
+        condi_rect.bottomleft = (EI.ancho*0.01,EI.alto*0.7)
+
         #Variables para calcular la hitbox del personaje
         altura = EI.alto * 0.5
         altura_variables = EI.alto * 0.5
@@ -1354,7 +1330,2078 @@ while True:
         rectangulo_caja_c = pygame.Rect(EI.ancho * 0.55, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
         rectangulo_caja_d = pygame.Rect(EI.ancho * 0.7, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
 
-        while running:
+        #Fondos
+        fondo_cueva = pygame.transform.scale(EI.fondo_cueva,(EI.ancho*0.8,EI.alto*0.7))
+        fondo_cueva_rect = fondo_cueva.get_rect()
+        fondo_cueva_rect.midtop = (EI.ancho//2, 0)
+
+        while True:
+            if anterior == "derecha":
+                hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.3)
+            elif anterior == "izquierda":
+                hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.3)
+            
+            teclas = pygame.key.get_pressed()
+
+            #Fondo
+            EI.PANTALLA.fill((0,0,0))
+            EI.PANTALLA.blit(fondo_cueva,fondo_cueva_rect)
+            
+            #Condicionales al romper las cajas
+            #Caja a correcta
+            if not caja_a_presionada and (caja_d_presionada or caja_b_presionada or caja_c_presionada) and prueba and num_dialog == 23:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Quiz de condicionales 1",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -100
+                    break
+
+            if caja_a_presionada and (not (caja_d_presionada or caja_b_presionada or caja_c_presionada)) and prueba and num_dialog == 23:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Quiz de condicionales 1",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Caja d correcta
+            if not caja_d_presionada and (caja_a_presionada or caja_b_presionada or caja_c_presionada) and prueba and num_dialog == 40:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Quiz de condicionales 2",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -200
+                    break
+
+            if caja_d_presionada and (not (caja_a_presionada or caja_b_presionada or caja_c_presionada)) and prueba and num_dialog == 40:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Quiz de condicionales 2",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+            
+            #Caja b correcta
+            if not caja_b_presionada and (caja_a_presionada or caja_d_presionada or caja_c_presionada) and prueba and num_dialog == 43:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Examen de condicionales",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_b_presionada and (not (caja_a_presionada or caja_d_presionada or caja_c_presionada)) and prueba and num_dialog == 43:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Examen de condicionales",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Caja a correcta
+            if not caja_a_presionada and (caja_b_presionada or caja_d_presionada or caja_c_presionada) and prueba and (num_dialog == 44 or num_dialog == 45 or num_dialog == 47):
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Examen de condicionales",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_a_presionada and (not (caja_b_presionada or caja_d_presionada or caja_c_presionada)) and prueba and (num_dialog == 44 or num_dialog == 45 or num_dialog == 47):
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Examen de condicionales",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+            
+            #Caja c correcta
+            if not caja_c_presionada and (caja_b_presionada or caja_d_presionada or caja_a_presionada) and prueba and num_dialog == 46:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Examen de condicionales",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_c_presionada and (not (caja_b_presionada or caja_d_presionada or caja_a_presionada)) and prueba and num_dialog == 46:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(condi,condi_rect)
+                    EI.pregunta("Examen de condicionales",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Diálogos
+            if num_dialog == -1:
+                EI.mostrar_texto("Escape Island","Llegando a la Cueva de condicionales.",color=EI.ROJO)
+            elif num_dialog == 0:
+                t1 = "Haz llegado a una cueva intrigante."
+                t2 = "El aire misterioso te condiciona a seguir."
+                EI.mostrar_texto("Cueva de condicionales",t1,t2,color=EI.MORADO)
+            elif num_dialog == 1:
+                EI.mostrar_texto("Cueva de condicionales","Te tropiezas.","Haces un alboroto.","Si alguien te escuchara, estarías en problemas.",color=EI.MORADO)
+            elif num_dialog == 2:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "???"
+                EI.mostrar_texto(personaje,"¿¿¿Hay alguien ahí???", "Si es así...","¡Muéstrate!")
+            elif num_dialog == 3:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Ah, pero sí eres un joven aventurero."
+                t2 = "¿Qué te trae por estos lares tan silenciosos?"
+                t3 = "Soy Condi, viejo maestro de las condiciones."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 4:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "¿Qué?"
+                t2 = "Así que vienes de la aldea de las variables, ¿eh?"
+                t3 = "En busca de llenar tu mente de sabiduría."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 5:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Si has venido a aprender, entonces estás en el lugar correcto."
+                t2 = "Si no estoy mal, ya deberías saber sobre las variables."
+                t3 = "Así que te podría enseñar mi especialidad: las condiciones."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 6:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Si estás listo..."
+                t2 = "¡Comencemos de una vez!"
+                EI.mostrar_texto(personaje,t1,t2)
+            elif num_dialog == 7:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Los condicionales son una de las herramientas más importantes en programación."
+                t2 = "Te serán de mucha utilidad."
+                EI.mostrar_texto(personaje,t1,t2)
+            elif num_dialog == 8:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Para ponerte en contexto, te voy a mostrar la estructura de un condicional:"
+                t2 = "Si se cumple (condición) entonces:"
+                t3 = "    se ejecuta (código)"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 9:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Básicamente, esto significa que si se cumple la condición que tú le pongas:"
+                t2 = "Se ejecuta todo lo que tengas dentro de ese condicional."
+                EI.mostrar_texto(personaje,t1,t2)
+            elif num_dialog == 9:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Ahora te pregutarás"
+                t2 = "¿Qué tipo de condiciones puedes poner?"
+                t3 = "Bueno, es algo bastante sencillo."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 10:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Puedes comparar dos valores distintos."
+                t2 = "Por ejemplo, puedes comparar 2 > 9 (2 es mayor que 9)."
+                t3 = "Eso sería falso, por lo que no se ejecutaría la condición."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 11:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "También podemos poner:"
+                t2 = "a = 10"
+                t3 = "Y evaluar la condición a >= 10 (La variable a es mayor o igual a 10)."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 12:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Esto sería verdadero, ya que como a es 10 y 10 >= 10, entonces se cumple la condición."
+                t2 = "Y todo lo que tengas dentro del condicional se ejecutaría."
+                t3 = "No se te olvide que puedes comparar variables (lo que suele ser muy usado)."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 13:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Digamos que tienes dos variables a = 10 y b = 20"
+                t2 = "a == b (a es igual a b) sería falso, porque 10 == 20 (10 es igual a 20) es falso."
+                t3 = "Y así puedes comparar variables."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 14:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Pero no solo puedes comparar números."
+                t2 = "También puedes comparar cadenas de texto (strings)."
+                t3 = "Por ejemplo..."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 15:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Si tienes nombre = 'Variably' y jefe = 'Variably'."
+                t2 = "Decir jefe == nombre es verdadero, ya que las dos contienen el mismo texto ('Variably')."
+                t3 = "En Python, se diferencian mayúsculas de minúsculas. Además, puedes tener condiciones con booleanos."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 16:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Los booleanos son valores de Falso o Verdadero que se pueden usar en una condición."
+                t2 = "Si tienes la variable condicion = True"
+                t3 = "Cuando evalúes la condición en un condicional, el código se va a ejecutar."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 17:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Lo mismo sucede con False."
+                t2 = "Si tienes condición = False"
+                t3 = "No se va a ejecutar el código."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 18:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Algo interesante es que puedes poner varias condiciones en un mismo condicional."
+                t2 = "Esto se hace con los operadores lógicos 'y' (and) y 'o' (or)."
+                t3 = "Si has trabajado con lógica antes se te va a hacer un poco más fácil, ya que funcionan igual."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 19:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Si tenemos una variable a = True y otra variable b = False"
+                t2 = "Al usar el operador de 'and', las dos condiciones tienen que ser verdadares para que se cumpla."
+                t3 = "Por ejemplo: 'a and b' es falso, porque b es falso (False)."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 20:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Al igual que con 'and' se puede usar 'or'."
+                t2 = "La diferencia es que 'or' solo necesita que una de las dos condiciones sea verdadera para funcionar."
+                t3 = "Siguiendo el ejemplo anterior, 'a or b' sería verdadero, dado que a es verdadero (True)."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 21:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Cabe destacar que la condición puede ser una comparación de valores."
+                t2 = "Si tomamos a = 10, b = 20 y c = 30, y tenemos 'a > b or c > b'"
+                t3 = "Sería verdadero porque c > b es verdadero, aunque a > b no lo sea."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 22:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Eso sería la teoría de cómo funciona un condicional."
+                t2 = "Si necesitas puedes volver para revisar algo de lo que dije. Es bastante información."
+                t3 = "Bueno, veamos qué tanto aprendiste."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 23: # Quiz de condicionales 1
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Si tenemos: a = 50, b = 20, c = 70"
+                t2 = "Y la condición 'a > b and c >= a'"
+                t3 = "¿La condición se cumple?"
+                a = "Sí, todo se cumple"
+                b = "No, nada se cumple"
+                c = "No, solo se cumple a > b"
+                d = "No, solo se cumple c >= a"
+                EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Quiz de condicionales 1
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Quiz de condicionales 1
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Quiz de condicionales 1
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Quiz de condicionales 1
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 1",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == -100: # Si falla
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Eso está mal. Volvamos a ver."
+                t2 = "Recuerda que no hay prisa."
+                t3 = "Presiona 'Espacio' para continuar."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                error = True
+                devolver = 7
+            elif num_dialog == 24: # Si responde bien
+                EI.PANTALLA.blit(condi,condi_rect)
+                dialog_continue = True
+                personaje = "Condi"
+                t1 = "Muy bien, joven. Ya lo estás entendiendo."
+                t2 = "Sigamos con la siguiente lección."
+                t3 = "Cómo aplicarlo."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 25:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Para aplicar los condicionales en Python se usa la siguiente estructura:"
+                t2 = "if (condición):"
+                t3 = "    (código)"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 26:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Bastante sencillo, ¿no?"
+                t2 = "Es lo mismo que aprendimos sobre las condiciones."
+                t3 = "Solo que el código que se ejecuta dentro del condicional tiene que estar indentado."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 27:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "¿Que qué es indentado?"
+                t2 = "Mira lo sencillo que es."
+                t3 = "Significa que al principio de la línea tienes que dejar unos espacios."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 28:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Para hacerlo puedes dejar 4 espacios o presionar la tecla TAB."
+                t2 = "Esto con el objetivo de indicar cuáles instrucciones se deben ejecutar si la condición es verdadera."
+                t3 = "También, permite mejorar la organización y legibilidad del código."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 29:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Por ejemplo, si tienes la variable edad y tipo_persona puedes hacer lo siguiente:"
+                t2 = "if edad < 18:"
+                t3 = "    tipo_persona = 'Menor de edad'"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 30:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Pero, ¿qué pasa si en el ejemplo anterior también queremos considerar a las personas mayores de edad?"
+                t2 = "Tendríamos qué hacer otro condicional, ¿cierto?"
+                t3 = "Pero también existe otra forma de hacerlo."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 31:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Existe dos estructuras que son 'elif' y 'else'"
+                t2 = "Estás se evalúan si la primera condición no se cumplió."
+                t3 = "¿Pero cuál es la diferencia entre ellas?"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 32:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Básicamente, con 'elif' puedes escribir una segunda condición de la siguiente manera:"
+                t2 = "elif (segunda condición):"
+                t3 = "    (segundo código)"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 33:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Y lo interesante de esto es que 'elif' lo puedes usar cuantas veces quieras."
+                t2 = "Una tercera, cuarta, décima vez o las veces que quieras."
+                EI.mostrar_texto(personaje,t1,t2)
+            elif num_dialog == 34:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "En cambio 'else' lo que hace es que si ninguna condición de las anteriores (incluyendo 'elif's)"
+                t2 = "se ejecuta, entonces ejecuta lo que tiene el 'else'."
+                t3 = "Volviendo al ejemplo de la edad, podríamos decir:"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 35:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "if 0 <= edad < 18: tipo_persona = 'Menor de edad'"
+                t2 = "elif edad > 18: tipo_persona = 'Mayor de edad'"
+                t3 = "else: tipo_persona = 'Inexistente'"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 36:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "En la primera condición evaluamos si la edad es menor a 18 y mayor o igual a cero."
+                t2 = "Esto se hace para averiguar las personas menores de edad y verficar que la edad no sea negativa."
+                t3 = "Una edad negativa no sería posible."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 37:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Luego, con el 'elif' evaluamos a las personas que tienen más de 18."
+                t2 = "A estas les asignamos la mayoría de edad."
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 38:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Por último, si nada se cumple, significaría que tiene edad negativa."
+                t2 = "Lo cual no es posible."
+                t3 = "Por esto se le asigna la categoría de 'Inexistente'."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 39:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Con este ejemplo creo que puedes dar un vistazo de todas las cosas que se pueden hacer con"
+                t2 = "los condicionales."
+                t3 = "¡Vayamos a la pregunta de la lección!"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 40: # Quiz de condicionales 2
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "¿Para qué sirve indentar?"
+                t2 = ""
+                t3 = ""
+                a = "Para indicar qué parte del código se debe ejecutar si se cumple la condición."
+                b = "Para indicar que el código no se tiene que ejecutar."
+                c = "Para tener una mejor organización en el código."
+                d = "La a y la c."
+                EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Quiz de condicionales 2
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Quiz de condicionales 2
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Quiz de condicionales 2
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Quiz de condicionales 2
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Quiz de condicionales 2",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 41: # Si responde bien
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Excelente, joven."
+                t2 = "Haz adquirido un gran conocimiento."
+                t3 = "Veamos cómo te enfrentas a lo siguiente."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                dialog_continue = True
+            elif num_dialog == 42: 
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Aquí comienza tu prueba final."
+                t2 = ""
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 43:
+                #Examen de condicionales
+                #Pregunta 1
+                t1 = "¿Para qué sirve un condicional?"
+                t2 = ""
+                t3 = ""
+                a = "Para guardar una parte del código."
+                b = "Para ejecutar un código cuando se cumpla una condición específica."
+                c = "Para almacenar información sobre las variables."
+                d = "Para únicamente comparar dos números o cadenas."
+                EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 44:
+                #Pregunta 2
+                t1 = "¿Cuál es la estructura de un condicional en Python?"
+                t2 = ""
+                t3 = ""
+                a = "if (condición): (código)"
+                b = "(código): if (condición)"
+                c = "(condición): if (código)"
+                d = "if (código): (condición)"
+                EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 45:
+                #Pregunta 3
+                t1 = "Si tenemos a = True, b = 10 y c = 5,"
+                t2 = "¿la siguiente condición se cumple?"
+                t3 = "'a and b > c'."
+                a = "Sí, todo se cumple."
+                b = "No, porque solo 'a' es falso."
+                c = "No, porque solo no se cumple 'b > c'."
+                d = "No, todo es falso."
+                EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 46:
+                #Pregunta 4
+                t1 = "Si tenemos a = False, b = True, c = 'manzana' y d = 'Manzana',"
+                t2 = "¿la siguiente condición se cumple?"
+                t3 = "'(a or b) and (c == d)'"
+                a = "Sí, todo se cumple."
+                b = "No, porque solo '(a or b)' no se cumple."
+                c = "No, porque solo '(c == d)' no se cumple."
+                d = "No, porque ni '(a or b)' ni '(c == d)' se cumplen."
+                EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 47:
+                t1 = "¿Qué se usa para ejecutar un código, cuando la primera condición es falsa?"
+                t2 = ""
+                t3 = ""
+                a = "'else' y 'elif'."
+                b = "'print' y 'else'."
+                c = "'if' y 'else'."
+                d = "'print' e 'if'."
+                EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de condicionales
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_cueva, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(condi,condi_rect)
+                        EI.pregunta("Examen de condicionales",[t1,t2,t3],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+                
+            elif num_dialog == -200: # Si falla
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Eso no está bien."
+                t2 = "Veamos qué pasó."
+                t3 = "Presiona 'Espacio' para continuar."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                error = True
+                devolver = 25
+                #Vuelve a num_dialog = 25
+            elif num_dialog == -300: # Si falla
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Tú puedes."
+                t2 = "Vuelve a intentarlo."
+                t3 = "Presiona 'Espacio' para continuar."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                error = True
+                devolver = 25
+                #Vuelve a num_dialog = 25
+            elif num_dialog == 48: #Si pasa
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "Increíble, joven."
+                t2 = "¡Has superado todas mis expectativas!"
+                t3 = "Sigue tu camino."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                dialog_continue = True
+            elif num_dialog == 49:
+                EI.PANTALLA.blit(condi,condi_rect)
+                personaje = "Condi"
+                t1 = "¡Un futuro grandioso te espera!"
+                t2 = ""
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 50:
+                t1 = "Saliendo de la cueva de condicionales."
+                t2 = ""
+                t3 = ""
+                EI.mostrar_texto("Escape Island",t1,t2,t3, color=EI.ROJO)
+
+            elif num_dialog == 51:
+                mapa = True
+                condicionales = False
+                con = True
+                completar_condicionales = True
+                break
+            else:
+                EI.mostrar_texto("","")
+
+            #Eventos    
+            for evento in pygame.event.get():
+                if evento.type == pygame.KEYDOWN:
+                    if evento.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+                    #Si se presiona la flecha izquierda o derecha, se avanza en los diálogos
+                    elif evento.key == pygame.K_RIGHT and dialog_continue:
+                        #Avanzar el diálogo
+                        num_dialog += 1
+                    elif num_dialog >= 0 and evento.key == pygame.K_LEFT and dialog_continue:
+                        #Retroceder el diálogo
+                        num_dialog -= 1
+                    #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1
+                    if evento.key == pygame.K_x:
+                        ataque1 = True
+                    #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3
+                    if evento.key == pygame.K_z:
+                        ataque3 = True
+                    if error and evento.key == pygame.K_SPACE:
+                        num_dialog = devolver
+                        dialog_continue = True
+                        error = False
+            
+            pygame.time.Clock().tick(60)
+            pygame.display.update()
+
+    #Nivel de variables
+    if variables:
+        
+        if seleccion == 1:
+            #Extraemos los sprites individuales del personaje 1 con las dimensiones ajustadas
+            sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//10, 87, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//10, 87, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+        elif seleccion == 2:
+            #Extraemos los sprites individuales del personaje 2 con las dimensiones ajustadas
+            sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//12, 85, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//12, 85, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 75, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 75, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
+        elif seleccion == 3:
+            #Extraemos los sprites individuales del personaje 3 con las dimensiones ajustadas
+            sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//11, 80, 128)
+            sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//11, 80, 128)
+            sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//11, 92, 128)
+            sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//11, 92, 128)
+            sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//9, 81, 128)
+            sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//9, 81, 128)
+            sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//5, 95, 128)
+            sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//5, 95, 128)
+            sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//6, 90, 128)
+            sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//6, 90, 128)
+        
+        quieto_derecha = pygame.transform.scale(quieto_derecha, (EI.ancho * 0.05, EI.alto * 0.22)) #Se adecua el sprite a un tamaño específico
+        quieto_izquierda = pygame.transform.scale(quieto_izquierda, (EI.ancho * 0.05, EI.alto * 0.22)) #Se adecua el sprite a un tamaño específico
+        caja_a_rota_transformada = pygame.transform.scale(EI.caja_a_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+        caja_b_rota_transformada = pygame.transform.scale(EI.caja_b_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+        caja_c_rota_transformada = pygame.transform.scale(EI.caja_c_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+        caja_d_rota_transformada = pygame.transform.scale(EI.caja_d_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+
+        #Variables para las respuestas
+        caja_a_presionada = False
+        caja_b_presionada = False
+        caja_c_presionada = False
+        caja_d_presionada = False
+        prueba = True
+        error = False
+
+        #Variables para calcular la hitbox del personaje
+        altura = EI.alto * 0.5
+        altura_variables = EI.alto * 0.5
+        velocidad_personaje_variables = EI.ancho * 0.8
+        velocidad_personaje = EI.ancho * 0.8
+        estado_caminar_derecha = None
+        estado_caminar_izquierda = None
+        estado_correr_derecha = None
+        estado_correr_izquierda = None
+        saltando = None
+        anterior = 'derecha'
+        ataque1 = None
+        ataque3 = None
+        posx_hitbox_derecha_variables = EI.ancho * 0.83
+        posy_hitbox_derecha_variables = EI.alto * 0.5
+        posx_hitbox_izquierda_variables = EI.ancho * 0.84
+        posx_hitbox_derecha = EI.ancho * 0.63
+        posy_hitbox_derecha = EI.alto * 0.31
+        posx_hitbox_izquierda = EI.ancho * 0.64
+        hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto * 0.08)
+        mapa = False
+        hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.25)
+        rectangulo_caja_a = pygame.Rect(EI.ancho * 0.25, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+        rectangulo_caja_b = pygame.Rect(EI.ancho * 0.4, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+        rectangulo_caja_c = pygame.Rect(EI.ancho * 0.55, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+        rectangulo_caja_d = pygame.Rect(EI.ancho * 0.7, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+
+        while True:
             if anterior == "derecha":
                 hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.3)
             elif anterior == "izquierda":
@@ -1365,7 +3412,7 @@ while True:
             EI.PANTALLA.fill((0,0,0))
             EI.PANTALLA.blit(fondo_aldea,fondo_aldea_rect)
 
-            #Condiciones para el momento en el que se rompe la caja
+            #Condicionales para el momento en el que se rompe la caja
 
             #Caja b correcta
             if not caja_b_presionada and (caja_a_presionada or caja_c_presionada or caja_d_presionada) and prueba and num_dialog == 10:
@@ -1403,7 +3450,7 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Quiz de variables 2",[t1,t2,t3],a,b,c,d)
+                    EI.pregunta("Quiz de variables 2",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog = -200
                     break
@@ -1416,13 +3463,13 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Quiz de variables 2",[t1,t2,t3],a,b,c,d)
+                    EI.pregunta("Quiz de variables 2",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog += 1
                     break
 
             #Caja a correcta
-            if not caja_a_presionada and (caja_d_presionada or caja_b_presionada or caja_c_presionada) and prueba and (num_dialog == 23 or num_dialog == 24):
+            if not caja_a_presionada and (caja_d_presionada or caja_b_presionada or caja_c_presionada) and prueba and (num_dialog == 23 or num_dialog == 24 or num_dialog == 26):
                 while True:
                     caja_a_presionada = False
                     caja_b_presionada = False
@@ -1430,12 +3477,12 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                    EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog = -300
                     break
 
-            if caja_a_presionada and (not (caja_d_presionada or caja_b_presionada or caja_c_presionada)) and prueba and (num_dialog == 23 or num_dialog == 24):
+            if caja_a_presionada and (not (caja_d_presionada or caja_b_presionada or caja_c_presionada)) and prueba and (num_dialog == 23 or num_dialog == 24 or num_dialog == 26):
                 while True:
                     caja_a_presionada = False
                     caja_b_presionada = False
@@ -1443,7 +3490,7 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                    EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog += 1
                     break 
@@ -1457,7 +3504,7 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                    EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog = -300
                     break
@@ -1470,37 +3517,10 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                    EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog += 1
                     break
-
-            #Caja a correcta
-            if not caja_a_presionada and (caja_d_presionada or caja_b_presionada or caja_c_presionada) and prueba and num_dialog == 26:
-                while True:
-                    caja_a_presionada = False
-                    caja_b_presionada = False
-                    caja_c_presionada = False
-                    caja_d_presionada = False
-                    EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
-                    EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
-                    pygame.time.wait(1000)
-                    num_dialog = -300
-                    break
-
-            if caja_a_presionada and (not (caja_d_presionada or caja_b_presionada or caja_c_presionada)) and prueba and num_dialog == 26:
-                while True:
-                    caja_a_presionada = False
-                    caja_b_presionada = False
-                    caja_c_presionada = False
-                    caja_d_presionada = False
-                    EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
-                    EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
-                    pygame.time.wait(1000)
-                    num_dialog += 1
-                    break 
 
             #Caja c correcta
             if not caja_c_presionada and (caja_d_presionada or caja_b_presionada or caja_a_presionada) and prueba and num_dialog == 27:
@@ -1511,7 +3531,7 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                    EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog = -300
                     break
@@ -1524,7 +3544,7 @@ while True:
                     caja_d_presionada = False
                     EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                     EI.PANTALLA.blit(variably,variably_rect)
-                    EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                    EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                     pygame.time.wait(1000)
                     num_dialog += 1
                     break 
@@ -1807,7 +3827,7 @@ while True:
                 personaje = "Variably"
                 t1 = "Eso no es correcto."
                 t2 = "Vamos a volver a repasar el concepto clave."
-                t3 = "Presiona 'Espacio'."
+                t3 = "Presiona 'Espacio' para continuar."
                 EI.mostrar_texto(personaje,t1,t2,t3)
                 error = True
                 devolver = 6
@@ -1831,9 +3851,9 @@ while True:
             elif num_dialog == 14:
                 EI.PANTALLA.blit(variably,variably_rect)
                 personaje = "Variably"
-                t1 = "Por ejemplo, si vas a asignar un nombre a una variable, puedes poner:"
-                t2 = "nombre = 'Juan'"
-                t3 = "Y así se guarda 'Juan' en la variable 'nombre'."
+                t1 = "Por ejemplo, si vas a asignar un nombre a una variable, puedes poner: nombre = 'Juan'"
+                t2 = "Recuerda que las cadenas de texto van entre comillas dobles o simples."
+                t3 = "Y así se guarda 'Juan' en la variable nombre."
                 EI.mostrar_texto(personaje,t1,t2,t3)
 
             elif num_dialog == 15:
@@ -1849,7 +3869,7 @@ while True:
                 personaje = "Variably"
                 t1 = "El último tipo de dato simple que puedes guardar es un booleano."
                 t2 = "Este dato es un valor que puede ser verdadero o falso."
-                t3 = "El valor de verdadero se escribe como 'True' y falso como 'False'"
+                t3 = "El valor de verdadero se escribe como 'True' y falso como 'False'."
                 EI.mostrar_texto(personaje,t1,t2,t3)
 
             elif num_dialog == 17:
@@ -2093,7 +4113,7 @@ while True:
                 personaje = "Variably"
                 t1 = "Eso no es correcto."
                 t2 = "Devólvamonos para repasarlo."
-                t3 = "Presiona 'Espacio'."
+                t3 = "Presiona 'Espacio' para continuar."
                 EI.mostrar_texto(personaje,t1,t2,t3)
                 error = True
                 devolver = 13
@@ -2119,13 +4139,13 @@ while True:
             elif num_dialog == 22:
                 EI.PANTALLA.blit(variably,variably_rect)
                 personaje = "Variably"
-                t1 = "Si pasas podrás irte."
+                t1 = "Si pasas, podrás irte."
                 t2 = "Si no, entonces tu tiempo aquí se alargará."
                 t3 = "¿Estás listo?"
                 EI.mostrar_texto(personaje,t1,t2,t3)
 
             elif num_dialog == 23:
-                #Exámen de variables
+                #Examen de variables
                 #Pregunta 1
                 t1 = "¿Para qué sirve una variable?"
                 a = "Para guardar información."
@@ -2133,7 +4153,7 @@ while True:
                 c = "Para despejar una ecuación matemática."
                 d = "Para ejecutar código."
                 correcta = 1
-                EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                 dialog_continue = False
                 prueba = True
                 #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
@@ -2219,11 +4239,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque1_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2249,11 +4269,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque1_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2280,11 +4300,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque3_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2310,11 +4330,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque3_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2343,7 +4363,7 @@ while True:
                 c = "variable == valor"
                 d = "valor == variable"
                 correcta = 1
-                EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                 dialog_continue = False
                 prueba = True
                 #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
@@ -2429,11 +4449,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque1_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2459,11 +4479,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque1_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2490,11 +4510,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque3_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2520,11 +4540,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque3_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2555,7 +4575,7 @@ while True:
                 c = "Número entero."
                 d = "Número decimal."
                 correcta = 2
-                EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                 dialog_continue = False
                 prueba = True
                 #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
@@ -2641,11 +4661,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque1_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2671,11 +4691,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque1_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2702,11 +4722,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque3_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2732,11 +4752,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque3_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2766,7 +4786,7 @@ while True:
                 c = "None"
                 d = "True 32"
                 correcta = 1
-                EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                 dialog_continue = False
                 prueba = True
                 #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
@@ -2852,11 +4872,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque1_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2882,11 +4902,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque1_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2913,11 +4933,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque3_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2943,11 +4963,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque3_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,t2,t3],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,t2,t3],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -2975,7 +4995,7 @@ while True:
                 c = "Python"
                 d = "C"
                 correcta = 3
-                EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                 dialog_continue = False
                 prueba = True
                 #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
@@ -3061,11 +5081,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque1_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -3091,11 +5111,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque1_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -3122,11 +5142,11 @@ while True:
                         posx_hitbox_izquierda_variables += EI.ancho * 0.012
                         posx_hitbox_derecha_variables += EI.ancho * 0.012
                     for sprite in sprites_ataque3_derecha:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_derecha_variables < EI.ancho * 0.8:
                             velocidad_personaje_variables += EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -3152,11 +5172,11 @@ while True:
                         posx_hitbox_izquierda_variables -= EI.ancho * 0.012
                         posx_hitbox_derecha_variables -= EI.ancho * 0.012
                     for sprite in sprites_ataque3_izquierda[::-1]:
-                        #Exámen de variables
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        #Examen de variables
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         EI.PANTALLA.blit(fondo_aldea, (EI.ancho * 0.1, 0))
                         EI.PANTALLA.blit(variably,variably_rect)
-                        EI.pregunta("Exámen de variables",[t1,"",""],a,b,c,d)
+                        EI.pregunta("Examen de variables",[t1,"",""],a,b,c,d)
                         if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
                             velocidad_personaje_variables -= EI.ancho * 0.003
                         EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
@@ -3181,7 +5201,7 @@ while True:
                 personaje = "Variably"
                 t1 = "Lo intentaste. No pierdas la esperanza."
                 t2 = "Lo intentaremos otra vez."
-                t3 = "Presiona 'Espacio'."
+                t3 = "Presiona 'Espacio' para continuar."
                 EI.mostrar_texto(personaje,t1,t2,t3)
                 error = True
                 devolver = 6
@@ -3241,10 +5261,10 @@ while True:
             
             pygame.time.Clock().tick(60)
             pygame.display.update()
-
+    
     if mapa:
         
-        if (num_dialog == -1 or num_dialog == 31) and var:
+        if (num_dialog == -1 or num_dialog >= 31) and (var or con):
             altura = EI.alto * 0.3
             velocidad_personaje = EI.ancho * 0.6
             posx_hitbox_derecha = EI.ancho * 0.63
@@ -3252,6 +5272,7 @@ while True:
             posx_hitbox_izquierda = EI.ancho * 0.64
             hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto * 0.08)
             var = False
+            con = False
 
         if anterior == "derecha":
             hitbox = pygame.Rect(posx_hitbox_derecha, posy_hitbox_derecha, EI.ancho * 0.017, EI.alto * 0.0802)
@@ -3317,12 +5338,19 @@ while True:
                 #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3
                 if evento.key == pygame.K_z:
                     ataque3 = True
-            if evento.type == pygame.MOUSEBUTTONDOWN and boton_niveles.esta_encima(evento.pos):
-                variables = True
+            #Si se presiona algún botón, entonces se abre el nivel
+            if evento.type == pygame.MOUSEBUTTONDOWN:
+                #Variables
+                if boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_variables):
+                    variables = True
+                #Condicionales
+                elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_condicionales) and completar_variables:
+                    condicionales = True
+            
             if evento.type == pygame.MOUSEMOTION:
                 #Si el cursor del mouse pasa por encima de algún botón, entonces su color cambia
                 boton_niveles.color_normal = EI.AZUL if not boton_niveles.esta_encima(evento.pos) else EI.ROJO
-        
+
         
 
         EI.PANTALLA.blit(mapa_avion_ajustado, (0, 0)) #Se limpia la pantalla
@@ -3584,7 +5612,9 @@ while True:
             elif estado_correr_izquierda == 6:
                 EI.PANTALLA.blit(sprites_correr_izquierda[0], (velocidad_personaje, altura))
                 estado_correr_izquierda = 7
-            
+        
+        #Si la hitbox del personaje superpone la hitbox de algún nivel, entonces se muestra la interfaz para ingresar a ese nivel
+        #Variables
         if hitbox.colliderect(hitbox_nivel_variables):
             EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
             EI.PANTALLA.blit(texto_variables, (EI.ancho * 0.3, EI.alto * 0.35))
@@ -3593,8 +5623,18 @@ while True:
                 EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
             else: 
                 EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+        #Condicionales
+        elif hitbox.colliderect(hitbox_nivel_condicionales):
+            EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
+            EI.PANTALLA.blit(texto_condicionales, (EI.ancho * 0.29, EI.alto * 0.35))
+            boton_niveles.dibujar(EI.PANTALLA)
+            if completar_condicionales:
+                EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+            else: 
+                EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
 
 
     pygame.time.Clock().tick(30)
+    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.77, EI.alto * 0.12, EI.ancho * 0.07, EI.alto * 0.13))
     pygame.display.update()
     
