@@ -14,11 +14,13 @@ fuente_codigo = pygame.font.Font("Fuentes\\FiraCode.otf", int(EI.ancho * 0.02))
 lines = [""]
 cursor_pos = [0, 0]  #Posición del cursor
  
-# Lista con palabras reservadas importantes
-palabras_reservadas = ['if', 'while', 'for', 'True', 'False', 'def', 'print', 'and', 'or', 'elif', 'else', 'in']
 
 def render_text():
     '''Esta función muestra el texto y el cursor de un editor de código'''
+    # Lista con palabras reservadas importantes
+    palabras_reservadas = ['True', 'False', 'print']
+    palabras_reservadas_condicionales = ['if', 'and', 'or', 'elif', 'else']
+    palabras_reservadas_ciclos = ['while', 'for', 'in', 'range']
     EI.PANTALLA.fill(EI.NEGRO)  #Se limpia la pantalla
     y = 0
     for line in lines:  #Se itera en cada línea
@@ -31,11 +33,17 @@ def render_text():
                 if palabra_actual:  #Si hay una palabra para renderizar
                     if palabra_actual in palabras_reservadas:
                         palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.ROJO)  #Renderizar la palabra reservada en rojo
+                    elif palabra_actual in palabras_reservadas_condicionales:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AZUL)  #Renderizar la palabra reservada en azul
+                    elif palabra_actual in palabras_reservadas_ciclos:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.VERDE)  #Renderizar la palabra reservada en verde
+                    elif palabra_actual == 'def':
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AMARILLO_FONDO)  #Renderizar la palabra reservada en amarillo
                     else:
                         palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.BLANCO)  #Renderizar la palabra en blanco
                     EI.PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
                     x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
-                    palabra_actual = ""  # Reiniciamos la palabra actual para la próxima palabra
+                    palabra_actual = ""  #Reiniciamos la palabra actual para la próxima palabra
                 
                 #Renderizar el delimitador
                 delim_renderizado = fuente_codigo.render(char, True, EI.BLANCO)
@@ -49,6 +57,12 @@ def render_text():
         if palabra_actual:
             if palabra_actual in palabras_reservadas:
                 palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.ROJO)  #Renderizar la palabra reservada en rojo
+            elif palabra_actual in palabras_reservadas_condicionales:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AZUL)  #Renderizar la palabra reservada en azul
+            elif palabra_actual in palabras_reservadas_ciclos:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.VERDE)  #Renderizar la palabra reservada en verde
+            elif palabra_actual == 'def':
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AMARILLO_FONDO)  #Renderizar la palabra reservada en amarillo        
             else:
                 palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.BLANCO)  #Renderizar la palabra en blanco
             EI.PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
