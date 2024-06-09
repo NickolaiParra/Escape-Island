@@ -13,24 +13,52 @@ fuente_codigo = pygame.font.Font("Fuentes\\FiraCode.otf", int(EI.ancho * 0.02))
 #Variables del editor
 lines = [""]
 cursor_pos = [0, 0]  #Posición del cursor
-
-#Lista con palabras reservadas importantes
+ 
+# Lista con palabras reservadas importantes
 palabras_reservadas = ['if', 'while', 'for', 'True', 'False', 'def', 'print', 'and', 'or', 'elif', 'else', 'in']
 
-def render_text(): 
+def render_text():
     '''Esta función muestra el texto y el cursor de un editor de código'''
-    EI.PANTALLA.fill(EI.NEGRO) #Se limpia la pantalla
+    EI.PANTALLA.fill(EI.NEGRO)  #Se limpia la pantalla
     y = 0
-    for line in lines: #Se itera en cada línea
-        linea_renderizada = fuente_codigo.render(line, True, EI.BLANCO)  #Renderizar la palabra en blanco
-        EI.PANTALLA.blit(linea_renderizada, (EI.ancho * 0.005, y))  #Se muestra la palabra en la pantalla
+    for line in lines:  #Se itera en cada línea
+        x = EI.ancho * 0.005  #Posición horizontal inicial de la línea
+        palabra_actual = ""  #Inicializamos una cadena vacía para construir cada palabra
+        i = 0
+        while i < len(line):
+            char = line[i]
+            if char in (" ", "\t", "(", ")", ",", ":", ";"):  #Si encontramos un delimitador
+                if palabra_actual:  #Si hay una palabra para renderizar
+                    if palabra_actual in palabras_reservadas:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.ROJO)  #Renderizar la palabra reservada en rojo
+                    else:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.BLANCO)  #Renderizar la palabra en blanco
+                    EI.PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
+                    x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
+                    palabra_actual = ""  # Reiniciamos la palabra actual para la próxima palabra
+                
+                #Renderizar el delimitador
+                delim_renderizado = fuente_codigo.render(char, True, EI.BLANCO)
+                EI.PANTALLA.blit(delim_renderizado, (x, y))
+                x += fuente_codigo.size(char)[0]  #Se ajusta la posición horizontal para el siguiente caracter
+            else:
+                palabra_actual += char  #Se agrega el caracter a la palabra actual
+            i += 1
+        
+        #Renderizar la última palabra de la línea (si no hay delimitador al final)
+        if palabra_actual:
+            if palabra_actual in palabras_reservadas:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.ROJO)  #Renderizar la palabra reservada en rojo
+            else:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.BLANCO)  #Renderizar la palabra en blanco
+            EI.PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
+            x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
         y += tamaño_fuente + EI.alto * 0.008  #Se ajusta la posición vertical para la siguiente línea
 
-    # Se calcula la posición del cursor
+    #Se calcula la posición del cursor
     cursor_x = EI.ancho * 0.005 + fuente_codigo.size(lines[cursor_pos[0]][:cursor_pos[1]])[0]
     cursor_y = cursor_pos[0] * tamaño_fuente + (EI.alto * 0.01) * cursor_pos[0]
     pygame.draw.line(EI.PANTALLA, EI.BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(EI.ancho * 0.0015))
-    
 
 
 def keydown(event):
@@ -38,14 +66,14 @@ def keydown(event):
     key = event.key
     line, pos = cursor_pos 
     current_line = lines[line]
-    
     if key == pygame.K_KP_ENTER or key == pygame.K_RETURN:
         if current_line.endswith(':'):
-            #Si se presiona enter luego de dos puntos, se salta de línea y se pone una tabulación
-            lines.insert(line + 1, "    ")
+            #Si se presiona 'Enter' luego de dos puntos, se salta de línea y se pone una tabulación
+            indentation = len(current_line) - len(current_line.lstrip(' '))
+            lines.insert(line + 1, " " * (indentation + 4))
             cursor_pos[0] += 1
-            cursor_pos[1] = 4
-        else: #Si se presiona enter, se salta de línea
+            cursor_pos[1] = indentation + 4
+        else: #Si se presiona 'Enter', se salta de línea
             lines.insert(line + 1, "")
             cursor_pos[0] += 1
             cursor_pos[1] = 0
@@ -115,6 +143,5 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
             else: keydown(event)
-    print(cursor_pos)
     render_text()
     pygame.display.flip()
