@@ -57,8 +57,10 @@ tecla_z = pygame.image.load("Imagenes/Iconos/Z.png")
 tecla_zpresionada = pygame.image.load("Imagenes/Iconos/Z_presionada.png")
 variably = pygame.image.load("Imagenes/Sprites/Variably.png").convert_alpha()
 condi = pygame.image.load("Imagenes/Sprites/Condi.png").convert_alpha()
+muerte = pygame.image.load("Imagenes/Sprites/Esqueleto.png").convert_alpha()
 fondo_aldea = pygame.image.load("Imagenes/Mapa/Fondo_aldea.jpg").convert()
 fondo_cueva = pygame.image.load("Imagenes/Mapa/Fondo_cueva.jpg").convert()
+fondo_guerra = pygame.image.load("Imagenes/Mapa/Fondo_guerra.png").convert()
 caja_a = pygame.image.load("Imagenes/Iconos/caja_a.png").convert()
 caja_b = pygame.image.load("Imagenes/Iconos/caja_b.png").convert()
 caja_c = pygame.image.load("Imagenes/Iconos/caja_c.png").convert()
@@ -71,6 +73,146 @@ estrella_vacia = pygame.image.load("Imagenes/Iconos/Estrella_vacia.png")
 estrella_rellena = pygame.image.load("Imagenes/Iconos/Estrella_rellena.png")
 
 #Funciones
+
+#Variables del editor
+
+def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
+    '''Esta función recibe como argumento la posición del cursor, una lista de palabras, la fuente y el tamaño del texto; y muestra el texto y el cursor de un editor de código'''
+    # Lista con palabras reservadas importantes
+    palabras_reservadas = ['True', 'False', 'print', 'input']
+    palabras_reservadas_condicionales = ['if', 'and', 'or', 'elif', 'else']
+    palabras_reservadas_ciclos = ['while', 'for', 'in', 'range', "break", "continue"]
+    palabras_reservadas_funciones = ['def', 'return']
+    PANTALLA.fill(NEGRO)  #Se limpia la pantalla
+    y = 0
+    for line in lines:  #Se itera en cada línea
+        x = ancho * 0.005  #Posición horizontal inicial de la línea
+        palabra_actual = ""  #Inicializamos una cadena vacía para construir cada palabra
+        i = 0
+        while i < len(line):
+            char = line[i]
+            if char in (" ", "\t", "(", ")", ",", ":", ";"):  #Si encontramos un delimitador
+                if palabra_actual:  #Si hay una palabra para renderizar
+                    if palabra_actual in palabras_reservadas:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, ROJO)  #Renderizar la palabra reservada en rojo
+                    elif palabra_actual in palabras_reservadas_condicionales:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, AZUL)  #Renderizar la palabra reservada en azul
+                    elif palabra_actual in palabras_reservadas_ciclos:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, VERDE)  #Renderizar la palabra reservada en verde
+                    elif palabra_actual in palabras_reservadas_funciones:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, AMARILLO_FONDO)  #Renderizar la palabra reservada en amarillo
+                    else:
+                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, BLANCO)  #Renderizar la palabra en blanco
+                    PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
+                    x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
+                    palabra_actual = ""  #Reiniciamos la palabra actual para la próxima palabra
+                
+                #Renderizar el delimitador
+                delim_renderizado = fuente_codigo.render(char, True, BLANCO)
+                PANTALLA.blit(delim_renderizado, (x, y))
+                x += fuente_codigo.size(char)[0]  #Se ajusta la posición horizontal para el siguiente caracter
+            else:
+                palabra_actual += char  #Se agrega el caracter a la palabra actual
+            i += 1
+        
+        #Renderizar la última palabra de la línea (si no hay delimitador al final)
+        if palabra_actual:
+            if palabra_actual in palabras_reservadas:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, ROJO)  #Renderizar la palabra reservada en rojo
+            elif palabra_actual in palabras_reservadas_condicionales:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, AZUL)  #Renderizar la palabra reservada en azul
+            elif palabra_actual in palabras_reservadas_ciclos:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, VERDE)  #Renderizar la palabra reservada en verde
+            elif palabra_actual in palabras_reservadas_funciones:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, AMARILLO_FONDO)  #Renderizar la palabra reservada en amarillo        
+            else:
+                palabra_renderizada = fuente_codigo.render(palabra_actual, True, BLANCO)  #Renderizar la palabra en blanco
+            PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
+            x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
+        y += tamaño_fuente + alto * 0.008  #Se ajusta la posición vertical para la siguiente línea
+
+    #Se calcula la posición del cursor
+    cursor_x = ancho * 0.005 + fuente_codigo.size(lines[cursor_pos[0]][:cursor_pos[1]])[0]
+    cursor_y = cursor_pos[0] * tamaño_fuente + (alto * 0.01) * cursor_pos[0]
+    pygame.draw.line(PANTALLA, BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(ancho * 0.0015))
+
+t = ''
+def keydown(cursor_pos, lines, event):
+    global t
+    '''Esta función recibe como argumento la posición del cursor, una lista de palabras y un evento de tipo KEYDOWN; y maneja los eventos en un editor de código'''
+    key = event.key
+    line, pos = cursor_pos 
+    current_line = lines[line]
+    if key == pygame.K_KP_ENTER or key == pygame.K_RETURN:
+        if current_line.endswith(':'):
+            #Si se presiona 'Enter' luego de dos puntos, se salta de línea y se pone una tabulación
+            indentation = len(current_line) - len(current_line.lstrip(' '))
+            lines.insert(line + 1, " " * (indentation + 4))
+            cursor_pos[0] += 1
+            cursor_pos[1] = indentation + 4
+        else: #Si se presiona 'Enter', se salta de línea
+            lines.insert(line + 1, "")
+            cursor_pos[0] += 1
+            cursor_pos[1] = 0
+
+    elif key == pygame.K_BACKSPACE:
+        #Si se presiona la tecla 'Backspace', entonces se borra el caracter
+        if pos > 0:
+            lines[line] = current_line[:pos - 1] + current_line[pos:]
+            cursor_pos[1] -= 1
+        elif line > 0:
+            cursor_pos[0] -= 1
+            cursor_pos[1] = len(lines[cursor_pos[0]])
+            lines[cursor_pos[0]] += lines.pop(line) #Fusiona la línea actual con la anterior
+
+    elif key == pygame.K_TAB:
+        #Si se presiona 'Tab', entonces se ponen 4 espacios
+        lines[line] = current_line[:pos] + ' ' * 4 + current_line[pos:]
+        cursor_pos[1] += 4
+
+    elif key == pygame.K_LEFT:
+        #Si se presiona la flecha izquierda, entonces el cursor se mueve a la izquierda
+        if pos > 0:
+            cursor_pos[1] -= 1
+        elif line > 0:
+            cursor_pos[0] -= 1
+            cursor_pos[1] = len(lines[cursor_pos[0]])
+
+    elif key == pygame.K_RIGHT:
+        #Si se presiona la flecha derecha, entonces el cursor se mueve a la derecha
+        if pos < len(current_line):
+            cursor_pos[1] += 1
+        elif line < len(lines) - 1:
+            cursor_pos[0] += 1
+            cursor_pos[1] = 0
+
+    elif key == pygame.K_UP:
+        #Si se presiona la flecha hacia arriba, entonces el cursor sube
+        if line > 0:
+            cursor_pos[0] -= 1
+            cursor_pos[1] = min(cursor_pos[1], len(lines[cursor_pos[0]]))
+
+    elif key == pygame.K_DOWN:
+        #Si se presiona la flecha hacia abajo, entonces el cursor baja
+        if line < len(lines) - 1:
+            cursor_pos[0] += 1
+            cursor_pos[1] = min(cursor_pos[1], len(lines[cursor_pos[0]]))
+
+    elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
+        #Si se presiona 'Ctrl', entonces el código se ejecuta
+        code = '\n'.join(lines)
+        try:
+            exec(code)
+            t = 'El código ha finalizado correctamente.'
+        except:
+            t = "Error al ejecutar el código."
+
+    else:
+        #Se agrega el caracter
+        char = event.unicode
+        lines[line] = current_line[:pos] + char + current_line[pos:]
+        cursor_pos[1] += 1
+
 def transicion_desvanecimiento(pantalla_carga, pantalla_inicio, tiempo_transicion):
     """Esta función realiza una transición de desvanecimiento. Recibe como argumentos la pantalla que se quiere cargar, la pantalla de inicio y el tiempo de transición (en milisegundos)"""
     #Se establecen dos superficies temporales en las que se copian la pantalla de carga y la pantalla de inicio

@@ -1,161 +1,70 @@
 import pygame
+import sys
 from Módulos import Escape_Island as EI
 
 #Inicialización de Pygame
 pygame.init()
 
-#Definición de constantes
-tamaño_fuente = int(EI.ancho * 0.02)
 
-#Configurar la fuente
 fuente_codigo = pygame.font.Font("Fuentes\\FiraCode.otf", int(EI.ancho * 0.02)) 
-
-#Variables del editor
+tamaño_fuente = int(EI.ancho * 0.02)
 lines = [""]
 cursor_pos = [0, 0]  #Posición del cursor
- 
 
-def render_text():
-    '''Esta función muestra el texto y el cursor de un editor de código'''
-    # Lista con palabras reservadas importantes
-    palabras_reservadas = ['True', 'False', 'print']
-    palabras_reservadas_condicionales = ['if', 'and', 'or', 'elif', 'else']
-    palabras_reservadas_ciclos = ['while', 'for', 'in', 'range']
-    EI.PANTALLA.fill(EI.NEGRO)  #Se limpia la pantalla
-    y = 0
-    for line in lines:  #Se itera en cada línea
-        x = EI.ancho * 0.005  #Posición horizontal inicial de la línea
-        palabra_actual = ""  #Inicializamos una cadena vacía para construir cada palabra
-        i = 0
-        while i < len(line):
-            char = line[i]
-            if char in (" ", "\t", "(", ")", ",", ":", ";"):  #Si encontramos un delimitador
-                if palabra_actual:  #Si hay una palabra para renderizar
-                    if palabra_actual in palabras_reservadas:
-                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.ROJO)  #Renderizar la palabra reservada en rojo
-                    elif palabra_actual in palabras_reservadas_condicionales:
-                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AZUL)  #Renderizar la palabra reservada en azul
-                    elif palabra_actual in palabras_reservadas_ciclos:
-                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.VERDE)  #Renderizar la palabra reservada en verde
-                    elif palabra_actual == 'def':
-                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AMARILLO_FONDO)  #Renderizar la palabra reservada en amarillo
-                    else:
-                        palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.BLANCO)  #Renderizar la palabra en blanco
-                    EI.PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
-                    x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
-                    palabra_actual = ""  #Reiniciamos la palabra actual para la próxima palabra
-                
-                #Renderizar el delimitador
-                delim_renderizado = fuente_codigo.render(char, True, EI.BLANCO)
-                EI.PANTALLA.blit(delim_renderizado, (x, y))
-                x += fuente_codigo.size(char)[0]  #Se ajusta la posición horizontal para el siguiente caracter
-            else:
-                palabra_actual += char  #Se agrega el caracter a la palabra actual
-            i += 1
-        
-        #Renderizar la última palabra de la línea (si no hay delimitador al final)
-        if palabra_actual:
-            if palabra_actual in palabras_reservadas:
-                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.ROJO)  #Renderizar la palabra reservada en rojo
-            elif palabra_actual in palabras_reservadas_condicionales:
-                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AZUL)  #Renderizar la palabra reservada en azul
-            elif palabra_actual in palabras_reservadas_ciclos:
-                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.VERDE)  #Renderizar la palabra reservada en verde
-            elif palabra_actual == 'def':
-                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.AMARILLO_FONDO)  #Renderizar la palabra reservada en amarillo        
-            else:
-                palabra_renderizada = fuente_codigo.render(palabra_actual, True, EI.BLANCO)  #Renderizar la palabra en blanco
-            EI.PANTALLA.blit(palabra_renderizada, (x, y))  #Se muestra la palabra en la pantalla
-            x += fuente_codigo.size(palabra_actual)[0]  #Se ajusta la posición horizontal para la siguiente palabra
-        y += tamaño_fuente + EI.alto * 0.008  #Se ajusta la posición vertical para la siguiente línea
+num_dialog = -1
+dialog_continue = True
 
-    #Se calcula la posición del cursor
-    cursor_x = EI.ancho * 0.005 + fuente_codigo.size(lines[cursor_pos[0]][:cursor_pos[1]])[0]
-    cursor_y = cursor_pos[0] * tamaño_fuente + (EI.alto * 0.01) * cursor_pos[0]
-    pygame.draw.line(EI.PANTALLA, EI.BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(EI.ancho * 0.0015))
+#personajes
+muerte = pygame.transform.scale(EI.muerte, (EI.ancho*0.2, EI.alto*0.3))
+muerte_rect = muerte.get_rect()
+muerte_rect.bottomleft = (EI.ancho*0.01, EI.alto*0.7)
 
-
-def keydown(event):
-    '''Esta función maneja los eventos en un editor de código'''
-    key = event.key
-    line, pos = cursor_pos 
-    current_line = lines[line]
-    if key == pygame.K_KP_ENTER or key == pygame.K_RETURN:
-        if current_line.endswith(':'):
-            #Si se presiona 'Enter' luego de dos puntos, se salta de línea y se pone una tabulación
-            indentation = len(current_line) - len(current_line.lstrip(' '))
-            lines.insert(line + 1, " " * (indentation + 4))
-            cursor_pos[0] += 1
-            cursor_pos[1] = indentation + 4
-        else: #Si se presiona 'Enter', se salta de línea
-            lines.insert(line + 1, "")
-            cursor_pos[0] += 1
-            cursor_pos[1] = 0
-
-    elif key == pygame.K_BACKSPACE:
-        #Si se presiona la tecla 'Backspace', entonces se borra el caracter
-        if pos > 0:
-            lines[line] = current_line[:pos - 1] + current_line[pos:]
-            cursor_pos[1] -= 1
-        elif line > 0:
-            cursor_pos[0] -= 1
-            cursor_pos[1] = len(lines[cursor_pos[0]])
-            lines[cursor_pos[0]] += lines.pop(line) #Fusiona la línea actual con la anterior
-
-    elif key == pygame.K_TAB:
-        #Si se presiona 'Tab', entonces se ponen 4 espacios
-        lines[line] = current_line[:pos] + ' ' * 4 + current_line[pos:]
-        cursor_pos[1] += 4
-
-    elif key == pygame.K_LEFT:
-        #Si se presiona la flecha izquierda, entonces el cursor se mueve a la izquierda
-        if pos > 0:
-            cursor_pos[1] -= 1
-        elif line > 0:
-            cursor_pos[0] -= 1
-            cursor_pos[1] = len(lines[cursor_pos[0]])
-
-    elif key == pygame.K_RIGHT:
-        #Si se presiona la flecha derecha, entonces el cursor se mueve a la derecha
-        if pos < len(current_line):
-            cursor_pos[1] += 1
-        elif line < len(lines) - 1:
-            cursor_pos[0] += 1
-            cursor_pos[1] = 0
-
-    elif key == pygame.K_UP:
-        #Si se presiona la flecha hacia arriba, entonces el cursor sube
-        if line > 0:
-            cursor_pos[0] -= 1
-            cursor_pos[1] = min(cursor_pos[1], len(lines[cursor_pos[0]]))
-
-    elif key == pygame.K_DOWN:
-        #Si se presiona la flecha hacia abajo, entonces el cursor baja
-        if line < len(lines) - 1:
-            cursor_pos[0] += 1
-            cursor_pos[1] = min(cursor_pos[1], len(lines[cursor_pos[0]]))
-
-    elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
-        #Si se presiona 'Ctrl', entonces el código se ejecuta
-        code = '\n'.join(lines)
-        try:
-            exec(code)
-        except:
-            print("Error al ejecutar el código")
-
-    else:
-        #Se agrega el caracter
-        char = event.unicode
-        lines[line] = current_line[:pos] + char + current_line[pos:]
-        cursor_pos[1] += 1
-
+#Imágenes
+fondo_guerra = pygame.transform.scale(EI.fondo_guerra, (EI.ancho, EI.alto))
 
 # Bucle principal del juego
 while True:
+    if num_dialog == -1:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        t1 = "Este lugar está en ruinas."
+        t2 = "Pero es la única manera de escapar."
+        EI.mostrar_texto("Examen final",t1,t2,color=EI.ROJO)
+    elif num_dialog == 0:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        EI.PANTALLA.blit(muerte, muerte_rect)
+        t1 = "Es increíble que hayas podido llegar hasta aquí."
+        t2 = "Lamentablemente, hasta acá llegó tu aventura."
+        EI.mostrar_texto("Muerte",t1,t2,color=EI.MORADO)
+    elif num_dialog == 1:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        EI.PANTALLA.blit(muerte, muerte_rect)
+        t1 = "La única manera de salir con vida es superando el siguiente desafío."
+        t2 = "Esta vez, no será de opción múltiple."
+        t3 = "Deberás escribir tu propio código."
+        EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+    elif num_dialog == 2:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        EI.PANTALLA.blit(muerte, muerte_rect)
+        t1 = "Debes -------------------------"
+        EI.mostrar_texto("Muerte",t1,t2,color=EI.MORADO)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
-            else: keydown(event)
-    render_text()
+                sys.exit()
+            #Si se presiona la flecha izquierda o derecha, se avanza en los diálogos
+            elif event.key == pygame.K_RIGHT and dialog_continue:
+                #Avanzar el diálogo
+                num_dialog += 1
+            elif num_dialog >= 0 and event.key == pygame.K_LEFT and dialog_continue:
+                #Retroceder el diálogo
+                num_dialog -= 1
+            elif num_dialog == 3: 
+                dialog_continue = False
+                EI.keydown(cursor_pos, lines, event)
+                EI.mostrar_texto("Desafío final", "Presiona 'Ctrl' para ejecutar tu código.",EI.t,color=EI.ROJO)
+    if num_dialog == 3:  
+        dialog_continue = False    
+        EI.render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente)
+        EI.mostrar_texto("Desafío final", "Presiona 'Ctrl' para ejecutar tu código.",EI.t,color=EI.ROJO)
     pygame.display.flip()
