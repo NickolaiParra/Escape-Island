@@ -48,8 +48,8 @@ while True:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
         t1 = "Necesitas encontrar la salida para ser rescatado."
-        t2 = "La isla está representada como una cuadrícula de 10 x 10."
-        t3 = "Cada celda tiene coordenadas (x, y) que van desde (1, 1) hasta (10, 10)."
+        t2 = "La isla está representada como una cuadrícula de 100 x 100."
+        t3 = "Cada celda tiene coordenadas (x, y) que van desde (1, 1) hasta (100, 100)."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 3:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
