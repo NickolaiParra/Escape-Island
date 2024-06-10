@@ -1,4 +1,5 @@
 import pygame
+import random
 pygame.init()
 
 #Colores
@@ -79,7 +80,7 @@ estrella_rellena = pygame.image.load("Imagenes/Iconos/Estrella_rellena.png")
 def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
     '''Esta función recibe como argumento la posición del cursor, una lista de palabras, la fuente y el tamaño del texto; y muestra el texto y el cursor de un editor de código'''
     # Lista con palabras reservadas importantes
-    palabras_reservadas = ['True', 'False', 'print', 'input']
+    palabras_reservadas = ['True', 'False', 'print', 'input', 'abs']
     palabras_reservadas_condicionales = ['if', 'and', 'or', 'elif', 'else']
     palabras_reservadas_ciclos = ['while', 'for', 'in', 'range', "break", "continue"]
     palabras_reservadas_funciones = ['def', 'return']
@@ -133,7 +134,7 @@ def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
 
     #Se calcula la posición del cursor
     cursor_x = ancho * 0.005 + fuente_codigo.size(lines[cursor_pos[0]][:cursor_pos[1]])[0]
-    cursor_y = cursor_pos[0] * tamaño_fuente + (alto * 0.01) * cursor_pos[0]
+    cursor_y = cursor_pos[0] * tamaño_fuente + (alto * 0.009) * cursor_pos[0]
     pygame.draw.line(PANTALLA, BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(ancho * 0.0015))
 
 t = ''
@@ -164,6 +165,8 @@ def keydown(cursor_pos, lines, event):
             cursor_pos[0] -= 1
             cursor_pos[1] = len(lines[cursor_pos[0]])
             lines[cursor_pos[0]] += lines.pop(line) #Fusiona la línea actual con la anterior
+    elif key == pygame.K_LSHIFT or key == pygame.K_RSHIFT:
+        pass
 
     elif key == pygame.K_TAB:
         #Si se presiona 'Tab', entonces se ponen 4 espacios
@@ -200,10 +203,33 @@ def keydown(cursor_pos, lines, event):
 
     elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
         #Si se presiona 'Ctrl', entonces el código se ejecuta
-        code = '\n'.join(lines)
+        complete_code = '\n'.join(lines)
+        def escape_island_base(x, y, salida_x, salida_y):
+                if x == salida_x and y == salida_y:
+                    return 'salida'
+                elif abs(x - salida_x) < abs(y - salida_y):
+                    return 'x'
+                elif abs(y - salida_y) < abs(x - salida_x):
+                    return 'y'
+                else: return 'igual'
         try:
-            exec(code)
-            t = 'El código ha finalizado correctamente.'
+        #Ejecutar el código del jugador
+            exec(complete_code, globals())
+            correcto = True
+            #1000 casos de prueba aleatorios
+            for i in range(1, 1001):
+                salida_x = random.randint(1, 100)
+                salida_y = random.randint(1, 100)
+                x = random.randint(1, 100)
+                y = random.randint(1, 100)
+                #Llamar a la función del jugador
+                if escape_island(x, y, salida_x, salida_y) != escape_island_base(x, y, salida_x, salida_y):
+                    correcto = False
+                    break
+            if correcto:
+                t = "¡Felicidades! Has completado el desafío."
+            else:
+                t = 'El código se ha ejecutado correctamente, pero el resultado es incorrecto.'''
         except:
             t = "Error al ejecutar el código."
 
