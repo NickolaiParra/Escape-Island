@@ -32,10 +32,10 @@ portada = pygame.image.load("Imagenes\Portada-Logo\Portada.jpeg").convert()
 portada_2 = pygame.image.load("Imagenes\Portada-Logo\Portada_2.jpeg").convert() 
 mapa_avion = pygame.image.load("Imagenes\Mapa\Avion.png").convert()
 pantalla_de_carga = pygame.image.load("Imagenes\Portada-Logo\Pantalla_de_carga.png").convert()
-icono_sonido = pygame.image.load("Imagenes\Iconos\Sonido.png").convert()
-icono_sinsonido = pygame.image.load("Imagenes\Iconos\Sinsonido.png").convert()
-icono_brillo = pygame.image.load("Imagenes\Iconos\Brillo.png").convert()
-icono_sinbrillo = pygame.image.load("Imagenes\Iconos\Sinbrillo.png").convert()
+icono_sonido = pygame.image.load("Imagenes\Iconos\Sonido.png")
+icono_sinsonido = pygame.image.load("Imagenes\Iconos\Sinsonido.png")
+icono_brillo = pygame.image.load("Imagenes\Iconos\Brillo.png")
+icono_sinbrillo = pygame.image.load("Imagenes\Iconos\Sinbrillo.png")
 dialogo = pygame.image.load("Imagenes\Mapa\dialogo.png").convert()
 flechas = pygame.image.load("Imagenes\Iconos\Flechas.png")
 flecha_izquierda = pygame.image.load("Imagenes\Iconos\Flecha_izquierda.png")
@@ -80,7 +80,7 @@ estrella_rellena = pygame.image.load("Imagenes/Iconos/Estrella_rellena.png")
 def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
     '''Esta función recibe como argumento la posición del cursor, una lista de palabras, la fuente y el tamaño del texto; y muestra el texto y el cursor de un editor de código'''
     # Lista con palabras reservadas importantes
-    palabras_reservadas = ['True', 'False', 'print', 'input', 'abs']
+    palabras_reservadas = ['True', 'False', 'print', 'input', 'abs', 'int', 'float']
     palabras_reservadas_condicionales = ['if', 'and', 'or', 'elif', 'else']
     palabras_reservadas_ciclos = ['while', 'for', 'in', 'range', "break", "continue"]
     palabras_reservadas_funciones = ['def', 'return']
@@ -165,7 +165,7 @@ def keydown(cursor_pos, lines, event):
             cursor_pos[0] -= 1
             cursor_pos[1] = len(lines[cursor_pos[0]])
             lines[cursor_pos[0]] += lines.pop(line) #Fusiona la línea actual con la anterior
-    elif key == pygame.K_LSHIFT or key == pygame.K_RSHIFT:
+    elif key == pygame.K_LSHIFT or key == pygame.K_RSHIFT or key == pygame.K_CAPSLOCK:
         pass
 
     elif key == pygame.K_TAB:
