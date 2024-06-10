@@ -62,6 +62,7 @@ muerte = pygame.image.load("Imagenes/Sprites/Esqueleto.png").convert_alpha()
 fondo_aldea = pygame.image.load("Imagenes/Mapa/Fondo_aldea.jpg").convert()
 fondo_cueva = pygame.image.load("Imagenes/Mapa/Fondo_cueva.jpg").convert()
 fondo_guerra = pygame.image.load("Imagenes/Mapa/Fondo_guerra.png").convert()
+fondo_final = pygame.image.load("Imagenes/Mapa/Fondo_final.jpg").convert()
 caja_a = pygame.image.load("Imagenes/Iconos/caja_a.png").convert()
 caja_b = pygame.image.load("Imagenes/Iconos/caja_b.png").convert()
 caja_c = pygame.image.load("Imagenes/Iconos/caja_c.png").convert()
@@ -138,6 +139,7 @@ def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
     pygame.draw.line(PANTALLA, BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(ancho * 0.0015))
 
 t = ''
+correcto = None
 def keydown(cursor_pos, lines, event):
     global t
     '''Esta función recibe como argumento la posición del cursor, una lista de palabras y un evento de tipo KEYDOWN; y maneja los eventos en un editor de código'''
@@ -215,7 +217,7 @@ def keydown(cursor_pos, lines, event):
         try:
         #Ejecutar el código del jugador
             exec(complete_code, globals())
-            correcto = True
+            global correcto
             #1000 casos de prueba aleatorios
             for i in range(1, 1001):
                 salida_x = random.randint(1, 100)
@@ -226,6 +228,7 @@ def keydown(cursor_pos, lines, event):
                 if escape_island(x, y, salida_x, salida_y) != escape_island_base(x, y, salida_x, salida_y):
                     correcto = False
                     break
+                else: correcto = True
             if correcto:
                 t = "¡Felicidades! Has completado el desafío."
             else:

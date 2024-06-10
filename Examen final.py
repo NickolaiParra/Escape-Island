@@ -23,6 +23,7 @@ muerte_rect.bottomleft = (EI.ancho*0.01, EI.alto*0.7)
 
 #Imágenes
 fondo_guerra = pygame.transform.scale(EI.fondo_guerra, (EI.ancho, EI.alto))
+fondo_final = pygame.transform.scale(EI.fondo_final, (EI.ancho, EI.alto))
 
 # Bucle principal del juego
 while True:
@@ -79,6 +80,12 @@ while True:
         t2 = "Ten cuidado con el nombre de la función."
         t3 = "Si lo logras, serás libre."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+    elif num_dialog == 8:
+        EI.PANTALLA.blit(fondo_final, (0, 0))
+        t1 = "¡Felicidades, has logrado escapar de la isla!"
+        t2 = "Has demostrado gran ingenio en cada desafío."
+        t3 = "¡Ahora eres libre!"
+        EI.mostrar_texto("Escape Island",t1,t2,t3,color=EI.ROJO)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
@@ -105,4 +112,7 @@ while True:
         dialog_continue = False  
         EI.render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente)
         EI.mostrar_texto(t1, t2, t3,EI.t,color=EI.ROJO)
+        if EI.correcto:  
+            pygame.time.wait(1000)
+            num_dialog += 1
     pygame.display.flip()
