@@ -141,29 +141,19 @@ def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
     pygame.draw.line(PANTALLA, BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(ancho * 0.0015))
 
 def escape_island_base(x, y, salida_x, salida_y):
-            """Esta función soluciona el examen final."""
-            pasos = ""
-            while (x, y) != (salida_x, salida_y):
-                distancia_x = abs(x - salida_x)
-                distancia_y = abs(y - salida_y)
-                if distancia_x == 0:
-                    pasos += 'y'
-                    y = y - 1 if y > salida_y else y + 1
-                elif distancia_y == 0:
-                    pasos += 'x'
-                    x = x - 1 if x > salida_x else x + 1
-                elif distancia_x < distancia_y:
-                    pasos += 'x'
-                    x = x - 1 if x > salida_x else x + 1
-                elif distancia_y < distancia_x:
-                    pasos += 'y'
-                    y = y - 1 if y > salida_y else y + 1
-                else:
-                    pasos += 'igual'
-                    x = x - 1 if x > salida_x else x + 1
-                    y = y - 1 if y > salida_y else y + 1
-            pasos += 'salida'
-            return pasos
+    """Esta función resuelve el examen final."""
+    pasos = 0
+    while (x, y) != (salida_x, salida_y):
+        if x < salida_x:
+            x += 1
+        elif x > salida_x:
+            x -= 1
+        elif y < salida_y:
+            y += 1
+        elif y > salida_y:
+            y -= 1
+        pasos += 1
+    return pasos
 t = ""
 correcto = False
 comprobacion = True
@@ -235,9 +225,8 @@ def keydown(cursor_pos, lines, lines_total, event):
         global correcto
         global comprobacion
         try:
-            print(f"El código es: {lines_total}")
             complete_code = '\n'.join(sum(lines_total, []))
-            print(complete_code)
+            print(f"El código del jugador es {complete_code}")
 
             # Ejecutar el código del jugador
             comprobacion = True
@@ -262,27 +251,25 @@ def keydown(cursor_pos, lines, lines_total, event):
                 t = 'Error en tiempo de ejecución.'
 
             if comprobacion:
-            #100 casos de prueba aleatorios
-                for _ in range(1, 101):
-                    salida_x = random.randint(1, 10)
-                    salida_y = random.randint(1, 10)
-                    x = random.randint(1, 10)
-                    y = random.randint(1, 10)
+            #1000 casos de prueba aleatorios
+                for _ in range(1, 1001):
+                    salida_x = random.randint(1, 100)
+                    salida_y = random.randint(1, 100)
+                    x = random.randint(1, 100)
+                    y = random.randint(1, 100)
                     resultado_base = escape_island_base(x, y, salida_x, salida_y)
                     resultado_jugador = escape_island(x, y, salida_x, salida_y)
                     
                     if resultado_jugador != resultado_base:
                         correcto = False
-                        print("Discrepancia detectada:")
-                        print(f"Entrada: x={x}, y={y}, salida_x={salida_x}, salida_y={salida_y}")
-                        print(f"Resultado esperado: {resultado_base}")
-                        print(f"Resultado del jugador: {resultado_jugador}")
+                        resultado_esperado = resultado_base
+                        resultado_usuario = resultado_jugador
                         break
                     else: correcto = True
                 if correcto:
                     t = "¡Felicidades! Has completado el desafío."
                 else:
-                    t = 'El código se ha ejecutado correctamente, pero el resultado es incorrecto.'''
+                    t = f'Resultado incorrecto. El resultado esperado era {resultado_esperado}, no {resultado_usuario}'
         except:
            t = "Error en la sintaxis del código o en el nombre de la función."
 
