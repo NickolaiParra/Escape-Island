@@ -104,7 +104,7 @@ while True:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
         t1 = "Por ejemplo, si la entrada es (4, 4, 1, 1). La función debe retornar: 'igualigualigualsalida'."
-        t2 = "Ten en cuidado con el nombre de la función."
+        t2 = "Ten cuidado con el nombre de la función."
         t3 = "Si lo logras, serás libre."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 13:

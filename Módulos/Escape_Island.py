@@ -1,6 +1,7 @@
 import pygame
 import random
-import multiprocessing
+import threading
+import time
 pygame.init()
 
 #Colores
@@ -163,9 +164,8 @@ def escape_island_base(x, y, salida_x, salida_y):
                     y = y - 1 if y > salida_y else y + 1
             pasos += 'salida'
             return pasos
-
-t = ''
-correcto = None
+t = ""
+correcto = False
 comprobacion = True
 def keydown(cursor_pos, lines, lines_total, event):
     global t
@@ -238,50 +238,53 @@ def keydown(cursor_pos, lines, lines_total, event):
             print(f"El código es: {lines_total}")
             complete_code = '\n'.join(sum(lines_total, []))
             print(complete_code)
-            exec(complete_code, globals())
-            #Ejecutar el código del jugador
-            '''def ejecutar_codigo(code):
-                exec(code, globals())
 
-            if __name__ == "__main__":
-                # Crea un proceso que ejecutará la función ejecutar_codigo
-                p = multiprocessing.Process(target=ejecutar_codigo, args=(complete_code,))
-                #Inicia el proceso
-                p.start()
-                #Espera durante 2 segundos o hasta que el proceso termine
-                p.join(2)
+            # Ejecutar el código del jugador
+            comprobacion = True
 
-                #Si el proceso todavía está en ejecución después de 2 segundos
-                if p.is_alive():
-                    print("El código se está ejecutando por demasiado tiempo, se detendrá.")
-                    p.terminate()
-                    p.join()
-                    comprobacion = False
-            if comprobacion:'''
-            
+            def ejecutar_codigo():
+                """Función para ejecutar el código del jugador"""
+                global comprobacion
+                exec(complete_code, globals())
+
+                #Crea un hilo que ejecutará la función ejecutar_codigo
+            t = threading.Thread(target=ejecutar_codigo)
+
+                #Inicia el hilo
+            t.start()
+
+                #Espera durante 2 segundos
+            time.sleep(2)
+
+                #Si el hilo todavía está en ejecución después de 2 segundos
+            if t.is_alive():
+                comprobacion = False
+                t = 'Error en tiempo de ejecución.'
+
+            if comprobacion:
             #100 casos de prueba aleatorios
-            for _ in range(1, 101):
-                salida_x = random.randint(1, 10)
-                salida_y = random.randint(1, 10)
-                x = random.randint(1, 10)
-                y = random.randint(1, 10)
-                resultado_base = escape_island_base(x, y, salida_x, salida_y)
-                resultado_jugador = escape_island(x, y, salida_x, salida_y)
-                
-                if resultado_jugador != resultado_base:
-                    correcto = False
-                    print("Discrepancia detectada:")
-                    print(f"Entrada: x={x}, y={y}, salida_x={salida_x}, salida_y={salida_y}")
-                    print(f"Resultado esperado: {resultado_base}")
-                    print(f"Resultado del jugador: {resultado_jugador}")
-                    break
-                else: correcto = True
-            if correcto:
-                t = "¡Felicidades! Has completado el desafío."
-            else:
-                t = 'El código se ha ejecutado correctamente, pero el resultado es incorrecto.'''
+                for _ in range(1, 101):
+                    salida_x = random.randint(1, 10)
+                    salida_y = random.randint(1, 10)
+                    x = random.randint(1, 10)
+                    y = random.randint(1, 10)
+                    resultado_base = escape_island_base(x, y, salida_x, salida_y)
+                    resultado_jugador = escape_island(x, y, salida_x, salida_y)
+                    
+                    if resultado_jugador != resultado_base:
+                        correcto = False
+                        print("Discrepancia detectada:")
+                        print(f"Entrada: x={x}, y={y}, salida_x={salida_x}, salida_y={salida_y}")
+                        print(f"Resultado esperado: {resultado_base}")
+                        print(f"Resultado del jugador: {resultado_jugador}")
+                        break
+                    else: correcto = True
+                if correcto:
+                    t = "¡Felicidades! Has completado el desafío."
+                else:
+                    t = 'El código se ha ejecutado correctamente, pero el resultado es incorrecto.'''
         except:
-           t = "Error al ejecutar el código."
+           t = "Error en la sintaxis del código o en el nombre de la función."
 
     else:
         #Se agrega el caracter
