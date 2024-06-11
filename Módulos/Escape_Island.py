@@ -1,5 +1,6 @@
 import pygame
 import random
+import multiprocessing
 pygame.init()
 
 #Colores
@@ -81,7 +82,7 @@ estrella_rellena = pygame.image.load("Imagenes/Iconos/Estrella_rellena.png")
 def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
     '''Esta función recibe como argumento la posición del cursor, una lista de palabras, la fuente y el tamaño del texto; y muestra el texto y el cursor de un editor de código'''
     # Lista con palabras reservadas importantes
-    palabras_reservadas = ['True', 'False', 'print', 'input', 'abs', 'int', 'float']
+    palabras_reservadas = ['True', 'False', 'print', 'input', 'abs', 'int', 'float', 'None']
     palabras_reservadas_condicionales = ['if', 'and', 'or', 'elif', 'else']
     palabras_reservadas_ciclos = ['while', 'for', 'in', 'range', "break", "continue"]
     palabras_reservadas_funciones = ['def', 'return']
@@ -135,14 +136,40 @@ def render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente):
 
     #Se calcula la posición del cursor
     cursor_x = ancho * 0.005 + fuente_codigo.size(lines[cursor_pos[0]][:cursor_pos[1]])[0]
-    cursor_y = cursor_pos[0] * tamaño_fuente + (alto * 0.009) * cursor_pos[0]
+    cursor_y = cursor_pos[0] * tamaño_fuente + (alto * 0.008) * cursor_pos[0]
     pygame.draw.line(PANTALLA, BLANCO, (cursor_x, cursor_y), (cursor_x, cursor_y + tamaño_fuente), int(ancho * 0.0015))
+
+def escape_island_base(x, y, salida_x, salida_y):
+            """Esta función soluciona el examen final."""
+            pasos = ""
+            while (x, y) != (salida_x, salida_y):
+                distancia_x = abs(x - salida_x)
+                distancia_y = abs(y - salida_y)
+                if distancia_x == 0:
+                    pasos += 'y'
+                    y = y - 1 if y > salida_y else y + 1
+                elif distancia_y == 0:
+                    pasos += 'x'
+                    x = x - 1 if x > salida_x else x + 1
+                elif distancia_x < distancia_y:
+                    pasos += 'x'
+                    x = x - 1 if x > salida_x else x + 1
+                elif distancia_y < distancia_x:
+                    pasos += 'y'
+                    y = y - 1 if y > salida_y else y + 1
+                else:
+                    pasos += 'igual'
+                    x = x - 1 if x > salida_x else x + 1
+                    y = y - 1 if y > salida_y else y + 1
+            pasos += 'salida'
+            return pasos
 
 t = ''
 correcto = None
-def keydown(cursor_pos, lines, event):
+comprobacion = True
+def keydown(cursor_pos, lines, lines_total, event):
     global t
-    '''Esta función recibe como argumento la posición del cursor, una lista de palabras y un evento de tipo KEYDOWN; y maneja los eventos en un editor de código'''
+    '''Esta función recibe como argumento la posición del cursor, la lista de palabras actual, la lista de palabras total y un evento de tipo KEYDOWN; y maneja los eventos en un editor de código'''
     key = event.key
     line, pos = cursor_pos 
     current_line = lines[line]
@@ -205,28 +232,48 @@ def keydown(cursor_pos, lines, event):
 
     elif key == pygame.K_LCTRL or key == pygame.K_RCTRL:
         #Si se presiona 'Ctrl', entonces el código se ejecuta
-        complete_code = '\n'.join(lines)
-        def escape_island_base(x, y, salida_x, salida_y):
-                if x == salida_x and y == salida_y:
-                    return 'salida'
-                elif abs(x - salida_x) < abs(y - salida_y):
-                    return 'x'
-                elif abs(y - salida_y) < abs(x - salida_x):
-                    return 'y'
-                else: return 'igual'
+        global correcto
+        global comprobacion
         try:
-        #Ejecutar el código del jugador
+            print(f"El código es: {lines_total}")
+            complete_code = '\n'.join(sum(lines_total, []))
+            print(complete_code)
             exec(complete_code, globals())
-            global correcto
-            #1000 casos de prueba aleatorios
-            for i in range(1, 1001):
-                salida_x = random.randint(1, 100)
-                salida_y = random.randint(1, 100)
-                x = random.randint(1, 100)
-                y = random.randint(1, 100)
-                #Llamar a la función del jugador
-                if escape_island(x, y, salida_x, salida_y) != escape_island_base(x, y, salida_x, salida_y):
+            #Ejecutar el código del jugador
+            '''def ejecutar_codigo(code):
+                exec(code, globals())
+
+            if __name__ == "__main__":
+                # Crea un proceso que ejecutará la función ejecutar_codigo
+                p = multiprocessing.Process(target=ejecutar_codigo, args=(complete_code,))
+                #Inicia el proceso
+                p.start()
+                #Espera durante 2 segundos o hasta que el proceso termine
+                p.join(2)
+
+                #Si el proceso todavía está en ejecución después de 2 segundos
+                if p.is_alive():
+                    print("El código se está ejecutando por demasiado tiempo, se detendrá.")
+                    p.terminate()
+                    p.join()
+                    comprobacion = False
+            if comprobacion:'''
+            
+            #100 casos de prueba aleatorios
+            for _ in range(1, 101):
+                salida_x = random.randint(1, 10)
+                salida_y = random.randint(1, 10)
+                x = random.randint(1, 10)
+                y = random.randint(1, 10)
+                resultado_base = escape_island_base(x, y, salida_x, salida_y)
+                resultado_jugador = escape_island(x, y, salida_x, salida_y)
+                
+                if resultado_jugador != resultado_base:
                     correcto = False
+                    print("Discrepancia detectada:")
+                    print(f"Entrada: x={x}, y={y}, salida_x={salida_x}, salida_y={salida_y}")
+                    print(f"Resultado esperado: {resultado_base}")
+                    print(f"Resultado del jugador: {resultado_jugador}")
                     break
                 else: correcto = True
             if correcto:
@@ -234,7 +281,7 @@ def keydown(cursor_pos, lines, event):
             else:
                 t = 'El código se ha ejecutado correctamente, pero el resultado es incorrecto.'''
         except:
-            t = "Error al ejecutar el código."
+           t = "Error al ejecutar el código."
 
     else:
         #Se agrega el caracter

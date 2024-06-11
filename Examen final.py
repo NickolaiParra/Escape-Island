@@ -1,17 +1,23 @@
 import pygame
 import sys
-import random
+import time
 from Módulos import Escape_Island as EI
 
 #Inicialización de Pygame
 pygame.init()
 
+tiempo_inicio = time.time() #Tiempo de inicio del programa
 
 fuente_codigo = pygame.font.Font("Fuentes\\FiraCode.otf", int(EI.ancho * 0.02)) 
 tamaño_fuente = int(EI.ancho * 0.02)
-lines = [""]
-cursor_pos = [0, 0]  #Posición del cursor
-
+lines = [[""]]
+cursor_pos= [[0, 0]]
+current_screen = 0
+num_screens = 3  # Número de pantallas
+for _ in range(num_screens - 1):
+    lines.append([""])
+for _ in range(num_screens - 1):
+    cursor_pos.append([0, 0])
 
 num_dialog = -1
 dialog_continue = True
@@ -49,38 +55,60 @@ while True:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
         t1 = "Necesitas encontrar la salida para ser rescatado."
-        t2 = "La isla está representada como una cuadrícula de 100 x 100."
-        t3 = "Cada celda tiene coordenadas (x, y) que van desde (1, 1) hasta (100, 100)."
+        t2 = "La isla está representada como una cuadrícula de 10 x 10."
+        t3 = "Cada celda tiene coordenadas (x, y) que van desde (1, 1) hasta (10, 10)."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 3:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
         t1 = "La salida está ubicada en una celda aleatoria de esta cuadrícula."
         t2 = "Tu objetivo será crear la función 'escape_island'."
-        t3 = "Esta función debe recibir cuatro argumentos: 'x', 'y', 'salida_x', 'salida_y'. (en ese orden)."
+        t3 = "Esta función debe recibir cuatro argumentos: 'x', 'y', 'salida_x', 'salida_y'. (En ese orden)."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 4:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
         t1 = "La posición 'x' de la salida está representada por la variable 'salida_x'."
         t2 = "La posición 'y' de la salida está representada por la variable 'salida_y'."
-        t3 = "La función debe retornar 'salida' si los valores (x, y) coinciden con los de la salida."
+        t3 = "Para escapar de la isla, debes moverte paso a paso hacia la salida."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 5:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
-        t1 = "En caso contrario, la función debe retornar:"
-        t2 = "'x' si la distancia en 'x' entre ambos puntos es menor a la distancia en 'y'."
-        t3 = "'y' si la distancia en 'y' entre ambos puntos es menor a la distancia en 'x'."
+        t1 = "En cada paso, debes determinar la dirección en la que debes moverte."
+        t2 = "La función debe retornar una cadena que contenga la secuencia de movimientos hasta llegar a la salida."
+        t3 = "Estos movimientos deben cumplir las siguientes condiciones:"
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 6:
         EI.PANTALLA.blit(fondo_guerra, (0, 0))
         EI.PANTALLA.blit(muerte, muerte_rect)
-        t1 = "'igual' si la distancia en 'x' e 'y' entre ambos puntos es igual."
-        t2 = "Ten cuidado con el nombre de la función."
-        t3 = "Si lo logras, serás libre."
+        t1 = "'salida', si el punto (x, y) corresponde con el de la salida."
+        t2 = "'x' si la distancia en 'x' entre el punto y la salida es menor a la distancia en 'y'."
+        t3 = "'y' si la distancia en 'y' entre el punto y la salida es menor a la distancia en 'x'."
+        EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+    elif num_dialog == 7:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        EI.PANTALLA.blit(muerte, muerte_rect)
+        t1 = "'igual', si las distancias en 'x' e 'y' son iguales."
+        t2 = "Si las distancias son diferentes, solo puedes desplazarte en el eje de menor distancia."
+        t3 = "Si las distancias son iguales, debes desplazarte en ambos ejes."
         EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
     elif num_dialog == 8:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        EI.PANTALLA.blit(muerte, muerte_rect)
+        t1 = "Si la distancia en 'x' es igual a cero y el punto no corresponde con la salida, entonces"
+        t2 = "debes desplazarte en el eje 'y'. Y viceversa."
+        t3 = "Por ejemplo, si la entrada es (5, 4, 1, 1). La función debe retornar: 'yyyxxxxsalida'."
+        EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+    elif num_dialog == 9:
+        EI.PANTALLA.blit(fondo_guerra, (0, 0))
+        EI.PANTALLA.blit(muerte, muerte_rect)
+        t1 = "Por ejemplo, si la entrada es (4, 4, 1, 1). La función debe retornar: 'igualigualigualsalida'."
+        t2 = "Ten en cuidado con el nombre de la función."
+        t3 = "Si lo logras, serás libre."
+        EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+    elif num_dialog == 13:
+        examen_final = False
         EI.PANTALLA.blit(fondo_final, (0, 0))
         t1 = "¡Felicidades, has logrado escapar de la isla!"
         t2 = "Has demostrado gran ingenio en cada desafío."
@@ -91,28 +119,37 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
+            #Si se presiona 'F1', 'F2' o 'F3' se cambia de pantalla
+            if event.key == pygame.K_F1:
+                current_screen = 0
+            elif event.key == pygame.K_F2:
+                current_screen = 1
+            elif event.key == pygame.K_F3:
+                current_screen = 2
             #Si se presiona la flecha izquierda o derecha, se avanza en los diálogos
-            elif event.key == pygame.K_RIGHT and dialog_continue:
+            if event.key == pygame.K_RIGHT and dialog_continue:
                 #Avanzar el diálogo
                 num_dialog += 1
             elif num_dialog >= 0 and event.key == pygame.K_LEFT and dialog_continue:
                 #Retroceder el diálogo
                 num_dialog -= 1
-            elif num_dialog == 7: 
+            elif num_dialog == 10: 
                 dialog_continue = False
+                examen_final = True
                 t1 = "Desafío final: Crea la función 'escape_island' (x, y, salida_x, salida_y)."
-                t2 = "Debes retornar 'x', 'y', 'igual' o 'salida'."
-                t3 = "Presiona 'Ctrl' para ejecutar tu código."
-                EI.keydown(cursor_pos, lines, event)
+                t2 = "Debes retornar una cadena que contenga: 'x', 'y', 'igual' y 'salida'."
+                t3 = "Presiona 'Ctrl' para ejecutar tu código. Utiliza 'F1', 'F2' y 'F3' si necesitas escribir más código."
+                EI.keydown(cursor_pos[current_screen], lines[current_screen], lines, event)
                 EI.mostrar_texto(t1,t2,t3,EI.t,color=EI.ROJO)
-    if num_dialog == 7:  
+    if num_dialog == 10:  
         t1 = "Desafío final: Crea la función 'escape_island' (x, y, salida_x, salida_y)."
-        t2 = "Debes retornar 'x', 'y', 'igual' o 'salida'."
-        t3 = "Presiona 'Ctrl' para ejecutar tu código."
-        dialog_continue = False  
-        EI.render_text(cursor_pos, lines, fuente_codigo, tamaño_fuente)
+        t2 = "Debes retornar una cadena que contenga: 'x', 'y', 'igual' y 'salida'."
+        t3 = "Presiona 'Ctrl' para ejecutar tu código. Utiliza 'F1', 'F2' y 'F3' si necesitas escribir más código."
+        dialog_continue = False
+        examen_final = True  
+        EI.render_text(cursor_pos[current_screen], lines[current_screen], fuente_codigo, tamaño_fuente)
         EI.mostrar_texto(t1, t2, t3,EI.t,color=EI.ROJO)
         if EI.correcto:  
             pygame.time.wait(1000)
-            num_dialog += 1
+            num_dialog = 13
     pygame.display.flip()
