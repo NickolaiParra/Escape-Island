@@ -154,6 +154,7 @@ def escape_island_base(x, y, salida_x, salida_y):
             y -= 1
         pasos += 1
     return pasos
+    #Otra solución: return abs(x - salida_x) + abs(y - salida_y)
 t = ""
 correcto = False
 comprobacion = True
