@@ -16,6 +16,7 @@ pygame.mixer.music.load('Música\ST.mp3')
 #Reproducimos la música en bucle 
 #Configuración de la música
 pygame.mixer.music.load('Música\ST.mp3') #Cargamos la música
+pygame.mixer.music.set_volume(0.5)  #Configuramos el volumen inicial
 pygame.mixer.music.play(-1) #Reproducimos la música en bucle 
 
 pantalla_de_carga_ajustada =  pygame.transform.scale(EI.pantalla_de_carga, (EI.ancho, EI.alto)) #Ajustamos portada al tamaño de la pantalla
@@ -180,6 +181,19 @@ while True:
                             boton_aceptar.color_normal = EI.AZUL if not boton_aceptar.esta_encima(evento.pos) else EI.ROJO
                             boton_cancelar.color_normal = EI.AZUL if not boton_cancelar.esta_encima(evento.pos) else EI.ROJO
                         if evento.type == pygame.MOUSEBUTTONDOWN and boton_aceptar.esta_encima(evento.pos):
+                            controlar_bucle_2 = True
+                            ciclo = True
+                            break
+                        elif evento.type == pygame.MOUSEBUTTONDOWN and boton_cancelar.esta_encima(evento.pos):
+                            #Valores iniciales
+                            posicion_relativa = 0.5
+                            brillo = 1
+                            mouseantiguo_x = EI.ancho * 0.34
+                            mouseantiguo_x_brillo = EI.ancho * 0.489
+                            Gris = True
+                            Gris_brillo = True
+                            pygame.mixer.music.set_volume(0.5)  #Configuramos el volumen inicial
+                            pygame.display.set_gamma(1) #Se aplica el brillo a la pantalla
                             controlar_bucle_2 = True
                             ciclo = True
                             break
