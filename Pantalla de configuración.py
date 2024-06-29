@@ -10,12 +10,12 @@ pygame.mixer.init()
 
 
 #Configuración de la música
-pygame.mixer.music.load('Música\ST.mp3') #Cargamos la música
+pygame.mixer.music.load('Música/ST.mp3') #Cargamos la música
 pygame.mixer.music.set_volume(0.5)  #Configuramos el volumen inicial
 pygame.mixer.music.play(-1)  #Reproducimos la música en bucle 
 
 #Textos
-fuente_2 = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de inicio
+fuente_2 = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de inicio
 texto_musica = fuente_2.render('Music', True, (EI.ROJO)) 
 texto_brillo = fuente_2.render('Brillo', True, (EI.ROJO)) 
 

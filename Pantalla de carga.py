@@ -15,7 +15,7 @@ pygame.mixer.init()
 
 #Cargamos la música
 
-pygame.mixer.music.load('Música\ST.mp3')
+pygame.mixer.music.load('Música/ST.mp3')
 
 #Reproducimos la música en bucle 
 
@@ -31,7 +31,7 @@ ancho_barra_maximo = EI.ancho * 0.8
 alto_barra = 0.05 * EI.alto
 progreso_carga = 0
 portada_ajustada =  pygame.transform.scale(EI.portada, (EI.ancho*0.8, EI.alto)) #Ajustamos portada al tamaño de la pantalla
-fuente = pygame.font.Font("Fuentes\Fortune.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de carga
+fuente = pygame.font.Font("Fuentes/Fortune.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de carga
 EI.PANTALLA.fill(EI.FONDO) #Rellenamos el fondo
 EI.PANTALLA.blit(portada_ajustada, (EI.ancho*0.1, 0)) #Mostramos portada
 texto = fuente.render("Cargando", True, (EI.ROJO)) 
@@ -57,7 +57,7 @@ def animar_puntos():
 threading.Thread(target=animar_puntos).start() #Ejecutamos la función animar_puntos al mismo tiempo que el bucle principal del juego (esto se hace para evitar que tiempo_espera afecte a la barra de carga)
 
 #Pantalla de inicio
-fuente_2 = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.03)) #Fuente del texto de la pantalla de inicio
+fuente_2 = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.03)) #Fuente del texto de la pantalla de inicio
 texto_2 = fuente_2.render('Presiona "Enter" para iniciar', True, (EI.ROJO)) 
 portada2_ajustada =  pygame.transform.scale(EI.portada_2, (EI.ancho, EI.alto)) #Ajustamos portada 2 al tamaño de la pantalla
 

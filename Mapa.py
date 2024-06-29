@@ -11,11 +11,11 @@ pygame.mixer.init()
 
 #Cargamos la música
 
-pygame.mixer.music.load('Música\ST.mp3')
+pygame.mixer.music.load('Música/ST.mp3')
 
 #Reproducimos la música en bucle 
 #Configuración de la música
-pygame.mixer.music.load('Música\ST.mp3') #Cargamos la música
+pygame.mixer.music.load('Música/ST.mp3') #Cargamos la música
 pygame.mixer.music.set_volume(0.5)  #Configuramos el volumen inicial
 pygame.mixer.music.play(-1) #Reproducimos la música en bucle 
 
@@ -23,7 +23,7 @@ pantalla_de_carga_ajustada =  pygame.transform.scale(EI.pantalla_de_carga, (EI.a
 
 #Pantalla de configuración
 #Textos
-fuente_2 = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de inicio
+fuente_2 = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de inicio
 texto_musica = fuente_2.render('Music', True, (EI.ROJO)) 
 texto_brillo = fuente_2.render('Brillo', True, (EI.ROJO)) 
 
@@ -52,7 +52,7 @@ ancho_barra_maximo = EI.ancho * 0.8
 alto_barra = 0.05 * EI.alto
 progreso_carga = 0
 portada_ajustada =  pygame.transform.scale(EI.portada, (EI.ancho*0.8, EI.alto)) #Ajustamos portada al tamaño de la pantalla
-fuente = pygame.font.Font("Fuentes\Fortune.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de carga
+fuente = pygame.font.Font("Fuentes/Fortune.otf", int(EI.ancho * 0.04)) #Fuente del texto de la pantalla de carga
 EI.PANTALLA.fill(EI.FONDO) #Rellenamos el fondo
 EI.PANTALLA.blit(portada_ajustada, (EI.ancho*0.1, 0)) #Mostramos portada
 texto = fuente.render("Cargando", True, (EI.ROJO)) 
@@ -78,7 +78,7 @@ def animar_puntos():
 threading.Thread(target=animar_puntos).start() #Ejecutamos la función animar_puntos al mismo tiempo que el bucle principal del juego (esto se hace para evitar que tiempo_espera afecte a la barra de carga)
 
 #Pantalla de inicio
-fuente_2 = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.03)) #Fuente del texto de la pantalla de inicio
+fuente_2 = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.03)) #Fuente del texto de la pantalla de inicio
 texto_2 = fuente_2.render('Presiona "Enter" para iniciar', True, (EI.ROJO)) 
 portada2_ajustada =  pygame.transform.scale(EI.portada_2, (EI.ancho, EI.alto)) #Ajustamos portada 2 al tamaño de la pantalla
 
@@ -258,7 +258,7 @@ while True:
         pygame.display.update()
 
 #Texto
-fuente_2 = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.04)) 
+fuente_2 = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.04)) 
 texto_seleccionar = fuente_2.render('Selecciona   tu   personaje', True, (EI.ROJO))
 
 #Botones
@@ -270,18 +270,18 @@ boton_aceptar = EI.Boton(EI.ancho * 0.6, EI.alto * 0.85, EI.ancho * 0.2, EI.alto
 
 #Imágenes
 #Personaje 1
-quieto_derecha1 = pygame.image.load("Imagenes\Sprites\Personaje_1\quieto_derecha.png")
+quieto_derecha1 = pygame.image.load("Imagenes/Sprites/Personaje_1/quieto_derecha.png")
 quieto_derecha1 = pygame.transform.scale(quieto_derecha1, (EI.ancho * 0.09, EI.alto * 0.4)) #Se adecua el sprite a un tamaño específico
 #Personaje 2
-quieto_derecha2 = pygame.image.load("Imagenes\Sprites\Personaje_2\quieto_derecha.png")
+quieto_derecha2 = pygame.image.load("Imagenes/Sprites/Personaje_2/quieto_derecha.png")
 quieto_derecha2 = pygame.transform.scale(quieto_derecha2, (EI.ancho * 0.1, EI.alto * 0.4)) #Se adecua el sprite a un tamaño específico
 #Personaje 3
-quieto_derecha3 = pygame.image.load("Imagenes\Sprites\Personaje_3\quieto_derecha.png")
+quieto_derecha3 = pygame.image.load("Imagenes/Sprites/Personaje_3/quieto_derecha.png")
 quieto_derecha3 = pygame.transform.scale(quieto_derecha3, (EI.ancho * 0.19, EI.alto * 0.34)) #Se adecua el sprite a un tamaño específico
 #Candado
-candado_cerrado = pygame.image.load("Imagenes\Iconos\Candado_cerrado.png")
+candado_cerrado = pygame.image.load("Imagenes/Iconos/Candado_cerrado.png")
 candado_cerrado = pygame.transform.scale(candado_cerrado, (EI.ancho * 0.15, EI.alto * 0.3)) #Se adecua la imagen a un tamaño específico
-candado_abierto = pygame.image.load("Imagenes\Iconos\Candado_abierto.png")
+candado_abierto = pygame.image.load("Imagenes/Iconos/Candado_abierto.png")
 
 p1 = False
 p2 = False
@@ -370,18 +370,18 @@ while True:
 
 if seleccion == 1:
     #Cargamos las hojas de sprites del personaje 1
-    quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\quieto_derecha.png")
-    quieto_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\quieto_izquierda.png")
-    correr_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\correr_derecha.png")
-    caminar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\caminar_derecha.png")
-    caminar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\caminar_izquierda.png")
-    correr_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\correr_izquierda.png")
-    ataque1_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque1_derecha.png")
-    ataque1_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque1_izquierda.png")
-    ataque3_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque3_derecha.png")
-    ataque3_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\\ataque3_izquierda.png")
-    saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_1\saltar_derecha.png")
-    saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_1\saltar_izquierda.png")
+    quieto_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/quieto_derecha.png")
+    quieto_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_1/quieto_izquierda.png")
+    correr_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/correr_derecha.png")
+    caminar_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/caminar_derecha.png")
+    caminar_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_1/caminar_izquierda.png")
+    correr_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_1/correr_izquierda.png")
+    ataque1_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/ataque1_derecha.png")
+    ataque1_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_1/ataque1_izquierda.png")
+    ataque3_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/ataque3_derecha.png")
+    ataque3_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_1/ataque3_izquierda.png")
+    saltar_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/saltar_derecha.png")
+    saltar_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_1/saltar_izquierda.png")
     #Extraemos los sprites individuales del personaje 1
     sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
     sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
@@ -395,18 +395,18 @@ if seleccion == 1:
     sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
 elif seleccion == 2:
     #Cargamos las hojas de sprites del personaje 2
-    quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\quieto_derecha.png")
-    quieto_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\quieto_izquierda.png")
-    correr_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\correr_derecha.png")
-    caminar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\caminar_derecha.png")
-    caminar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\caminar_izquierda.png")
-    correr_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\correr_izquierda.png")
-    ataque1_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque1_derecha.png")
-    ataque1_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque1_izquierda.png")
-    ataque3_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque3_derecha.png")
-    ataque3_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\\ataque3_izquierda.png")
-    saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_2\saltar_derecha.png")
-    saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_2\saltar_izquierda.png")
+    quieto_derecha = pygame.image.load("Imagenes/Sprites/Personaje_2/quieto_derecha.png")
+    quieto_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_2/quieto_izquierda.png")
+    correr_derecha = pygame.image.load("Imagenes/Sprites/Personaje_2/correr_derecha.png")
+    caminar_derecha = pygame.image.load("Imagenes/Sprites/Personaje_2/caminar_derecha.png")
+    caminar_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_2/caminar_izquierda.png")
+    correr_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_2/correr_izquierda.png")
+    ataque1_derecha = pygame.image.load("Imagenes/Sprites/Personaje_2/ataque1_derecha.png")
+    ataque1_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_2/ataque1_izquierda.png")
+    ataque3_derecha = pygame.image.load("Imagenes/Sprites/Personaje_2/ataque3_derecha.png")
+    ataque3_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_2/ataque3_izquierda.png")
+    saltar_derecha = pygame.image.load("Imagenes/Sprites/Personaje_2/saltar_derecha.png")
+    saltar_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_2/saltar_izquierda.png")
     #Extraemos los sprites individuales del personaje 2
     sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
     sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
@@ -420,18 +420,18 @@ elif seleccion == 2:
     sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
 elif seleccion == 3:
     #Cargamos las hojas de sprites del personaje 3
-    quieto_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\quieto_derecha.png")
-    quieto_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\quieto_izquierda.png")
-    correr_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\correr_derecha.png")
-    caminar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\caminar_derecha.png")
-    caminar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\caminar_izquierda.png")
-    correr_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\correr_izquierda.png")
-    ataque1_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque1_derecha.png")
-    ataque1_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque1_izquierda.png")
-    ataque3_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque3_derecha.png")
-    ataque3_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\\ataque3_izquierda.png")
-    saltar_derecha = pygame.image.load("Imagenes\Sprites\Personaje_3\saltar_derecha.png")
-    saltar_izquierda = pygame.image.load("Imagenes\Sprites\Personaje_3\saltar_izquierda.png")
+    quieto_derecha = pygame.image.load("Imagenes/Sprites/Personaje_3/quieto_derecha.png")
+    quieto_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_3/quieto_izquierda.png")
+    correr_derecha = pygame.image.load("Imagenes/Sprites/Personaje_3/correr_derecha.png")
+    caminar_derecha = pygame.image.load("Imagenes/Sprites/Personaje_3/caminar_derecha.png")
+    caminar_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_3/caminar_izquierda.png")
+    correr_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_3/correr_izquierda.png")
+    ataque1_derecha = pygame.image.load("Imagenes/Sprites/Personaje_3/ataque1_derecha.png")
+    ataque1_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_3/ataque1_izquierda.png")
+    ataque3_derecha = pygame.image.load("Imagenes/Sprites/Personaje_3/ataque3_derecha.png")
+    ataque3_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_3/ataque3_izquierda.png")
+    saltar_derecha = pygame.image.load("Imagenes/Sprites/Personaje_3/saltar_derecha.png")
+    saltar_izquierda = pygame.image.load("Imagenes/Sprites/Personaje_3/saltar_izquierda.png")
     #Extraemos los sprites individuales del personaje 3
     sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//11, 80, 128)
     sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//11, 80, 128)
@@ -1468,7 +1468,7 @@ hitbox_nivel_condicionales = pygame.Rect(EI.ancho * 0.77, EI.alto * 0.12, EI.anc
 dialogo = pygame.transform.scale(EI.dialogo, (EI.ancho * 0.5, EI.alto * 0.4))
 
 #Variables para mostrar el texto
-fuente_niveles = pygame.font.Font("Fuentes\\Nicolast.otf", int(EI.ancho * 0.03))
+fuente_niveles = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.03))
 texto_variables = fuente_niveles.render("Aldea de las variables", True, (EI.ROJO)) 
 texto_condicionales = fuente_niveles.render("Cueva de condicionales", True, (EI.ROJO)) 
 boton_niveles = EI.Boton(EI.ancho * 0.30, EI.alto * 0.5, EI.ancho * 0.15, EI.alto * 0.08, "Comenzar", int(EI.ancho * 0.04), int(EI.ancho * 0.01))
