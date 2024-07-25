@@ -1,12 +1,9 @@
 import pygame
 import sys
-import time
 from Módulos import Escape_Island as EI
 
 #Inicialización de Pygame
 pygame.init()
-
-tiempo_inicio = time.time() #Tiempo de inicio del programa
 
 fuente_codigo = pygame.font.Font("Fuentes/FiraCode.otf", int(EI.ancho * 0.02)) 
 tamaño_fuente = int(EI.ancho * 0.02)

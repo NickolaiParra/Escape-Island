@@ -283,20 +283,17 @@ candado_cerrado = pygame.image.load("Imagenes/Iconos/Candado_cerrado.png")
 candado_cerrado = pygame.transform.scale(candado_cerrado, (EI.ancho * 0.15, EI.alto * 0.3)) #Se adecua la imagen a un tamaño específico
 candado_abierto = pygame.image.load("Imagenes/Iconos/Candado_abierto.png")
 
+#Booleanos
 p1 = False
 p2 = False
-
 controlar_bucle = False
-
-#Booleanos
 dialog_continue = True
-
-
 num_dialog = -1
 completar_variables = False
 completar_condicionales = False
 completar_ciclos = False
-completar_funciones = False
+completar_funciones = True
+completar_examen_final = False
 
 #personajes
 variably = pygame.transform.scale(EI.variably,(EI.ancho*0.2,EI.alto*0.3))
@@ -1469,6 +1466,7 @@ hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto 
 hitbox_nivel_variables = pygame.Rect(EI.ancho * 0.74, EI.alto * 0.3, EI.ancho * 0.08, EI.alto * 0.1)
 hitbox_nivel_condicionales = pygame.Rect(EI.ancho * 0.77, EI.alto * 0.12, EI.ancho * 0.07, EI.alto * 0.13)
 hitbox_nivel_ciclos = pygame.Rect(EI.ancho * 0.205, EI.alto * 0.3, EI.ancho * 0.07, EI.alto * 0.12)
+hitbox_examen_final = pygame.Rect(EI.ancho * 0.07, 0, EI.ancho * 0.07, EI.alto * 0.08)
 dialogo = pygame.transform.scale(EI.dialogo, (EI.ancho * 0.5, EI.alto * 0.4))
 
 #Variables para mostrar el texto
@@ -1476,6 +1474,7 @@ fuente_niveles = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.03))
 texto_variables = fuente_niveles.render("Aldea de las variables", True, (EI.ROJO)) 
 texto_condicionales = fuente_niveles.render("Cueva de condicionales", True, (EI.ROJO)) 
 texto_ciclos = fuente_niveles.render("Bosque de ciclos", True, (EI.ROJO)) 
+texto_examen_final = fuente_niveles.render("Examen final", True, (EI.ROJO)) 
 boton_niveles = EI.Boton(EI.ancho * 0.30, EI.alto * 0.5, EI.ancho * 0.15, EI.alto * 0.08, "Comenzar", int(EI.ancho * 0.04), int(EI.ancho * 0.01))
 estrella_rellena_transformada = pygame.transform.scale(EI.estrella_rellena, (EI.ancho * 0.15, EI.alto * 0.2))
 estrella_vacia_transformada = pygame.transform.scale(EI.estrella_vacia, (EI.ancho * 0.15, EI.alto * 0.2))
@@ -1485,17 +1484,151 @@ variables = False
 condicionales = False
 ciclos = False
 funciones = False
+examen_final = False
 Matematicas_basicas = False
 Funciones = False
 Limites = False
 Derivadas = False
 mapa = True
-terminado = False
 var = True
 con = True
 cic = True
 
 while True: 
+    #Examen final
+    if examen_final:
+        fuente_codigo = pygame.font.Font("Fuentes/FiraCode.otf", int(EI.ancho * 0.02)) 
+        tamaño_fuente = int(EI.ancho * 0.02)
+        lines = [[""]]
+        cursor_pos= [[0, 0]]
+        current_screen = 0
+        num_screens = 3  # Número de pantallas
+        for _ in range(num_screens - 1):
+            lines.append([""])
+        for _ in range(num_screens - 1):
+            cursor_pos.append([0, 0])
+
+        num_dialog = -1
+        dialog_continue = True
+
+        #personajes
+        muerte = pygame.transform.scale(EI.muerte, (EI.ancho*0.2, EI.alto*0.3))
+        muerte_rect = muerte.get_rect()
+        muerte_rect.bottomleft = (EI.ancho*0.01, EI.alto*0.7)
+
+        #Imágenes
+        fondo_guerra = pygame.transform.scale(EI.fondo_guerra, (EI.ancho, EI.alto))
+        fondo_final = pygame.transform.scale(EI.fondo_final, (EI.ancho, EI.alto))
+
+        # Bucle principal del juego
+        while True:
+            if num_dialog == -1:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                t1 = "Este lugar está en ruinas."
+                t2 = "Pero es la única manera de escapar..."
+                EI.mostrar_texto("Examen final",t1,t2,color=EI.ROJO)
+            elif num_dialog == 0:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "Es increíble que hayas podido llegar hasta aquí."
+                t2 = "Lamentablemente, hasta acá llegó tu aventura."
+                t3 = "La única manera de salir con vida es superando el siguiente desafío."
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 1:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "Esta vez, no será de opción múltiple."
+                t2 = "Deberás escribir tu propio código."
+                EI.mostrar_texto("Muerte",t1,t2,color=EI.MORADO)
+            elif num_dialog == 2:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "Necesitas desplazarte hasta la salida para ser rescatado."
+                t2 = "La isla está representada como una cuadrícula de 100 x 100."
+                t3 = "Cada celda tiene coordenadas (x, y) que van desde (1, 1) hasta (100, 100)."
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 3:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "La salida está ubicada en una celda aleatoria de esta cuadrícula."
+                t2 = "Tu objetivo será crear la función 'escape_island'."
+                t3 = "Esta función debe recibir cuatro argumentos: 'x', 'y', 'salida_x', 'salida_y'. (En ese orden)."
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 4:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "La posición 'x' de la salida está representada por la variable 'salida_x'."
+                t2 = "La posición 'y' de la salida está representada por la variable 'salida_y'."
+                t3 = "Tú te encuentras en la posición (x, y) de la isla."
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 5:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "Para escapar de la isla, debes moverte paso a paso hacia la salida."
+                t2 = "Solo puedes hacer movimientos horizontales y verticales."
+                t3 = "Solo puedes hacer un movimiento por cada paso."
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 6:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "La función debe retornar la menor cantidad de pasos necesarios para llegar hasta la salida."
+                t2 = "Por ejemplo, si la entrada es (5, 4, 1, 1). La función debe retornar: 7"
+                t3 = "Por ejemplo, si la entrada es (100, 100, 100, 100). La función debe retornar: 0"
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 7:
+                EI.PANTALLA.blit(fondo_guerra, (0, 0))
+                EI.PANTALLA.blit(muerte, muerte_rect)
+                t1 = "Por ejemplo, si la entrada es (2, 10, 2, 1). La función debe retornar: 9"
+                t2 = "Ten cuidado con el nombre de la función."
+                t3 = "Si lo logras, serás libre."
+                EI.mostrar_texto("Muerte",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 9:
+                examen_final = False
+                EI.PANTALLA.blit(fondo_final, (0, 0))
+                t1 = "¡Felicidades, has logrado escapar de la isla!"
+                t2 = "Has demostrado gran ingenio en cada desafío."
+                t3 = "¡Ahora eres libre!"
+                EI.mostrar_texto("Escape Island",t1,t2,t3,color=EI.ROJO)
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+                    #Si se presiona 'F1', 'F2' o 'F3' se cambia de pantalla
+                    if event.key == pygame.K_F1:
+                        current_screen = 0
+                    elif event.key == pygame.K_F2:
+                        current_screen = 1
+                    elif event.key == pygame.K_F3:
+                        current_screen = 2
+                    #Si se presiona la flecha izquierda o derecha, se avanza en los diálogos
+                    if event.key == pygame.K_RIGHT and dialog_continue:
+                        #Avanzar el diálogo
+                        num_dialog += 1
+                    elif num_dialog >= 0 and event.key == pygame.K_LEFT and dialog_continue:
+                        #Retroceder el diálogo
+                        num_dialog -= 1
+                    elif num_dialog == 8: 
+                        dialog_continue = False
+                        examen_final = True
+                        t1 = "Desafío final: Crea la función 'escape_island' (x, y, salida_x, salida_y)."
+                        t2 = "Debes retornar la menor cantidad de pasos para llegar a la salida."
+                        t3 = "Presiona 'Ctrl' para ejecutar tu código. Utiliza 'F1', 'F2' y 'F3' si necesitas escribir más código."
+                        EI.keydown(cursor_pos[current_screen], lines[current_screen], lines, event)
+                        EI.mostrar_texto(t1,t2,t3,EI.t,color=EI.ROJO)
+            if num_dialog == 8:  
+                t1 = "Desafío final: Crea la función 'escape_island' (x, y, salida_x, salida_y)."
+                t2 = "Debes retornar la menor cantidad de pasos para llegar a la salida."
+                t3 = "Presiona 'Ctrl' para ejecutar tu código. Utiliza 'F1', 'F2' y 'F3' si necesitas escribir más código."
+                dialog_continue = False
+                examen_final = True  
+                EI.render_text(cursor_pos[current_screen], lines[current_screen], fuente_codigo, tamaño_fuente)
+                EI.mostrar_texto(t1, t2, t3,EI.t,color=EI.ROJO)
+                if EI.correcto:  
+                    pygame.time.wait(1000)
+                    completar_examen_final = True
+                    num_dialog = 9
+            pygame.display.flip()
     #Nivel de ciclos
     if ciclos:
         if seleccion == 1:
@@ -3536,7 +3669,7 @@ while True:
                 EI.mostrar_texto("Escape Island","Saliendo del Bosque de ciclos.",color=EI.ROJO)
                 mapa = True
                 ciclos = False
-                con = True
+                cic = True
                 completar_ciclos = True
                 break
             else:
@@ -7317,7 +7450,7 @@ while True:
 
             elif num_dialog == 27:
                 #Pregunta 5
-                t1 = "¿Cuál es el nombre del lenguaje de programación que se hemos estado usando?"
+                t1 = "¿Cuál es el nombre del lenguaje de programación que hemos estado usando?"
                 a = "C++"
                 b = "Java"
                 c = "Python"
@@ -7592,7 +7725,7 @@ while True:
     
     if mapa:
         
-        if (num_dialog == -1 or num_dialog >= 31) and (var or con):
+        if (num_dialog == -1 or num_dialog >= 31) and (var or con or cic):
             altura = EI.alto * 0.3
             velocidad_personaje = EI.ancho * 0.6
             posx_hitbox_derecha = EI.ancho * 0.63
@@ -7601,6 +7734,7 @@ while True:
             hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto * 0.08)
             var = False
             con = False
+            cic = False
 
         if anterior == "derecha":
             hitbox = pygame.Rect(posx_hitbox_derecha, posy_hitbox_derecha, EI.ancho * 0.017, EI.alto * 0.0802)
@@ -7677,6 +7811,9 @@ while True:
                 #Ciclos
                 elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_ciclos) and completar_condicionales:
                     ciclos = True
+                #Examen final
+                elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_examen_final) and completar_funciones:
+                    examen_final = True
             
             if evento.type == pygame.MOUSEMOTION:
                 #Si el cursor del mouse pasa por encima de algún botón, entonces su color cambia
@@ -7972,9 +8109,17 @@ while True:
                 EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
             else: 
                 EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
-
+        #Examen final
+        elif hitbox.colliderect(hitbox_examen_final):
+            EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
+            EI.PANTALLA.blit(texto_examen_final, (EI.ancho * 0.38, EI.alto * 0.35))
+            boton_niveles.dibujar(EI.PANTALLA)
+            if completar_examen_final:
+                EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+            else: 
+                EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
 
     pygame.time.Clock().tick(30)
-    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.205, EI.alto * 0.3, EI.ancho * 0.07, EI.alto * 0.12))
+    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.07, 0, EI.ancho * 0.07, EI.alto * 0.08))
     pygame.display.update()
     
