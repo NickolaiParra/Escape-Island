@@ -44,7 +44,7 @@ mouseantiguo_x_brillo = EI.ancho * 0.489
 Gris = True
 Gris_brillo = True
 
-
+'''
 #Pantalla de carga
 posicionx_barra = EI.ancho * 0.1
 posiciony_barra = EI.alto * 0.92
@@ -256,7 +256,7 @@ while True:
 
                     pygame.display.flip() #Actualizar la pantalla
         pygame.display.update()
-
+'''
 #Texto
 fuente_2 = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.04)) 
 texto_seleccionar = fuente_2.render('Selecciona   tu   personaje', True, (EI.ROJO))
@@ -309,7 +309,7 @@ fondo_aldea = pygame.transform.scale(EI.fondo_aldea,(EI.ancho*0.8,EI.alto*0.7))
 fondo_aldea_rect = fondo_aldea.get_rect()
 fondo_aldea_rect.midtop = (EI.ancho//2, 0)
 
-
+'''
 while True:
     if controlar_bucle:
         break
@@ -367,7 +367,8 @@ while True:
     
 
     pygame.display.flip() #Actualizar la pantalla
-
+'''
+seleccion = 1
 if seleccion == 1:
     #Cargamos las hojas de sprites del personaje 1
     quieto_derecha = pygame.image.load("Imagenes/Sprites/Personaje_1/quieto_derecha.png")
@@ -482,6 +483,7 @@ tecla_xpresionada = pygame.transform.scale(EI.tecla_xpresionada, (EI.ancho * 0.0
 tecla_z = pygame.transform.scale(EI.tecla_z, (EI.ancho * 0.08, EI.alto * 0.1))
 tecla_zpresionada = pygame.transform.scale(EI.tecla_zpresionada, (EI.ancho * 0.08, EI.alto * 0.1))
 
+'''
 while True:
 
     #Se crea un rectangulo que corresponde a la hitbox del personaje
@@ -489,7 +491,7 @@ while True:
         hitbox = pygame.Rect(posx_hitbox_derecha, posy_hitbox_derecha, EI.ancho * 0.05, EI.alto * 0.22)
     elif anterior == "izquierda":
         hitbox = pygame.Rect(posx_hitbox_izquierda, posy_hitbox_derecha, EI.ancho * 0.05, EI.alto * 0.22)
-
+    
     #Se imprimen los fondos
     if numero_dialogos == 0 or numero_dialogos >= 5:
         EI.PANTALLA.blit(fondo3, (0, 0))
@@ -517,8 +519,9 @@ while True:
                 ataque3 = True
 
     teclas = pygame.key.get_pressed()
+    
     if numero_dialogos == 0:
-        EI.mostrar_texto("Tutorial", "Bienvenid@ al tutorial básico.", "¿Estás list@ para iniciar esta nueva, aventura?", "Presiona 'Enter' para continuar.", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
+        EI.mostrar_texto("Tutorial", "Bienvenid@ al tutorial básico.", "¿Estás list@ para iniciar esta nueva aventura?", "Presiona 'Enter' para continuar.", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
     
     #Primera parte del tutorial
     if numero_dialogos == 1:
@@ -573,7 +576,7 @@ while True:
             EI.PANTALLA.blit(flecha_arriba, (EI.ancho * 0.65, EI.alto * 0.75))
         
         #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
             EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Movimientos", "Para comenzar, usa las flechas para desplazarte:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(flecha_derecha, (EI.ancho * 0.65, EI.alto * 0.75))
@@ -701,7 +704,7 @@ while True:
             EI.PANTALLA.blit(shift, (EI.ancho * 0.7, EI.alto * 0.75))
         
         #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
             EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Movimientos", "Puedes presionar las flechas + shift para correr:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(shift_flechaderecha, (EI.ancho * 0.7, EI.alto * 0.75))
@@ -900,7 +903,7 @@ while True:
             EI.PANTALLA.blit(espacio_sinpresionar, (EI.ancho * 0.6, EI.alto * 0.8))
         
         #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
             EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Movimientos", "Puedes presionar espacio para saltar:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(espacio_sinpresionar, (EI.ancho * 0.6, EI.alto * 0.8))
@@ -1138,7 +1141,7 @@ while True:
             EI.PANTALLA.blit(tecla_z, (EI.ancho * 0.7, EI.alto * 0.8))
         
         #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+        if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
             EI.PANTALLA.blit(fondo1, (0, 0))
             EI.mostrar_texto("Ataques", "Puedes presionar 'x' y 'z' para atacar:", "Presiona 'Enter' para continuar.", "", int(EI.ancho * 0.03), int(EI.ancho * 0.03))
             EI.PANTALLA.blit(tecla_x, (EI.ancho * 0.6, EI.alto * 0.8))
@@ -1399,7 +1402,7 @@ while True:
         break
     pygame.time.Clock().tick(60)
     pygame.display.update()
-
+    '''
 if seleccion == 1:
     quieto_derecha = pygame.transform.scale(quieto_derecha, (EI.ancho * 0.022, EI.alto * 0.09)) #Se adecua el sprite a un tamaño específico
     quieto_izquierda = pygame.transform.scale(quieto_izquierda, (EI.ancho * 0.022, EI.alto * 0.09)) #Se adecua el sprite a un tamaño específico
@@ -1465,12 +1468,14 @@ hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto 
 #Variables para calcular las hitboxes de los niveles
 hitbox_nivel_variables = pygame.Rect(EI.ancho * 0.74, EI.alto * 0.3, EI.ancho * 0.08, EI.alto * 0.1)
 hitbox_nivel_condicionales = pygame.Rect(EI.ancho * 0.77, EI.alto * 0.12, EI.ancho * 0.07, EI.alto * 0.13)
+hitbox_nivel_ciclos = pygame.Rect(EI.ancho * 0.205, EI.alto * 0.3, EI.ancho * 0.07, EI.alto * 0.12)
 dialogo = pygame.transform.scale(EI.dialogo, (EI.ancho * 0.5, EI.alto * 0.4))
 
 #Variables para mostrar el texto
 fuente_niveles = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.03))
 texto_variables = fuente_niveles.render("Aldea de las variables", True, (EI.ROJO)) 
 texto_condicionales = fuente_niveles.render("Cueva de condicionales", True, (EI.ROJO)) 
+texto_ciclos = fuente_niveles.render("Bosque de ciclos", True, (EI.ROJO)) 
 boton_niveles = EI.Boton(EI.ancho * 0.30, EI.alto * 0.5, EI.ancho * 0.15, EI.alto * 0.08, "Comenzar", int(EI.ancho * 0.04), int(EI.ancho * 0.01))
 estrella_rellena_transformada = pygame.transform.scale(EI.estrella_rellena, (EI.ancho * 0.15, EI.alto * 0.2))
 estrella_vacia_transformada = pygame.transform.scale(EI.estrella_vacia, (EI.ancho * 0.15, EI.alto * 0.2))
@@ -1478,7 +1483,7 @@ estrella_vacia_transformada = pygame.transform.scale(EI.estrella_vacia, (EI.anch
 #Variables para implementar los niveles
 variables = False
 condicionales = False
-bucles = False
+ciclos = False
 funciones = False
 Matematicas_basicas = False
 Funciones = False
@@ -1488,8 +1493,2082 @@ mapa = True
 terminado = False
 var = True
 con = True
+cic = True
 
 while True: 
+    #Nivel de ciclos
+    if ciclos:
+        if seleccion == 1:
+            #Extraemos los sprites individuales del personaje 1 con las dimensiones ajustadas
+            sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//10, 87, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//10, 87, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//4, 84, 128, EI.ancho * 0.2, EI.alto * 0.22)
+        elif seleccion == 2:
+            #Extraemos los sprites individuales del personaje 2 con las dimensiones ajustadas
+            sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//8, 81, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//12, 85, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//12, 85, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//8, 75, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//8, 75, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//4, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//4, 78, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
+            sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//5, 80, 128, EI.ancho * 0.2, EI.alto * 0.22)
+        elif seleccion == 3:
+            #Extraemos los sprites individuales del personaje 3 con las dimensiones ajustadas
+            sprites_caminar_derecha = EI.cargar_sprites(caminar_derecha, caminar_derecha.get_width()//11, 80, 128)
+            sprites_caminar_izquierda = EI.cargar_sprites(caminar_izquierda, caminar_izquierda.get_width()//11, 80, 128)
+            sprites_saltar_derecha = EI.cargar_sprites(saltar_derecha, saltar_derecha.get_width()//11, 92, 128)
+            sprites_saltar_izquierda = EI.cargar_sprites(saltar_izquierda, saltar_izquierda.get_width()//11, 92, 128)
+            sprites_correr_izquierda = EI.cargar_sprites(correr_izquierda, correr_izquierda.get_width()//9, 81, 128)
+            sprites_correr_derecha = EI.cargar_sprites(correr_derecha, correr_derecha.get_width()//9, 81, 128)
+            sprites_ataque3_derecha = EI.cargar_sprites(ataque3_derecha, ataque3_derecha.get_width()//5, 95, 128)
+            sprites_ataque3_izquierda = EI.cargar_sprites(ataque3_izquierda, ataque3_izquierda.get_width()//5, 95, 128)
+            sprites_ataque1_derecha = EI.cargar_sprites(ataque1_derecha, ataque1_derecha.get_width()//6, 90, 128)
+            sprites_ataque1_izquierda = EI.cargar_sprites(ataque1_izquierda, ataque1_izquierda.get_width()//6, 90, 128)
+        #Booleanos
+        running = True
+        dialog_continue = True
+
+        
+        num_dialog = -1
+
+        #personajes
+        cicloso = pygame.transform.scale(EI.cicloso,(EI.ancho*0.2,EI.alto*0.3))
+        cicloso_rect = cicloso.get_rect()
+        cicloso_rect.bottomleft = (EI.ancho*0.01,EI.alto*0.7)
+
+        #Fondos
+
+        fondo_bosque = pygame.transform.scale(EI.fondo_bosque,(EI.ancho*0.8,EI.alto*0.7))
+        fondo_bosque_rect = fondo_bosque.get_rect()
+        fondo_bosque_rect.midtop = (EI.ancho//2, 0)
+
+        #Cajas
+        caja_a = pygame.transform.scale(EI.caja_a,(EI.ancho * 0.1,EI.alto * 0.15))
+        caja_a_rect = caja_a.get_rect()
+        caja_a_rect.bottomleft=(EI.ancho * 0.25, EI.alto * 0.69)
+        caja_b = pygame.transform.scale(EI.caja_b,(EI.ancho * 0.1,EI.alto * 0.15))
+        caja_b_rect = caja_b.get_rect()
+        caja_b_rect.bottomleft=(EI.ancho * 0.4, EI.alto * 0.69)
+        caja_c = pygame.transform.scale(EI.caja_c,(EI.ancho * 0.1,EI.alto * 0.15))
+        caja_c_rect = caja_c.get_rect()
+        caja_c_rect.bottomleft=(EI.ancho * 0.55, EI.alto * 0.69)
+        caja_d = pygame.transform.scale(EI.caja_d,(EI.ancho * 0.1,EI.alto * 0.15))
+        caja_d_rect = caja_d.get_rect()
+        caja_d_rect.bottomleft=(EI.ancho * 0.7, EI.alto * 0.69)
+        quieto_derecha = pygame.transform.scale(quieto_derecha, (EI.ancho * 0.05, EI.alto * 0.22)) #Se adecua el sprite a un tamaño específico
+        quieto_izquierda = pygame.transform.scale(quieto_izquierda, (EI.ancho * 0.05, EI.alto * 0.22)) #Se adecua el sprite a un tamaño específico
+        caja_a_rota_transformada = pygame.transform.scale(EI.caja_a_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+        caja_b_rota_transformada = pygame.transform.scale(EI.caja_b_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+        caja_c_rota_transformada = pygame.transform.scale(EI.caja_c_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+        caja_d_rota_transformada = pygame.transform.scale(EI.caja_d_rota, (EI.ancho * 0.1, EI.alto * 0.15))
+
+        #Variables apra las preguntas
+        num_dialog = -1
+
+        #Variables para las respuestas
+        caja_a_presionada = False
+        caja_b_presionada = False
+        caja_c_presionada = False
+        caja_d_presionada = False
+        prueba = True
+        error = False
+
+        #Variables para calcular la hitbox del personaje
+        altura = EI.alto * 0.5
+        altura_variables = EI.alto * 0.5
+        velocidad_personaje_variables = EI.ancho * 0.8
+        velocidad_personaje = EI.ancho * 0.8
+        estado_caminar_derecha = None
+        estado_caminar_izquierda = None
+        estado_correr_derecha = None
+        estado_correr_izquierda = None
+        saltando = None
+        anterior = 'derecha'
+        ataque1 = None
+        ataque3 = None
+        posx_hitbox_derecha_variables = EI.ancho * 0.83
+        posy_hitbox_derecha_variables = EI.alto * 0.5
+        posx_hitbox_izquierda_variables = EI.ancho * 0.84
+        posx_hitbox_derecha = EI.ancho * 0.63
+        posy_hitbox_derecha = EI.alto * 0.31
+        posx_hitbox_izquierda = EI.ancho * 0.64
+        hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto * 0.08)
+        mapa = False
+        hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.25)
+        rectangulo_caja_a = pygame.Rect(EI.ancho * 0.25, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+        rectangulo_caja_b = pygame.Rect(EI.ancho * 0.4, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+        rectangulo_caja_c = pygame.Rect(EI.ancho * 0.55, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+        rectangulo_caja_d = pygame.Rect(EI.ancho * 0.7, EI.alto * 0.55, EI.ancho * 0.1, EI.alto * 0.15)
+
+        #While principal
+        while running:
+            teclas = pygame.key.get_pressed()
+            if anterior == "derecha":
+                hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.3)
+            elif anterior == "izquierda":
+                hitbox_variables = pygame.Rect(posx_hitbox_derecha_variables, posy_hitbox_derecha_variables, EI.ancho * 0.05, EI.alto * 0.3)
+            #Fondo
+            EI.PANTALLA.fill((0,0,0))
+            EI.PANTALLA.blit(fondo_bosque,fondo_bosque_rect)
+            #Condicionales al romper las cajas
+
+            #Caja a correcta
+            if not caja_a_presionada and (caja_d_presionada or caja_b_presionada or caja_c_presionada) and prueba and num_dialog == 11:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -100
+                    break
+
+            if caja_a_presionada and (not (caja_d_presionada or caja_b_presionada or caja_c_presionada)) and prueba and num_dialog == 11:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            if not caja_a_presionada and (caja_d_presionada or caja_b_presionada or caja_c_presionada) and prueba and num_dialog == 41:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_a_presionada and (not (caja_d_presionada or caja_b_presionada or caja_c_presionada)) and prueba and num_dialog == 41:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Caja b correcta
+
+            if not caja_b_presionada and (caja_d_presionada or caja_a_presionada or caja_c_presionada) and prueba and (num_dialog == 39 or num_dialog == 43):
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_b_presionada and (not (caja_d_presionada or caja_a_presionada or caja_c_presionada)) and prueba and (num_dialog == 39 or num_dialog == 43):
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Caja c correcta
+            if not caja_c_presionada and (caja_a_presionada or caja_b_presionada or caja_d_presionada) and prueba and num_dialog == 40:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_c_presionada and (not (caja_a_presionada or caja_b_presionada or caja_d_presionada)) and prueba and num_dialog == 40:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Caja d correcta
+            if not caja_d_presionada and (caja_b_presionada or caja_a_presionada or caja_c_presionada) and prueba and num_dialog == 37:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -200
+                    break
+
+            if caja_d_presionada and (not (caja_b_presionada or caja_a_presionada or caja_c_presionada)) and prueba and num_dialog == 37:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            if not caja_d_presionada and (caja_a_presionada or caja_b_presionada or caja_c_presionada) and prueba and num_dialog == 42:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog = -300
+                    break
+
+            if caja_d_presionada and (not (caja_a_presionada or caja_b_presionada or caja_c_presionada)) and prueba and num_dialog == 42:
+                while True:
+                    caja_a_presionada = False
+                    caja_b_presionada = False
+                    caja_c_presionada = False
+                    caja_d_presionada = False
+                    EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                    EI.PANTALLA.blit(cicloso,cicloso_rect)
+                    EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                    pygame.time.wait(1000)
+                    num_dialog += 1
+                    break 
+
+            #Diálogos
+            if num_dialog == -1:
+                EI.mostrar_texto("Escape Island","Llegando al Bosque de ciclos.",color=EI.ROJO)
+            elif num_dialog == 0:
+                t1 = "Haz llegado a un bosque pegajoso."
+                t2 = "Te motivas a seguir."
+                EI.mostrar_texto("Bosque de ciclos",t1,t2,color=EI.MORADO)
+            elif num_dialog == 1:
+                t1 = "Al caminar durante un rato notas que el paisaje se empieza a repetir."
+                t2 = "Crees que estas caminando en círculos."
+                EI.mostrar_texto("Bosque de ciclos",t1,t2,color=EI.MORADO)
+            elif num_dialog == 2:
+                t1 = "¡Oye!"
+                t2 = "¡Deja de caminar!"
+                t3 = "Así no vas a llegar a ningún lado."
+                EI.mostrar_texto("???",t1,t2)
+            elif num_dialog == 3:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "¡Hola!"
+                t2 = "Yo soy el cicloso."
+                t3 = "Habito estas tierras desde su nacimiento."
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 4:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "Te puedo sacar de este ciclo infinito."
+                t2 = "Pero para ello, debes dominar el uso de los ciclos."
+                t3 = "¿Estás listo para aprender sobre ellos?"
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 5:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "Bien. ¡Empecemos!"
+                t2 = ""
+                t3 = ""
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 6:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "Imáginate que quieres sumar dos números,"
+                t2 = "entonces escribes un código que hace eso."
+                t3 = ""
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 7:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "Pero ahora imáginate que necesitas sumar números varias veces."
+                t2 = "No te vas a poner a escribir el mismo código esa cantidad de veces, ¿o sí?"
+                t3 = ""
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 8:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "No."
+                t2 = "Por esa misma razón se usa una herramienta muy poderosa en programacion:"
+                t3 = "Los ciclos."
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 9:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "Estos ciclos te permiten repetir una cantidad de veces cierta parte de tu código."
+                t2 = "Así, si tienes que hacer una operación múltiples veces, lo puedes hacer sin necesidad"
+                t3 = "de escribir el código cientos de veces."
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 10:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "Eso es básicamente lo que hacen los ciclos, su concepto más básico."
+                t2 = "Bueno, creo que ahora es necesario ver si entendiste."
+                t3 = "Este concepto es fundamental para poder continuar."
+                EI.mostrar_texto("Cicloso",t1,t2,t3)
+            elif num_dialog == 11:
+                #Quiz de ciclos 1
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "¿Para qué sirven los ciclos en programación?"
+                a = "Para repetir un código una cierta cantidad de veces."
+                b = "Para caminar en círculos."
+                c = "Para guardar información."
+                d = "Para ejecutar un código cuando se cumpla cierta condición."
+                correcta = 2
+                EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Quiz de ciclos 1
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Quiz de ciclos 1
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Quiz de ciclos 1
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Quiz de ciclos 1
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 1",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+            elif num_dialog == -100: #Si se equivoca
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Eso está mal."
+                t2 = "Vamos a tener que repetirlo."
+                t3 = "Presiona 'Espacio' para continuar."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                error = True
+                devolver = 6
+            elif num_dialog == 12: #Si responde correctamente
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Perfecto."
+                t2 = "¡Continuemos!"
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                dialog_continue = True
+            elif num_dialog == 13:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Ahora pasaremos a su ejecución en Python."
+                t2 = "Así podrás aplicarlos."
+                t3 = "¿Te parece?"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 14:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Listo."
+                t2 = ""
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 15:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Hay dos tipos de ciclos muy importantes que vas a encontrar en todo lado."
+                t2 = "Estos son el 'for' y el 'while'."
+                t3 = "¿Cuál es su diferencia?"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 16: 
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "El 'for' se usa cuando necesitas que se repita el código una cantidad de veces específica,"
+                t2 = "mientras que el 'while' se ejecuta hasta que una condición que le des no se cumpla."
+                t3 = "Si sabes usar condiciones, podrás usar los 'while'."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 17:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Ahora, ¿cómo se programan en Python?"
+                t2 = "Empecemos por el 'for'."
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 18:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "La sintaxis de un 'for' puede ser:"
+                t2 = "'for elemento in elementos:'"
+                t3 = "o también: 'for numero in range(rango):'"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 19:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "La palabra posterior a for es una variable arbitraria que va recorrer (iterar)"
+                t2 = "a través de un string, una lista o cualquier otro arreglo que contenga elementos."
+                t3 = "Por ejemplo, el 'for' puede recorrer los caracteres de una palabra."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 20:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Un ejemplo de esto sería:"
+                t2 = "'for vocal in \"aeiou\":'"
+                t3 = "'    {código}'"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 21:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "En este caso, el código se repite según la cantidad de vocales que hay en \"aeiou\"."
+                t2 = "Cada vez que el código se repite, la variable 'vocal' almacena la vocal."
+                t3 = "Recuerda que el código debe estar indentado."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 22:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Por otro lado, la segunda sintaxis repite el código la cantidad de veces específicada en el"
+                t2 = "rango del ciclo. Este rango tiene que ser un número entero."
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 23:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Por ejemplo:"
+                t2 = "'for i in range(5):' repetiría el código 5 veces, y guardaría el número"
+                t3 = "del ciclo en la variable 'i', empezando por 0 y terminando en 4 (en este caso)."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 24:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Es importante notar es que si tienes una variable que contenga un número entero,"
+                t2 = "puedes usar esa variable como rango para el 'for'."
+                t3 = "Algo como: 'for numero in range(numeros)'."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 25:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "En este caso, el código se repetiría según el valor de 'números',"
+                t2 = "y en cada repetición (también llamada iteración o ciclo) se guardaría en la variable 'número'."
+                t3 = "El rango va desde 0 hasta el valor de 'números' menos 1."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 26:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Así es como funciona el 'for'."
+                t2 = "Vamos por buen camino."
+                t3 = "Recuerda que puedes regresar en mi explicación si se te complica algo."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 27:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Ahora pasemos con el 'while'."
+                t2 = "Si has llegado hasta aquí asumiré que ya sabes sobre las condiciones."
+                t3 = "Es importante que lo recuerdes."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 28:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Bien, si estás listo pasaré a mostrarte la estructura de un 'while'."
+                t2 = "¿Preparado?"
+                t3 = ""
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 29:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "'While {condición}:'"
+                t2 = "'    {código}'"
+                t3 = "Se ve más sencillo que el for, ¿no?"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 30:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Básicamente, todo lo que este dentro de ese while se va ejecutar mientras se cumpla esa condición."
+                t2 = "Para que lo entiendas mejor, debes saber que lo que hace es que cada vez que inicia un nuevo ciclo"
+                t3 = "verifica si se cumple esa condición, y si lo hace se sigue ejecutando."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 31:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Si lo entiendes, verás que es muy fácil que acabes en un ciclo infinito, por lo que ten cuidado."
+                t2 = "Debes hacer que esa condición se deje de cumplir en algún momento si no"
+                t3 = "quieres que el ciclo se ejecute para siempre."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 32:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "¿Necesitas un ejemplo?"
+                t2 = "Dejame pensar..."
+                t3 = "Bueno, aquí va:"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 33:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "numero = 1"
+                t2 = "while numero < 10:"
+                t3 = "    numero = numero + 1"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 34:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Este código empieza con el número 1 y verifica si es menor que 10,"
+                t2 = "como eso es verdad, entonces le suma 1 al número y queda en 2. Luego vuelve a verificar y vuelve a sumar."
+                t3 = "Eso ocurre hasta que el número queda en 10."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 35:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Como 10 no es menor que 10 entonces no le vuelve a sumar nada y el número se queda en 10."
+                t2 = "Así puedes usar los ciclos, pero no es la única manera de hacerlo."
+                t3 = "Tienes que ser creativo."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 36:
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Creo que eso es todo por ahora."
+                t2 = "Con esto creo que serías capaz de salir de aquí."
+                t3 = "Voy a ver si me pusiste atención."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+            elif num_dialog == 37:
+                #Quiz de ciclos 2
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                t1 = "¿Cuáles son los dos tipos de ciclos que se pueden usar en Python?"
+                a = "'if' y 'for'"
+                b = "'range' y 'for'"
+                c = "'if y 'while'"
+                d = "'while' y 'for'"
+                EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                correcta = 4
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Quiz de ciclos 2
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Quiz de ciclos 2
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Quiz de ciclos 2
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Quiz de ciclos 2
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Quiz de ciclos 2",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+            elif num_dialog == -200: # Si se equivoca
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Eso está mal."
+                t2 = "Vamos a tener que repetirlo."
+                t3 = "Presiona 'Espacio' para continuar."
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                error = True
+                devolver = 15
+            elif num_dialog == 38: # Si responde correctamente
+                EI.PANTALLA.blit(cicloso,cicloso_rect)
+                personaje = "Cicloso"
+                t1 = "Vale. Con este conocimiento podrás salir de este bosque."
+                t2 = "Recuerda dar lo mejor de ti."
+                t3 = "¡Nos vemos!"
+                EI.mostrar_texto(personaje,t1,t2,t3)
+                dialog_continue = True
+            elif num_dialog == 39:
+                #Examen de ciclos
+                #Pregunta 1
+                t1 = "¿Cuál de las siguientes tiene una estructura válida de un 'for' en Python?:"
+                a = "for 'condición':"
+                b = "for letra in 'palabra':"
+                c = "for letra = 'palabra':"
+                d = "for = 'condición'"
+                correcta = 2
+                EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 40:
+                #Pregunta 2
+                t1 = "¿Cuál de las siguientes NO tiene una estructura válida de un 'while' en Python?"
+                a = "while True:"
+                b = "while a > b:"
+                c = "while a = b:"
+                d = "while a > b and b > c:"
+                correcta = 3
+                EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 41:
+                #Pregunta 3
+                t1 = "¿Cuántas veces se repite el siguiente 'for'?:"
+                t2 = "for i in range(10):"
+                a = "10"
+                b = "9"
+                c = "11"
+                d = "i"
+                correcta = 1
+                EI.pregunta("Examen de ciclos",[t1,t2,""],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 42:
+                #Pregunta 4
+                t1 = "¿Cuántas veces se repite el siguiente 'while', si a = 0?:"
+                t2 = "while a >= 10:"
+                t3 = "    a = a + 1"
+                a = "10"
+                b = "9"
+                c = "11"
+                d = "0"
+                correcta = 4
+                EI.pregunta("Examen de ciclos",[t1,t2,t3],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == 43:
+                #Pregunta 5
+                t1 = "¿Cuántas veces se repite el siguiente 'while'?:"
+                t2 = "while (True and ((not False and True) or True)):"
+                a = "Ninguna"
+                b = "Infinitas"
+                c = "1"
+                d = "1000"
+                correcta = 2
+                EI.pregunta("Examen de ciclos",[t1,t2,""],a,b,c,d)
+                prueba = True
+                dialog_continue = False
+                #Si no se está presionando ninguna tecla, entonces el personaje se queda quieto
+                if teclas[pygame.K_RIGHT] == False and (anterior == "derecha" or anterior == None):
+                    EI.PANTALLA.blit(quieto_derecha, (velocidad_personaje_variables + EI.ancho * 0.027, altura_variables))
+                if teclas[pygame.K_LEFT] == False and (anterior == "izquierda"):
+                    EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
+
+                #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.81:
+                        velocidad_personaje_variables += EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables += EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.002
+                    sumar = EI.ancho * 0.015 if seleccion == 3 else - EI.ancho * 0.04
+                    anterior = "derecha"
+
+                    if estado_caminar_derecha == None or estado_caminar_derecha == 7:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 0
+                    elif estado_caminar_derecha == 0:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 1
+                    elif estado_caminar_derecha == 1:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 2
+                    elif estado_caminar_derecha == 2:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 3
+                    elif estado_caminar_derecha == 3:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 4
+                    elif estado_caminar_derecha == 4:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 5
+                    elif estado_caminar_derecha == 5:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 6
+                    elif estado_caminar_derecha == 6:
+                        EI.PANTALLA.blit(sprites_caminar_derecha[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_derecha = 7
+
+                #Si la tecla izquierda está siendo presionada o "a", entonces el personaje camina hacia la izquierda
+                if (teclas[pygame.K_LEFT] or teclas[pygame.K_a]):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        velocidad_personaje_variables -= EI.ancho * 0.002 
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.002
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.002
+
+                    sumar = EI.ancho * 0.02 if seleccion == 3 else - EI.ancho * 0.05
+                    anterior = "izquierda"
+                    
+                    if estado_caminar_izquierda == None or estado_caminar_izquierda == 7:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[7], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 0
+                    elif estado_caminar_izquierda == 0:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[6], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 1
+                    elif estado_caminar_izquierda == 1:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[5], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 2
+                    elif estado_caminar_izquierda == 2:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[4], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 3
+                    elif estado_caminar_izquierda == 3:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[3], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 4
+                    elif estado_caminar_izquierda == 4:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[2], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 5
+                    elif estado_caminar_izquierda == 5:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[1], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 6
+                    elif estado_caminar_izquierda == 6:
+                        EI.PANTALLA.blit(sprites_caminar_izquierda[0], (velocidad_personaje_variables + sumar, altura_variables))
+                        estado_caminar_izquierda = 7
+
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1         
+                if ataque1 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3  else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque1_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1           
+                if ataque1 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque1_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso, cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque1 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "derecha" or anterior == None):
+                    restar = 0 if seleccion == 3 else EI.ancho * 0.02
+                    if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                        posx_hitbox_izquierda_variables += EI.ancho * 0.012
+                        posx_hitbox_derecha_variables += EI.ancho * 0.012
+                    for sprite in sprites_ataque3_derecha:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_derecha_variables < EI.ancho * 0.8:
+                            velocidad_personaje_variables += EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - restar, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+
+                #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3            
+                if ataque3 and (anterior == "izquierda"):
+                    if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                        posx_hitbox_izquierda_variables -= EI.ancho * 0.012
+                        posx_hitbox_derecha_variables -= EI.ancho * 0.012
+                    for sprite in sprites_ataque3_izquierda[::-1]:
+                        #Examen de ciclos
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        EI.PANTALLA.blit(fondo_bosque, (EI.ancho * 0.1, 0))
+                        EI.PANTALLA.blit(cicloso,cicloso_rect)
+                        EI.pregunta("Examen de ciclos",[t1,"",""],a,b,c,d)
+                        if posx_hitbox_izquierda_variables > EI.ancho * 0.2:
+                            velocidad_personaje_variables -= EI.ancho * 0.003
+                        EI.PANTALLA.blit(sprite, (velocidad_personaje_variables - EI.ancho * 0.02, altura_variables - EI.alto * 0.009))  #Se dibuja el sprite actual
+                        pygame.display.flip()  #Se actualiza la pantalla
+                        pygame.time.delay(90)  #Se pausa la ejecución durante un breve período de tiempo
+                    if hitbox_variables.colliderect(rectangulo_caja_a):
+                        caja_a_presionada = True
+                        EI.PANTALLA.blit(caja_a_rota_transformada, (EI.ancho * 0.25, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_b):
+                        caja_b_presionada = True
+                        EI.PANTALLA.blit(caja_b_rota_transformada, (EI.ancho * 0.4, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_c):
+                        caja_c_presionada = True
+                        EI.PANTALLA.blit(caja_c_rota_transformada, (EI.ancho * 0.55, EI.alto * 0.54))
+                    elif hitbox_variables.colliderect(rectangulo_caja_d):
+                        EI.PANTALLA.blit(caja_d_rota_transformada, (EI.ancho * 0.7, EI.alto * 0.54))
+                        caja_d_presionada = True
+                    ataque3 = False
+            elif num_dialog == -300: # Si no pasa
+                t1 = "Continuas dando vueltas en círculos..."
+                t2 = "Devuélvete y cumple la condición para salir de este bucle."
+                t3 = "Presiona 'Espacio' para continuar."
+                EI.mostrar_texto("Bosque de ciclos",t1,t2,t3,color=EI.MORADO)
+                error = True
+                devolver = 15
+            elif num_dialog == 44: # Si pasa
+                t1 = "Una salida se abre ante ti."
+                t2 = "Avanzas hacia ella."
+                t3 = ""
+                EI.mostrar_texto("Bosque de ciclos",t1,t2,t3,color=EI.MORADO)
+                dialog_continue = True
+            elif num_dialog == 45: 
+                t1 = "Has salido del bosque."
+                t2 = "Te sientes aliviado de haber salido de ese ciclo infinito."
+                t3 = "Ya falta poco."
+                EI.mostrar_texto("Bosque de ciclos",t1,t2,t3,color=EI.MORADO)
+            elif num_dialog == 46: 
+                EI.mostrar_texto("Escape Island","Saliendo del Bosque de ciclos.",color=EI.ROJO)
+                mapa = True
+                ciclos = False
+                con = True
+                completar_ciclos = True
+                break
+            else:
+                EI.mostrar_texto("","")
+            
+            #Eventos    
+            for evento in pygame.event.get():
+                if evento.type == pygame.KEYDOWN:
+                    if evento.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+                    #Si se presiona la flecha izquierda o derecha, se avanza en los diálogos
+                    elif evento.key == pygame.K_RIGHT and dialog_continue:
+                        #Avanzar el diálogo
+                        num_dialog += 1
+                    elif num_dialog >= 0 and evento.key == pygame.K_LEFT and dialog_continue:
+                        #Retroceder el diálogo
+                        num_dialog -= 1
+                    #Si se presiona la tecla "x", entonces el personaje realiza el ataque 1
+                    if evento.key == pygame.K_x:
+                        ataque1 = True
+                    #Si se presiona la tecla "z", entonces el personaje realiza el ataque 3
+                    if evento.key == pygame.K_z:
+                        ataque3 = True
+                    if error and evento.key == pygame.K_SPACE:
+                        num_dialog = devolver
+                        dialog_continue = True
+                        error = False
+            
+            pygame.time.Clock().tick(60)
+            pygame.display.update()
+
     #Nivel de condicionales
     if condicionales:
         if seleccion == 1:
@@ -1889,7 +3968,7 @@ while True:
                 t2 = "Si necesitas puedes volver para revisar algo de lo que dije. Es bastante información."
                 t3 = "Bueno, veamos qué tanto aprendiste."
                 EI.mostrar_texto(personaje,t1,t2,t3)
-            elif num_dialog == 23: # Quiz de condicionales 1
+            elif num_dialog == 23: #Quiz de condicionales 1
                 EI.PANTALLA.blit(condi,condi_rect)
                 personaje = "Condi"
                 t1 = "Si tenemos: a = 50, b = 20, c = 70"
@@ -1909,7 +3988,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -2240,7 +4319,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -2465,7 +4544,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -2674,7 +4753,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -2883,7 +4962,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -3092,7 +5171,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -3300,7 +5379,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -3873,7 +5952,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -4166,7 +6245,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -4412,7 +6491,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -4622,7 +6701,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -4834,7 +6913,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -5045,7 +7124,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -5254,7 +7333,7 @@ while True:
                     EI.PANTALLA.blit(quieto_izquierda, (velocidad_personaje_variables + EI.ancho * 0.04, altura_variables))
 
                 #Si la tecla derecha está siendo presionada o "d", entonces el personaje camina hacia la derecha
-                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]):
+                if (teclas[pygame.K_RIGHT] or teclas[pygame.K_d]) and (teclas[pygame.K_LEFT] or teclas[pygame.K_a]) == False:
                     if posx_hitbox_derecha_variables < EI.ancho * 0.81:
                         velocidad_personaje_variables += EI.ancho * 0.002 
                         posx_hitbox_derecha_variables += EI.ancho * 0.002
@@ -5595,6 +7674,9 @@ while True:
                 #Condicionales
                 elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_condicionales) and completar_variables:
                     condicionales = True
+                #Ciclos
+                elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_ciclos) and completar_condicionales:
+                    ciclos = True
             
             if evento.type == pygame.MOUSEMOTION:
                 #Si el cursor del mouse pasa por encima de algún botón, entonces su color cambia
@@ -5881,9 +7963,18 @@ while True:
                 EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
             else: 
                 EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+        #Ciclos
+        elif hitbox.colliderect(hitbox_nivel_ciclos):
+            EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
+            EI.PANTALLA.blit(texto_ciclos, (EI.ancho * 0.35, EI.alto * 0.35))
+            boton_niveles.dibujar(EI.PANTALLA)
+            if completar_ciclos:
+                EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+            else: 
+                EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
 
 
     pygame.time.Clock().tick(30)
-    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.77, EI.alto * 0.12, EI.ancho * 0.07, EI.alto * 0.13))
+    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.205, EI.alto * 0.3, EI.ancho * 0.07, EI.alto * 0.12))
     pygame.display.update()
     
