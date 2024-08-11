@@ -292,7 +292,7 @@ num_dialog = -1
 completar_variables = False
 completar_condicionales = False
 completar_ciclos = False
-completar_funciones = True
+completar_funciones = False
 completar_examen_final = False
 
 #personajes
@@ -352,7 +352,7 @@ while True:
     boton_personaje1.dibujar(EI.PANTALLA)
     boton_personaje2.dibujar(EI.PANTALLA)
     boton_personaje3.dibujar(EI.PANTALLA)
-    boton_cancelar.dibujar(EI.PANTALLA)
+    #boton_cancelar.dibujar(EI.PANTALLA)
     boton_aceptar.dibujar(EI.PANTALLA)
     
     EI.PANTALLA.blit(quieto_derecha1, (EI.ancho * 0.15, EI.alto * 0.32)) #Se imprime la imágen del personaje 1
@@ -457,6 +457,7 @@ posx_hitbox_derecha = EI.ancho * 0.43
 posy_hitbox_derecha = EI.alto * 0.3
 posx_hitbox_izquierda = EI.ancho * 0.44
 
+#Iconos
 numero_dialogos = 0 
 quieto_derecha = pygame.transform.scale(quieto_derecha, (EI.ancho * 0.05, EI.alto * 0.22)) #Se adecua el sprite a un tamaño específico
 quieto_izquierda = pygame.transform.scale(quieto_izquierda, (EI.ancho * 0.05, EI.alto * 0.22)) #Se adecua el sprite a un tamaño específico
@@ -1397,7 +1398,6 @@ while True:
     #Se sale del tutorial
     if numero_dialogos == 6:
         break
-    pygame.time.Clock().tick(60)
     pygame.display.update()
     '''
 if seleccion == 1:
@@ -1466,6 +1466,7 @@ hitbox = pygame.Rect(EI.ancho * 0.63, EI.alto * 0.31, EI.ancho * 0.017, EI.alto 
 hitbox_nivel_variables = pygame.Rect(EI.ancho * 0.74, EI.alto * 0.3, EI.ancho * 0.08, EI.alto * 0.1)
 hitbox_nivel_condicionales = pygame.Rect(EI.ancho * 0.77, EI.alto * 0.12, EI.ancho * 0.07, EI.alto * 0.13)
 hitbox_nivel_ciclos = pygame.Rect(EI.ancho * 0.205, EI.alto * 0.3, EI.ancho * 0.07, EI.alto * 0.12)
+hitbox_nivel_funciones = pygame.Rect(EI.ancho * 0.22, EI.alto * 0.12, EI.ancho * 0.09, EI.alto * 0.1)
 hitbox_examen_final = pygame.Rect(EI.ancho * 0.07, 0, EI.ancho * 0.07, EI.alto * 0.08)
 dialogo = pygame.transform.scale(EI.dialogo, (EI.ancho * 0.5, EI.alto * 0.4))
 
@@ -1474,6 +1475,7 @@ fuente_niveles = pygame.font.Font("Fuentes/Nicolast.otf", int(EI.ancho * 0.03))
 texto_variables = fuente_niveles.render("Aldea de las variables", True, (EI.ROJO)) 
 texto_condicionales = fuente_niveles.render("Cueva de condicionales", True, (EI.ROJO)) 
 texto_ciclos = fuente_niveles.render("Bosque de ciclos", True, (EI.ROJO)) 
+texto_funciones = fuente_niveles.render("Selva de funciones", True, (EI.ROJO)) 
 texto_examen_final = fuente_niveles.render("Examen final", True, (EI.ROJO)) 
 boton_niveles = EI.Boton(EI.ancho * 0.30, EI.alto * 0.5, EI.ancho * 0.15, EI.alto * 0.08, "Comenzar", int(EI.ancho * 0.04), int(EI.ancho * 0.01))
 estrella_rellena_transformada = pygame.transform.scale(EI.estrella_rellena, (EI.ancho * 0.15, EI.alto * 0.2))
@@ -1485,14 +1487,11 @@ condicionales = False
 ciclos = False
 funciones = False
 examen_final = False
-Matematicas_basicas = False
-Funciones = False
-Limites = False
-Derivadas = False
 mapa = True
 var = True
 con = True
 cic = True
+fun = True
 
 while True: 
     #Examen final
@@ -3699,7 +3698,6 @@ while True:
                         dialog_continue = True
                         error = False
             
-            pygame.time.Clock().tick(60)
             pygame.display.update()
 
     #Nivel de condicionales
@@ -5777,7 +5775,6 @@ while True:
                         dialog_continue = True
                         error = False
             
-            pygame.time.Clock().tick(60)
             pygame.display.update()
 
     #Nivel de variables
@@ -7720,7 +7717,6 @@ while True:
                         dialog_continue = True
                         error = False
             
-            pygame.time.Clock().tick(60)
             pygame.display.update()
     
     if mapa:
@@ -7811,6 +7807,9 @@ while True:
                 #Ciclos
                 elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_ciclos) and completar_condicionales:
                     ciclos = True
+                #Funciones
+                elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_nivel_funciones) and completar_ciclos:
+                    funciones = True
                 #Examen final
                 elif boton_niveles.esta_encima(evento.pos) and hitbox.colliderect(hitbox_examen_final) and completar_funciones:
                     examen_final = True
@@ -8109,6 +8108,15 @@ while True:
                 EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
             else: 
                 EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+        #Funciones
+        elif hitbox.colliderect(hitbox_nivel_funciones):
+            EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
+            EI.PANTALLA.blit(texto_funciones, (EI.ancho * 0.33, EI.alto * 0.35))
+            boton_niveles.dibujar(EI.PANTALLA)
+            if completar_funciones:
+                EI.PANTALLA.blit(estrella_rellena_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
+            else: 
+                EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
         #Examen final
         elif hitbox.colliderect(hitbox_examen_final):
             EI.PANTALLA.blit(dialogo, (EI.ancho * 0.25, EI.alto * 0.3))
@@ -8120,6 +8128,6 @@ while True:
                 EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
 
     pygame.time.Clock().tick(30)
-    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.07, 0, EI.ancho * 0.07, EI.alto * 0.08))
+    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.22, EI.alto * 0.12, EI.ancho * 0.09, EI.alto * 0.1))
     pygame.display.update()
     

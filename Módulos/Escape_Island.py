@@ -61,10 +61,12 @@ tecla_zpresionada = pygame.image.load("Imagenes/Iconos/Z_presionada.png")
 variably = pygame.image.load("Imagenes/Sprites/Variably.png").convert_alpha()
 condi = pygame.image.load("Imagenes/Sprites/Condi.png").convert_alpha()
 cicloso = pygame.image.load("Imagenes/Sprites/Cicloso.png").convert_alpha()
+funci = pygame.image.load("Imagenes/Sprites/Funci.png").convert_alpha()
 muerte = pygame.image.load("Imagenes/Sprites/Esqueleto.png").convert_alpha()
 fondo_aldea = pygame.image.load("Imagenes/Mapa/Fondo_aldea.jpg").convert()
 fondo_cueva = pygame.image.load("Imagenes/Mapa/Fondo_cueva.jpg").convert()
 fondo_bosque = pygame.image.load("Imagenes/Mapa/Fondo_bosque.png").convert()
+fondo_selva = pygame.image.load("Imagenes/Mapa/Fondo_selva.jpeg")
 fondo_guerra = pygame.image.load("Imagenes/Mapa/Fondo_guerra.png").convert()
 fondo_final = pygame.image.load("Imagenes/Mapa/Fondo_final.jpg").convert()
 caja_a = pygame.image.load("Imagenes/Iconos/Caja_a.png").convert()
@@ -317,21 +319,23 @@ def dibujar_barra(pos_x, color_barra, color_control, color_anterior, x, y, ancho
     pygame.draw.rect(PANTALLA, color_barra, (pos_x, y, ancho_barra - (pos_x - x), alto_barra))  #Parte posterior de la barra
     pygame.draw.rect(PANTALLA, color_control, (pos_x, y - (alto_control - alto_barra) / 2, ancho_control, alto_control))  #Control deslizante
 
-def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(ancho * 0.023), tamaño_texto = int(ancho * 0.02), color = NARANJA):
-    """Esta función toma como argumentos el título, el texto de máximo 3 líneas, el tamaño del título, el tamaño del texto, el color del título y retorna un cuadro de texto en la parte inferior"""
-    fuente_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_texto)
+def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(ancho * 0.023), tamaño_texto = int(ancho * 0.02), color = NARANJA, fuente_dialog_t1 = "Fuentes/Sedan-Regular.ttf", fuente_dialog_t2 = "Fuentes/Sedan-Regular.ttf", fuente_dialog_t3 = "Fuentes/Sedan-Regular.ttf"):
+    """Esta función toma como argumentos el título, el texto de máximo 3 líneas, el tamaño del título, el tamaño del texto, el color del título, la fuente del texto (opcional) y retorna un cuadro de texto en la parte inferior"""
+    fuente_dialog_t1 = pygame.font.Font(fuente_dialog_t1, tamaño_texto)
+    fuente_dialog_t2 = pygame.font.Font(fuente_dialog_t2, tamaño_texto)
+    fuente_dialog_t3 = pygame.font.Font(fuente_dialog_t3, tamaño_texto)
     personaje_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_titulo) 
     personaje_dialog.set_bold(True)
     dialog_char = personaje_dialog.render("Hola",True,NEGRO)
     dialog_char_rect = dialog_char.get_rect()
     dialog_char_rect.topright = (ancho * 0.1, alto * 0.74)
-    dialog_text1 = fuente_dialog.render("Hola",True,NEGRO)
+    dialog_text1 = fuente_dialog_t1.render("Hola",True,NEGRO)
     dialog_text_rect1 = dialog_text1.get_rect()
     dialog_text_rect1.topright = (ancho * 0.1, alto * 0.80)
-    dialog_text2 = fuente_dialog.render("Hola", True,NEGRO)
+    dialog_text2 = fuente_dialog_t2.render("Hola", True,NEGRO)
     dialog_text_rect2 = dialog_text1.get_rect()
     dialog_text_rect2.topright = (ancho * 0.1, alto * 0.85)
-    dialog_text3 = fuente_dialog.render("Hola", True,NEGRO)
+    dialog_text3 = fuente_dialog_t3.render("Hola", True,NEGRO)
     dialog_text_rect3 = dialog_text1.get_rect()
     dialog_text_rect3.topright = (ancho * 0.1, alto * 0.90)
     dialframe = pygame.transform.scale(dialogo,(ancho, 0.3 * alto))
@@ -340,15 +344,15 @@ def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(
     PANTALLA.blit(dialframe,dialframe_rect)
     dialog_char = personaje_dialog.render(titulo, True, color)
     PANTALLA.blit(dialog_char,dialog_char_rect)
-    dialog_text1 = fuente_dialog.render(linea1, True, NEGRO)
+    dialog_text1 = fuente_dialog_t1.render(linea1, True, NEGRO)
     PANTALLA.blit(dialog_text1,dialog_text_rect1)
-    dialog_text2 = fuente_dialog.render(linea2, True, NEGRO)
+    dialog_text2 = fuente_dialog_t2.render(linea2, True, NEGRO)
     PANTALLA.blit(dialog_text2,dialog_text_rect2)
-    dialog_text3 = fuente_dialog.render(linea3, True, NEGRO)
+    dialog_text3 = fuente_dialog_t3.render(linea3, True, NEGRO)
     PANTALLA.blit(dialog_text3,dialog_text_rect3)
 
-def pregunta(titulo,pregunta,r1,r2,r3,r4, tamaño_texto =int(ancho * 0.02),tamaño_titulo =int(ancho * 0.023)):
-    """Esta función toma como argumento el título del cuestionario, el texto de la pregunta, el texto de 4 respuestas, el tamaño del texto, el tamaño del título y retorna una plantilla de cuestionario usando cuatro cajas."""
+def pregunta(titulo,pregunta,r1,r2,r3,r4, tamaño_texto =int(ancho * 0.02),tamaño_titulo =int(ancho * 0.023), fuente_dialog = "Fuentes/Sedan-Regular.ttf"):
+    """Esta función toma como argumento el título del cuestionario, el texto de la pregunta, el texto de 4 respuestas, el tamaño del texto, el tamaño del título, la fuente del texto (opcional) y retorna una plantilla de cuestionario usando cuatro cajas."""
     caja_a = pygame.image.load("Imagenes/Iconos/Caja_a.png").convert()
     caja_b = pygame.image.load("Imagenes/Iconos/Caja_b.png").convert()
     caja_c = pygame.image.load("Imagenes/Iconos/Caja_c.png").convert()
@@ -368,8 +372,8 @@ def pregunta(titulo,pregunta,r1,r2,r3,r4, tamaño_texto =int(ancho * 0.02),tama�
     caja_d_rect = caja_d.get_rect()
     caja_d_rect.bottomleft=(ancho * 0.7, alto * 0.69)
     mostrar_texto(titulo,l1,l2,l3,color=ROJO)
-    fuente_dialog = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_texto)
     fuente_titulo = pygame.font.Font("Fuentes/Sedan-Regular.ttf", tamaño_titulo)
+    fuente_dialog = pygame.font.Font(fuente_dialog, tamaño_texto)
     
     titulo_pregunta = fuente_titulo.render(" Respuestas: ",True,ROJO)
     titulo_pregunta_rect = titulo_pregunta.get_rect()
