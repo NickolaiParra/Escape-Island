@@ -2,6 +2,7 @@ import pygame
 import random
 import threading
 import time
+import json
 pygame.init()
 
 #Colores
@@ -350,6 +351,19 @@ def mostrar_texto(titulo, linea1, linea2 = "",linea3 = "", tamaño_titulo = int(
     PANTALLA.blit(dialog_text2,dialog_text_rect2)
     dialog_text3 = fuente_dialog_t3.render(linea3, True, NEGRO)
     PANTALLA.blit(dialog_text3,dialog_text_rect3)
+
+def guardar_informacion(informacion, nombre_archivo="game_data.json"):
+    """Esta función toma como argumento la información, el nombre del archivo y crea un archivo.json con esa información."""
+    with open(nombre_archivo, 'w') as a:
+        json.dump(informacion, a)
+def cargar_informacion(nombre_archivo="game_data.json"):
+    """Esta función toma como argumento un archivo.json y retorna la información que contiene (En caso de error retorna None)."""
+    try:
+        with open(nombre_archivo, 'r') as f:
+            data = json.load(f)
+            return data
+    except FileNotFoundError:
+        return None
 
 def pregunta(titulo,pregunta,r1,r2,r3,r4, tamaño_texto =int(ancho * 0.02),tamaño_titulo =int(ancho * 0.023), fuente_dialog = "Fuentes/Sedan-Regular.ttf"):
     """Esta función toma como argumento el título del cuestionario, el texto de la pregunta, el texto de 4 respuestas, el tamaño del texto, el tamaño del título, la fuente del texto (opcional) y retorna una plantilla de cuestionario usando cuatro cajas."""
