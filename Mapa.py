@@ -125,7 +125,7 @@ boton_nueva_partida = EI.Boton(EI.ancho * 0.025, EI.alto * 0.15, EI.ancho * 0.15
 boton_cargar_partida = EI.Boton(EI.ancho * 0.025, EI.alto * 0.35, EI.ancho * 0.15, EI.alto * 0.1, "Cargar partida", int(EI.ancho * 0.026), int(EI.ancho * 0.015))
 boton_creditos = EI.Boton(EI.ancho * 0.025, EI.alto * 0.55, EI.ancho * 0.15, EI.alto * 0.1, "Créditos", int(EI.ancho * 0.026), int(EI.ancho * 0.015))
 boton_configuracion = EI.Boton(EI.ancho * 0.025, EI.alto * 0.75, EI.ancho * 0.15, EI.alto * 0.1, "Configuración", int(EI.ancho * 0.026), int(EI.ancho * 0.015))
-
+boton_creditos_regresar = EI.Boton(EI.ancho * 0.4, EI.alto * 0.75, EI.ancho * 0.2, EI.alto * 0.15, "Regresar", int(EI.ancho * 0.05), int(EI.ancho * 0.015))
 #Mostramos inicialmente los botones
 boton_nueva_partida.dibujar(EI.PANTALLA)
 boton_cargar_partida.dibujar(EI.PANTALLA)
@@ -172,6 +172,38 @@ while True:
                 controlar_bucle = True
                 cargar = True
                 break
+            #Pantalla de créditos
+            if evento.type == pygame.MOUSEBUTTONDOWN and boton_creditos.esta_encima(evento.pos):
+                controlar_bucle_3 = False
+                while True:
+                    EI.PANTALLA.fill(EI.FONDO) #Se limpia la pantalla
+                    if controlar_bucle_3:
+                        break
+                    #Nombres de los integrantes
+                    texto_Parra = fuente_2.render('David Nickolai Parra Ariza', True, (EI.ROJO))
+                    texto_Pérez = fuente_2.render('Julian Felipe Perez Osorio', True, (EI.AZUL))
+                    texto_Yaya = fuente_2.render('Sebastian Jhoan Yaya', True, (EI.VERDE_OSCURO))
+                    texto_Gómez = fuente_2.render('Julian David Gomez', True, (EI.NARANJA))
+                    boton_creditos_regresar.dibujar(EI.PANTALLA) #Se dibuja el boton de regresar
+                    #Se muestran los textos
+                    EI.PANTALLA.blit(texto_Parra, (EI.ancho * 0.5, EI.alto * 0.1))
+                    EI.PANTALLA.blit(texto_Pérez, (EI.ancho * 0.5, EI.alto * 0.25))
+                    EI.PANTALLA.blit(texto_Yaya, (EI.ancho * 0.5, EI.alto * 0.4))
+                    EI.PANTALLA.blit(texto_Gómez, (EI.ancho * 0.5, EI.alto * 0.55))
+                    programador = pygame.transform.scale(EI.programador, (EI.ancho * 0.45, EI.alto * 0.7)) #Se adecua el sprite a un tamaño específico
+                    EI.PANTALLA.blit(programador, (0, 0)) #Se muestra la imagen del programador
+                    for evento in pygame.event.get():
+                        if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
+                            pygame.quit()
+                            sys.exit()
+                        if evento.type == pygame.MOUSEMOTION:
+                            #Si el cursor del mouse pasa por encima de algún  botón, entonces su color cambia
+                            boton_creditos_regresar.color_normal = EI.AZUL if not boton_creditos_regresar.esta_encima(evento.pos) else EI.ROJO
+                        if evento.type == pygame.MOUSEBUTTONDOWN and boton_creditos_regresar.esta_encima(evento.pos):
+                            controlar_bucle_3 = True
+                            ciclo = True
+                    pygame.display.update()
+
             if evento.type == pygame.MOUSEBUTTONDOWN and boton_configuracion.esta_encima(evento.pos):
                 controlar_bucle_2 = False
                 while True:
@@ -3743,7 +3775,7 @@ while True:
                         num_dialog = devolver
                         dialog_continue = True
                         error = False
-            
+            pygame.time.Clock().tick(80)
             pygame.display.update()
 
     #Nivel de condicionales
@@ -5832,7 +5864,7 @@ while True:
                         num_dialog = devolver
                         dialog_continue = True
                         error = False
-            
+            pygame.time.Clock().tick(80)
             pygame.display.update()
 
     #Nivel de variables
@@ -7786,7 +7818,7 @@ while True:
                         num_dialog = devolver
                         dialog_continue = True
                         error = False
-            
+            pygame.time.Clock().tick(80)
             pygame.display.update()
     
     if mapa:
@@ -8208,6 +8240,5 @@ while True:
                 EI.PANTALLA.blit(estrella_vacia_transformada, (EI.ancho * 0.52, EI.alto * 0.43))
 
     pygame.time.Clock().tick(30)
-    #pygame.draw.rect(EI.PANTALLA, EI.ROJO, (EI.ancho * 0.22, EI.alto * 0.12, EI.ancho * 0.09, EI.alto * 0.1))
     pygame.display.update()
     
