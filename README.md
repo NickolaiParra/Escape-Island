@@ -69,7 +69,7 @@ En este desafío, el jugador debe **escribir código en un editor integrado** pa
 
 1. Descargar el archivo **Escape_Island.zip**
 2. Extraer el contenido en una carpeta
-3. Ejecutar el archivo **Escape_Island.exe**
+3. Ejecutar el archivo **Mapa.exe**
 4. Asegurarse de que todas las carpetas de recursos estén en la misma ubicación
 
 > Al guardar la partida, se generará el archivo `game_data.json`, donde se almacena el progreso del jugador.
